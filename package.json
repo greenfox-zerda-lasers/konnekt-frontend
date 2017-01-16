@@ -1,21 +1,20 @@
 {
-  "name": "Konnekt Contact MAnager",
+  "name": "konnekt-contact-manager",
   "version": "1.0.0",
-  "description": "Konnekt project",
-  "main": "frontend.js",
+  "description": "Konnekt Contact Manager Project",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
   },
-  "author": "Cornubite",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/greenfox-zerda-lasers/konnekt-frontend.git"
+  },
+  "author": "Cornubit",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.14.0"
+  "bugs": {
+    "url": "https://github.com/greenfox-zerda-lasers/konnekt-frontend/issues"
   },
-  "devDependencies": {
-    "body-parser": "^1.15.2",
-    "eslint": "^3.12.2",
-    "eslint-config-airbnb": "^13.0.0",
-    "eslint-config-airbnb-base": "^11.0.0",
-    "eslint-plugin-import": "^2.2.0"
-  }
+  "homepage": "https://github.com/greenfox-zerda-lasers/konnekt-frontend#readme"
 }
