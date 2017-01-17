@@ -4,7 +4,7 @@
   "description": "Konnekt Contact Manager Project",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "karma start",
     "start": "nodemon server.js"
   },
   "repository": {
@@ -16,5 +16,16 @@
   "bugs": {
     "url": "https://github.com/greenfox-zerda-lasers/konnekt-frontend/issues"
   },
-  "homepage": "https://github.com/greenfox-zerda-lasers/konnekt-frontend#readme"
+  "homepage": "https://github.com/greenfox-zerda-lasers/konnekt-frontend#readme",
+  "devDependencies": {
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.4.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-cli": "^1.0.1",
+    "karma-jasmine": "^1.1.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0"
+  }
 }
