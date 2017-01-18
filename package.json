@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/greenfox-zerda-lasers/konnekt-frontend#readme",
   "devDependencies": {
+    "eslint": "^3.13.1",
+    "eslint-config-airbnb-base": "^11.0.1",
+    "eslint-plugin-import": "^2.2.0",
     "jasmine-core": "^2.5.2",
     "karma": "^1.4.0",
     "karma-chrome-launcher": "^2.0.0",
