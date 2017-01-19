@@ -1,6 +1,6 @@
 'use strict';
 
-require('../lib/angular.min.js');
+require('angular');
 
 var loginForm = angular.module('loginForm', []);
 
