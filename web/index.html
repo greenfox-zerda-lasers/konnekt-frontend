@@ -6,12 +6,17 @@
       <script src="./dist/bundle.js"></script>
    </head>
    <body>
-      <div ng-controller="loginController">
-         <p>{{message}}</p>
+      <div id="form" ng-controller="loginController">
+         <h1>{{message}}</h1>
          <form>
-            <input type="text" placeholder="USERNAME" ng-model="credentials" />
-            <input type="text" placeholder="PASSWORD" ng-model="credentials" />
-            <button ng-click="submit">LOGIN</button>
+            <input type="text" placeholder="USERNAME" ng-model="username" />
+            <input type="password" placeholder="PASSWORD" ng-model="password" />
+            <br>
+            <button ng-click="count = count + 1" ng-init="count=0">login</button>
+            <br>
+            <p>user name: {{ username }}</p>
+            <p>pass: {{ password }}</p>
+            <p>click count: {{ count }}</p>
          </form>
       </div>
    </body>

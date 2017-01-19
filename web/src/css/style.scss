@@ -1,5 +1,31 @@
-$mainColour: pink;
+$mainColour: #00C4BC;
 
 body {
   background-color: $mainColour;
+  font-family: sans-serif;
+  margin: 50px auto;
+  width: 700px;
+  text-align: center;
+}
+
+#form {
+  height: 500px;
+  padding: 30px;
+  background-image: url('login_background.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+p {
+  color: white;
+}
+
+h1 {
+  color: white;
+}
+
+input {
+  width: 60%;
+  margin: 20px;
 }

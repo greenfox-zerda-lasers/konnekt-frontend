@@ -23,6 +23,11 @@ module.exports = {
         test: /\.scss$/,
         loader: 'style-loader!css-loader!sass-loader',
       },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        path: './web/dist',
+        loader: 'file-loader',
+      },
     ],
   },
 };
