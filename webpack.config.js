@@ -1,10 +1,10 @@
 'use strict';
 
 module.exports = {
-   entry:'./src/main.js',
+   entry:'./web/src/main.js',
 
    output: {
-      path:'dist',
+      path:'./web/dist',
       filename:'bundle.js'
    },
 
