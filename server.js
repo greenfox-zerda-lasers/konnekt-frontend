@@ -3,7 +3,7 @@ var server = require('express');
 // START SERVER
 var port = process.env.PORT || 3000;
 var app = server();
-app.use(server.static(__dirname + '/web/dist'));
+app.use(server.static(__dirname + '/web'));
 
 // Port settings
 app.listen(port, function () {
