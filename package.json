@@ -9,7 +9,9 @@
   },
   "scripts": {
     "test": "karma start",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "build": "node_modules/.bin/webpack",
+    "heroku-postbuild": "node_modules/.bin/webpack -p --config ./webpack.config.js --progress"
   },
   "repository": {
     "type": "git",
