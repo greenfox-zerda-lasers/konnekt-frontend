@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Konnekt Contact Manager Project",
   "main": "server.js",
+  "engines" : {
+    "node" : "v6.9.1",
+    "npm" : "3.10.8"
+  },
   "scripts": {
     "test": "karma start",
     "start": "nodemon server.js",
