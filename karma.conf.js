@@ -37,7 +37,7 @@ module.exports = function (config) {
 
 
     // web server port
-    port: 3000,
+    port: 9876,
     // port: 9876,
 
 
