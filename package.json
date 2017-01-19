@@ -10,7 +10,6 @@
   "scripts": {
     "test": "karma start",
     "start": "nodemon server.js",
-    "heroku-postbuild": "webpack"
   },
   "repository": {
     "type": "git",
