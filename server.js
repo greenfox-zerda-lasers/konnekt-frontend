@@ -3,7 +3,7 @@ var server = require('express');
 // START SERVER
 var port = process.env.PORT || 3000;
 var app = server();
-app.use(server.static(__dirname + '/web'));
+app.use(server.static(__dirname + '/web/dist'));
 
 // Port settings
 app.listen(port, function () {
@@ -12,5 +12,5 @@ app.listen(port, function () {
 
 // Routes
 app.get('/', function (req, res) {
-  res.render('index');
+  res.render('index.html');
 });
