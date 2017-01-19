@@ -1,5 +1,6 @@
 'use strict';
 
+
 module.exports = {
    entry:'./web/src/main.js',
 
