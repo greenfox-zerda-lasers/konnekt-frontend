@@ -1,5 +1,5 @@
 <!-- test -->
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -9,4 +9,26 @@
     <h1>hello world!</h1>
     <script src="./dist/bundle.js"></script>
   </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en" ng-app="loginForm">
+   <head>
+      <meta charset="utf-8">
+      <title>KNNKT</title>
+      <!-- <link rel="stylesheet" type="text/css" href="src/css/style.css"> -->
+      <!-- <script src="lib/angular.min.js"></script>
+      <script src="src/login.js"></script> -->
+      <script src="./dist/bundle.js"></script>
+   </head>
+   <body>
+      <div ng-controller="loginController">
+         <p>{{message}}</p>
+         <form>
+            <input type="text" placeholder="USERNAME" ng-model="credentials" />
+            <input type="text" placeholder="PASSWORD" ng-model="credentials" />
+            <button ng-click="submit">LOGIN</button>
+         </form>
+      </div>
+   </body>
 </html>
