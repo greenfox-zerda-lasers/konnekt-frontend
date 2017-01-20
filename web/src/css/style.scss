@@ -1,16 +1,18 @@
 $mainColour: #00C4BC;
 
 body {
-  background-color: $mainColour;
+  background-color: white;
   font-family: sans-serif;
-  margin: 50px auto;
-  width: 700px;
+  margin: 0px auto;
+  width: 100%;
   text-align: center;
+  height: 700px;
 }
 
 #form {
-  height: 500px;
-  padding: 30px;
+  height: 100%;
+  padding: 50px;
+  margin: 0px;
   background-image: url('login_background.jpg');
   background-position: center;
   background-repeat: no-repeat;
@@ -18,14 +20,37 @@ body {
 }
 
 p {
-  color: white;
+  color: $mainColour;
 }
 
 h1 {
-  color: white;
+  color: $mainColour;
 }
 
 input {
   width: 60%;
   margin: 20px;
+}
+
+.login-form {
+  padding: 30px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  align-content: center;
+  background-color: white;
+  opacity: 0.8;
+  width: 600px;
+  height: 320px;
+  border-radius: 10px;
+  border: 1px solid $mainColour;
+}
+
+.button {
+  background-color: $mainColour;
+}
+
+img {
+  margin: 50px;
+  width: 300px;
 }

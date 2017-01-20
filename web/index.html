@@ -2,22 +2,27 @@
 <html lang="en" ng-app="loginForm">
    <head>
       <meta charset="utf-8">
-      <title>KNNKT</title>
+      <title>Konnekt Kontakt Manager</title>
       <script src="./dist/bundle.js"></script>
    </head>
    <body>
       <div id="form" ng-controller="loginController">
-         <h1>{{message}}</h1>
-         <form>
-            <input type="text" placeholder="USERNAME" ng-model="username" />
-            <input type="password" placeholder="PASSWORD" ng-model="password" />
-            <br>
-            <button ng-click="count = count + 1" ng-init="count=0">login</button>
-            <br>
-            <p>user name: {{ username }}</p>
-            <p>pass: {{ password }}</p>
-            <p>click count: {{ count }}</p>
-         </form>
+        <div class="login-form">
+           <h1>{{message}}</h1>
+           <form>
+              <input type="text" placeholder="USERNAME" ng-model="username" />
+              <input type="password" placeholder="PASSWORD" ng-model="password" />
+              <br>
+              <button id="button" ng-click="count = count + 1" ng-init="count=0">login</button>
+              <br>
+              <p>user name: {{ username }}</p>
+              <p>pass: {{ password }}</p>
+              <p>click count: {{ count }}</p>
+           </form>
+         </div>
+         <div class="login-image">
+           <img ng-src="./images/logo-feher-hosszu.png" alt="Konnekt Logo" />
+         </div>
       </div>
    </body>
 </html>
