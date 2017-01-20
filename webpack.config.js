@@ -8,6 +8,7 @@ module.exports = {
     path: './web/dist',
     filename: 'bundle.js',
   },
+
   module: {
     loaders: [
       {
@@ -26,6 +27,7 @@ module.exports = {
         test: /\.(jpe?g|png|gif|svg)$/i,
         path: './web/dist',
         loader: 'image-webpack-loader',
+
       },
     ],
   },

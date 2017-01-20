@@ -1,4 +1,4 @@
-$mainColour: pink;
+$mainColour: #00C4BC;
 
 body {
   background-color: white;
@@ -44,4 +44,9 @@ input {
 
 .button {
   background-color: $mainColour;
+}
+
+img {
+  margin: 50px;
+  width: 300px;
 }
