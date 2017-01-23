@@ -1,4 +1,4 @@
-$mainColour: #00C4BC;
+$mainColour: #00c4bc;♠
 
 body {
   background-color: white;
@@ -13,18 +13,19 @@ body {
   height: 100%;
   padding: 50px;
   margin: 0px;
-  background-image: url('../../login_background.jpg');
+  background-image: url('../../images/login-background.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 p {
-  color: $mainColour;
+  color: white;
 }
 
 h1 {
-  color: $mainColour;
+  color: white;
+  text-align: center;
 }
 
 input {
@@ -33,17 +34,22 @@ input {
 }
 
 .login-form {
-  padding: 30px;
+  width: 388px;
+  height: 394px;
+  opacity: 0.9;
+  background-color: #00c4bc;
+  // padding: 30px;
   display: block;
   margin-left: auto;
   margin-right: auto;
   align-content: center;
-  background-color: white;
-  opacity: 0.8;
-  width: 600px;
-  height: 320px;
-  border-radius: 10px;
-  border: 1px solid $mainColour;
+  margin-top: 232px;
+  // background-color: white;
+  // opacity: 0.8;
+  // width: 600px;
+  // height: 320px;
+  // border-radius: 10px;
+  // border: 1px solid $mainColour;
 }
 
 .button {
