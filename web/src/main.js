@@ -1,8 +1,9 @@
 'use strict';
 
-require('./script1.js');
 require('./css/style.scss');
-require('./login.js');
+require('./css/login.css');
+require('./css/registration.css');
+require('./app.js');
 
 
-console.log('main js');
+console.log('main js ok');
