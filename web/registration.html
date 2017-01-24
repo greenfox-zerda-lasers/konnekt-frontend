@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="registrationApp">
+  <head>
+    <meta charset="utf-8">
+    <title>registration</title>
+    <link rel="stylesheet" href="src/css/registration.css">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,800" rel="stylesheet">
+    <script type="text/javascript" src="lib/angular.min.js"></script>
+    <script type="text/javascript" src="src/registration.js"></script>
+  </head>
+  <body>
+    <div class="rectangle" ng-controller='registrationController'>
+      <h1 class="r-e-g-i-s-z-t-r-l-j">{{ header }}</h1>
+      <p class="dv-a-konnekt-kontak">{{ welcome }}</p>
+      <form ng-submit="addNewMember()">
+        <div class="rectangle-input">
+          <input type="email" placeholder="e-mail címed:" ng-model='email'>
+        </div>
+        <div class="rectangle-input">
+          <input type="password" placeholder="jelszavad:" ng-model="pass1">
+        </div>
+        <div class="rectangle-input">
+          <input type="password" placeholder="jelszavad mégegyszer:" ng-model="pass2">
+        </div>
+        <button class="rectangle-button">
+          <p class="m-e-h-e-t">{{ button }}</p>
+        </button>
+      </form>
+      <p class="inkbb-belpnk">(Inkább <a href="#">belépnék</a>)</p>
+    </div>
+  </body>
+</html>
