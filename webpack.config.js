@@ -25,8 +25,8 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
-        path: './web',
-        loader: 'file-loader',
+        path: './web/images',
+        loader: 'file-loader?name=images/[name].[ext]&publicPath=dist/', 
       },
     ],
   },
