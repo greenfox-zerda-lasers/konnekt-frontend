@@ -1,3 +1,6 @@
+var angular = require('angular');
+var ngRoute = require('angular-route');
+
 var konnektApp = angular.module('konnektApp', ['ngRoute']);
 
 konnektApp.config(['$routeProvider', function ($routeProvider) {
@@ -6,7 +9,7 @@ konnektApp.config(['$routeProvider', function ($routeProvider) {
       templateUrl: 'login.html',
       controller: 'loginController',
     })
-    .when('/registration', {
+    .when('/register', {
       templateUrl: 'registration.html',
       controller: 'registrationController',
     })
@@ -15,26 +18,49 @@ konnektApp.config(['$routeProvider', function ($routeProvider) {
     });
 }]);
 
-konnektApp.controller('registrationController', ['$scope', function ($scope) {
+konnektApp.controller('registrationController', ['$scope', '$http', function ($scope, $http) {
 
   $scope.header = 'REGISZTRÁLJ.';
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
   $scope.button = 'MEHET';
 
   $scope.addNewMember = function () {
-    console.log($scope.email, $scope.pass1, $scope.pass2);
-  };
 
+    var data = [{
+      username: $scope.newUser.username,
+      password: $scope.newUser.password,
+      passwordConfirmation: $scope.newUser.passwordConfirmation,
+    }];
+
+    console.log(JSON.stringify(data));
+
+    $http.post('http://localhost:3000/register', JSON.stringify(data)).then(function (successResponse) {
+      console.log(successResponse);
+    }, function (errorResponse) {
+      console.log(errorResponse);
+    });
+  };
 }]);
 
-konnektApp.controller('loginController', ['$scope', function ($scope) {
+konnektApp.controller('loginController', ['$scope', '$http', function ($scope, $http) {
 
   $scope.header = 'Jelentkezz be';
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
   $scope.button = 'MEHET';
 
-  $scope.addNewMember = function () {
-    console.log($scope.email, $scope.pass1, $scope.pass2);
-  };
+  $scope.loginMember = function () {
 
+    var data = [{
+      user: $scope.userLogin.username,
+      password: $scope.userLogin.password,
+    }];
+
+    console.log(JSON.stringify(data));
+
+    $http.post('http://localhost:3000/login', JSON.stringify(data)).then(function (successResponse) {
+      console.log(successResponse);
+    }, function (errorResponse) {
+      console.log(errorResponse);
+    });
+  };
 }]);
