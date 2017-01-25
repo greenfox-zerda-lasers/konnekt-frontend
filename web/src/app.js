@@ -1,3 +1,15 @@
+// IMPORTANT! Set your url here!
+
+// for localhost testing
+const appUrl = 'http://localhost:3000';
+
+// for lasers web
+// const appUrl = 'https://lasers-cornubite-konnekt.herokuapp.com';
+
+// for raptors web
+// const appUrl = '  RAPTOR server url comes here';
+
+
 var angular = require('angular');
 var ngRoute = require('angular-route');
 
@@ -34,7 +46,7 @@ konnektApp.controller('registrationController', ['$scope', '$http', function ($s
 
     console.log(JSON.stringify(data));
 
-    $http.post('http://localhost:3000/register', JSON.stringify(data)).then(function (successResponse) {
+    $http.post(appUrl + '/register', JSON.stringify(data)).then(function (successResponse) {
       console.log(successResponse);
     }, function (errorResponse) {
       console.log(errorResponse);
@@ -57,7 +69,7 @@ konnektApp.controller('loginController', ['$scope', '$http', function ($scope, $
 
     console.log(JSON.stringify(data));
 
-    $http.post('http://localhost:3000/login', JSON.stringify(data)).then(function (successResponse) {
+    $http.post(appUrl + '/login', JSON.stringify(data)).then(function (successResponse) {
       console.log(successResponse);
     }, function (errorResponse) {
       console.log(errorResponse);
