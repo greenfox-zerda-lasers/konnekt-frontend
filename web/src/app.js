@@ -63,7 +63,7 @@ konnektApp.controller('loginController', ['$scope', '$http', function ($scope, $
   $scope.loginMember = function () {
 
     var data = [{
-      user: $scope.userLogin.username,
+      username: $scope.userLogin.username,
       password: $scope.userLogin.password,
     }];
 
