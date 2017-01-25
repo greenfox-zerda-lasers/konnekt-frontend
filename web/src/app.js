@@ -1,13 +1,13 @@
 // IMPORTANT! Set your url here!
 
 // for localhost testing
-// const appUrl = 'http://localhost:3000';
+const appUrl = 'http://localhost:3000';
 
 // for lasers web
 // const appUrl = 'https://lasers-cornubite-konnekt.herokuapp.com';
 
 // for raptors web
-const appUrl = 'https://raptor-konnekt.herokuapp.com';
+// const appUrl = 'https://raptor-konnekt.herokuapp.com';
 
 
 var angular = require('angular');
@@ -16,6 +16,9 @@ var ngRoute = require('angular-route');
 var konnektApp = angular.module('konnektApp', ['ngRoute']);
 
 konnektApp.config(['$routeProvider', function ($routeProvider) {
+
+  // $scope.logo = 'dist/images/logo-feher-hosszu.png';
+
   $routeProvider
     .when('/login', {
       templateUrl: 'login.html',
