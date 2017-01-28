@@ -1,7 +1,196 @@
 body {
-  padding: 50px;
+  padding: 0px;
+  margin: 0px;
   background-image: url('images/konnekt-team.jpg');
   background-position: top;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.logo-feher-hosszu {
+  padding-top: 105px;
+  padding-bottom: 29px;
+  display: block;
+  margin: auto;
+	width: 219px;
+	height: 70px;
+}
+
+.rectangle {
+	margin: 0px auto;
+	max-width: 388px;
+	height: 459px;
+	opacity: 0.9;
+	background-color: #00c4bc;
+}
+
+.r-e-g-i-s-z-t-r-l-j {
+  margin: 0px;
+	padding-top: 50px;
+	height: 42px;
+	font-family: Raleway;
+	font-size: 36px;
+	font-weight: 800;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: center;
+	color: #ffffff;
+}
+
+form {
+  margin-top: 15px;
+}
+
+.dv-a-konnekt-kontak {
+  margin: 0px;
+	padding-bottom: 25px;
+	font-family: 'Merriweather', serif;
+	height: 15px;
+	font-family: Merriweather;
+	font-size: 12px;
+	font-weight: normal;
+	font-style: italic;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: center;
+	color: #012d61;
+}
+
+.rectangle-input {
+  margin: auto;
+  margin-bottom: 15px;
+	padding: 0px;
+	width: 328px;
+	height: 47px;
+	background-color: #ffffff;
+	box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.23);
+}
+
+.rectangle-button {
+  margin: 0 auto;
+  display: block;
+	width: 142px;
+	height: 47px;
+	box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.23);
+	border: solid 2px #ffffff;
+	background-color: #00c4bc;
+  transition: 0.2s;
+}
+
+.rectangle-button:hover {
+  background-color: #ffffff;
+  /*background-color: #00cc66;*/
+  transition: 0.2s;
+}
+
+.m-e-h-e-t {
+	margin: 0px;
+	font-family: 'Raleway', sans-serif;
+	font-size: 24px;
+	font-weight: 800;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: center;
+	color: #012d61;
+}
+
+.inkbb {
+	margin-top: 12px;
+	font-family: Merriweather;
+	font-size: 12px;
+	font-weight: normal;
+	font-style: italic;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: center;
+	color: #012d61;
+}
+
+input {
+	width: 314px;
+	height: 43px;
+	padding: 0px 5px 0px 5px;
+	font-family: Merriweather;
+	font-size: 12px;
+	font-weight: normal;
+	font-style: italic;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #012d61;
+}
+
+/*placeholder for MS, Firefox 19+, Firefox 18-, Chrome*/
+::-webkit-input-placeholder {
+
+	width: 78px;
+	height: 15px;
+	font-family: Merriweather;
+	font-size: 12px;
+	font-weight: normal;
+	font-style: italic;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #012d61;
+}
+
+:-ms-input-placeholder {
+	width: 78px;
+	height: 15px;
+	font-family: Merriweather;
+	font-size: 12px;
+	font-weight: normal;
+	font-style: italic;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #012d61;
+}
+
+::-moz-placeholder {
+	width: 78px;
+	height: 15px;
+	font-family: Merriweather;
+	font-size: 12px;
+	font-weight: normal;
+	font-style: italic;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #012d61;
+}
+
+:-moz-placeholder {
+	width: 78px;
+	height: 15px;
+	font-family: Merriweather;
+	font-size: 12px;
+	font-weight: normal;
+	font-style: italic;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #012d61;
+}
+
+a {
+	color: #012d61;
+  text-decoration: none;
+  border-bottom: 1px solid white;
+}
+
+a:hover {
+  color: white;
 }
