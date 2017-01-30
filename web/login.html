@@ -1,14 +1,12 @@
-<h1 class="r-e-g-i-s-z-t-r-l-j">{{ header }}</h1>
-<p class="dv-a-konnekt-kontak">{{ welcome }}</p>
-<form ng-submit="loginMember()">
-  <div class="rectangle-input">
-    <input type="text" placeholder="felhasználóneved:" ng-model='userLogin.username'>
-  </div>
-  <div class="rectangle-input">
+<div class="container">
+  <h1 class="r-e-g-i-s-z-t-r-l-j">{{ header | uppercase }}</h1>
+  <p class="dv-a-konnekt-kontak">{{ welcome }}</p>
+  <form ng-submit="loginMember()">
+    <input type="text" placeholder="e-mail címed:" ng-model='userLogin.username'>
     <input type="password" placeholder="jelszavad:" ng-model='userLogin.password'>
-  </div>
-  <button class="rectangle-button">
-    <p class="m-e-h-e-t">{{ button }}</p>
-  </button>
-</form>
-<p class="inkbb">(Inkább <a href="#!/register">regisztrálnék</a>)</p>
+    <button class="rectangle-button">
+      <p class="m-e-h-e-t">{{ button }}</p>
+    </button>
+  </form>
+  <p class="inkbb">(Inkább <a href="#!/register">regisztrálnék</a>)</p>
+</div>

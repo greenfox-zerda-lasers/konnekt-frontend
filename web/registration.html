@@ -1,17 +1,13 @@
-<h1 class="r-e-g-i-s-z-t-r-l-j">{{ header }}</h1>
-<p class="dv-a-konnekt-kontak">{{ welcome }}</p>
-<form ng-submit="addNewMember()">
-  <div class="rectangle-input">
-    <input type="email" placeholder="e-mail címed:" ng-model='newUser.username'>
-  </div>
-  <div class="rectangle-input">
-    <input type="password" placeholder="jelszavad:" ng-model='newUser.password'>
-  </div>
-  <div class="rectangle-input">
-    <input type="password" placeholder="jelszavad mégegyszer:" ng-model='newUser.passwordConfirmation'>
-  </div>
-  <button class="rectangle-button">
-    <p class="m-e-h-e-t">{{ button }}</p>
-  </button>
-</form>
-<p class="inkbb">(Inkább <a href="#!/login">belépnék</a>)</p>
+<div class="container">
+    <h1 class="r-e-g-i-s-z-t-r-l-j">{{ header }}</h1>
+    <p class="dv-a-konnekt-kontak">{{ welcome }}</p>
+    <form ng-submit="addNewMember()">
+      <input type="email" placeholder="e-mail címed:" ng-model='newUser.username'>
+      <input type="password" placeholder="jelszavad:" ng-model='newUser.password'>
+      <input type="password" placeholder="jelszavad mégegyszer:" ng-model='newUser.passwordConfirmation'>
+      <button class="rectangle-button">
+        <p class="m-e-h-e-t">{{ button }}</p>
+      </button>
+    </form>
+  <p class="inkbb">(Inkább <a href="#!/login">belépnék</a>)</p>
+</div>
