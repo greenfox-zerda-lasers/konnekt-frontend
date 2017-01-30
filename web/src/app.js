@@ -40,8 +40,9 @@ konnektApp.controller('registrationController', ['$scope', '$http', function ($s
 
   $scope.addNewMember = function () {
 
+
     var data = {
-      username: $scope.newUser.username,
+      email: $scope.newUser.email,
       password: $scope.newUser.password,
       passwordConfirmation: $scope.newUser.passwordConfirmation,
     };
@@ -65,7 +66,7 @@ konnektApp.controller('loginController', ['$scope', '$http', function ($scope, $
   $scope.loginMember = function () {
 
     var data = {
-      username: $scope.userLogin.username,
+      email: $scope.userLogin.email,
       password: $scope.userLogin.password,
     };
 
