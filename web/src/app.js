@@ -31,7 +31,43 @@ konnektApp.config(['$routeProvider', function ($routeProvider) {
     });
 }]);
 
+// user identification
+konnektApp.factory('AuthService', function ($http) {
+  var authService = {};
 
+  authService.login = function (userData) {
+    console.log(authService);
+
+    return $http
+      .post(appUrl + '/login', JSON.stringify(userData)).then(function (successResponse) {
+        console.log(successResponse);
+      }, function (errorResponse) {
+        console.log(errorResponse);
+      });
+      // .post('/login', userData)
+      // .then(function (res) {
+      //   Session.create(res.data.id, res.data.user.id,
+      //                  res.data.user.role);
+      //   return res.data.user;
+      // });
+  };
+
+  // authService.isAuthenticated = function () {
+  //   return !!Session.userId;
+  // };
+  //
+  // authService.isAuthorized = function (authorizedRoles) {
+  //   if (!angular.isArray(authorizedRoles)) {
+  //     authorizedRoles = [authorizedRoles];
+  //   }
+  //   return (authService.isAuthenticated() &&
+  //     authorizedRoles.indexOf(Session.userRole) !== -1);
+  // };
+
+  return authService;
+});
+
+// registration controller
 konnektApp.controller('registrationController', ['$scope', '$http', function ($scope, $http) {
 
   $scope.header = 'regisztrálj.';
@@ -40,41 +76,45 @@ konnektApp.controller('registrationController', ['$scope', '$http', function ($s
 
   $scope.addNewMember = function () {
 
-    var data = [{
+    var userData = {
       username: $scope.newUser.username,
       password: $scope.newUser.password,
       passwordConfirmation: $scope.newUser.passwordConfirmation,
-    }];
+    };
 
-    console.log(JSON.stringify(data));
+    console.log(JSON.stringify(userData));
 
-    $http.post(appUrl + '/register', JSON.stringify(data)).then(function (successResponse) {
+    $http.post(appUrl + '/register', JSON.stringify(userData).then(function (successResponse) {
       console.log(successResponse);
     }, function (errorResponse) {
       console.log(errorResponse);
-    });
+    },
+    ));
   };
 }]);
 
-konnektApp.controller('loginController', ['$scope', '$http', function ($scope, $http) {
+// login controller
+konnektApp.controller('loginController', ['$scope', '$http', 'AuthService', function ($scope, $http, AuthService) {
 
   $scope.header = 'lépj be';
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
   $scope.button = 'mehet';
 
-  $scope.loginMember = function () {
 
-    var data = [{
+  $scope.loginMember = function (userData) {
+
+    var userData = {
       username: $scope.userLogin.username,
       password: $scope.userLogin.password,
-    }];
+    };
 
-    console.log(JSON.stringify(data));
-
-    $http.post(appUrl + '/login', JSON.stringify(data)).then(function (successResponse) {
-      console.log(successResponse);
-    }, function (errorResponse) {
-      console.log(errorResponse);
+    AuthService.login(userData).then(function (user) {
+      console.log('user data:');
+      console.log(userData);
+      console.log('user:');
+      console.log(user);
+    }, function () {
+      console.log('login ERROR! no user data!');
     });
   };
 }]);
