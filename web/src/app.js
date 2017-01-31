@@ -34,9 +34,9 @@ konnektApp.config(['$routeProvider', function ($routeProvider) {
 
 konnektApp.controller('registrationController', ['$scope', '$http', function ($scope, $http) {
 
-  $scope.header = 'REGISZTRÁLJ.';
+  $scope.header = 'regisztrálj.';
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
-  $scope.button = 'MEHET';
+  $scope.button = 'mehet';
 
   $scope.addNewMember = function () {
 
@@ -58,9 +58,9 @@ konnektApp.controller('registrationController', ['$scope', '$http', function ($s
 
 konnektApp.controller('loginController', ['$scope', '$http', function ($scope, $http) {
 
-  $scope.header = 'LÉPJ BE';
+  $scope.header = 'lépj be';
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
-  $scope.button = 'MEHET';
+  $scope.button = 'mehet';
 
   $scope.loginMember = function () {
 
