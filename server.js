@@ -25,6 +25,12 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.use(function(req, res, next) {
+  console.log('myheader has sessiontoken!');
+  res.setHeader('sessiontoken', '12345');
+  next();
+});
+
 // Port settings
 app.listen(port, function () {
   console.log(`Server running on port ${port}`);
@@ -52,3 +58,11 @@ app.post('/login', function (req, res) {
     res.status(401).send(JSON.stringify(response));
   }
 });
+
+// app.post('/login', function (req, res) {
+//   console.log('login on server');
+//   // console.log(req.body);
+//   res.setHeader['token'] = 'oke';
+//   // res.setHeader({ "token", "oke" });
+//   res.send('success login');
+// });

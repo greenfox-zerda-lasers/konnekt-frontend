@@ -43,6 +43,27 @@ konnektApp.config(['$routeProvider', function ($routeProvider) {
     });
 }]);
 
+// user identification
+konnektApp.factory('AuthService', function ($http) {
+  var authService = {};
+
+  authService.login = function (userData) {
+    console.log(authService);
+
+    return $http
+      .post(appUrl + '/login', JSON.stringify(userData)).then(function (successResponse) {
+        console.log(successResponse);
+      }, function (errorResponse) {
+        console.log(errorResponse);
+      });
+      // .post('/login', userData)
+      // .then(function (res) {
+      //   Session.create(res.data.id, res.data.user.id,
+      //                  res.data.user.role);
+      //   return res.data.user;
+      // });
+  };
+
 
 // APP RUN
 konnektApp.run(['$rootScope', '$location', 'UserService', function ($rootScope, $location, UserService) {
@@ -215,7 +236,6 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
   $scope.button = 'mehet';
   // console.log('ez a login controllerben van:');
   // console.log(UserService.errormessage);
-
   // error message not work
   // $scope.errormessage = UserService.errormessage;
 
@@ -231,4 +251,5 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
 konnektApp.controller('dashboardController', ['$scope', '$window', 'UserService', function ($scope, $window, UserService) {
 
   $scope.header = UserService.getUserData().email;
+
 }]);
