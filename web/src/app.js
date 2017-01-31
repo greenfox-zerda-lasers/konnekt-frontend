@@ -7,7 +7,7 @@ const appUrl = 'http://localhost:3000';
 // const appUrl = 'https://lasers-cornubite-konnekt.herokuapp.com';
 
 // for raptors web
-// const appUrl = 'https://raptor-konnekt.herokuapp.com';
+const appUrl = 'https://raptor-konnekt.herokuapp.com';
 
 
 var angular = require('angular');
@@ -40,11 +40,12 @@ konnektApp.controller('registrationController', ['$scope', '$http', function ($s
 
   $scope.addNewMember = function () {
 
-    var data = [{
-      username: $scope.newUser.username,
+
+    var data = {
+      email: $scope.newUser.email,
       password: $scope.newUser.password,
       passwordConfirmation: $scope.newUser.passwordConfirmation,
-    }];
+    };
 
     console.log(JSON.stringify(data));
 
@@ -64,10 +65,10 @@ konnektApp.controller('loginController', ['$scope', '$http', function ($scope, $
 
   $scope.loginMember = function () {
 
-    var data = [{
-      username: $scope.userLogin.username,
+    var data = {
+      email: $scope.userLogin.email,
       password: $scope.userLogin.password,
-    }];
+    };
 
     console.log(JSON.stringify(data));
 
