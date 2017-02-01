@@ -48,11 +48,11 @@ konnektApp.factory('AuthService', function ($http) {
   var authService = {};
 
   authService.login = function (userData) {
-    console.log(authService);
 
     return $http
       .post(appUrl + '/login', JSON.stringify(userData)).then(function (successResponse) {
-        console.log(successResponse);
+        console.log('headers:');
+        console.log(successResponse.headers('session_token'));
       }, function (errorResponse) {
         console.log(errorResponse);
       });
