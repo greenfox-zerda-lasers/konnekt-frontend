@@ -36,11 +36,11 @@ konnektApp.factory('AuthService', function ($http) {
   var authService = {};
 
   authService.login = function (userData) {
-    console.log(authService);
 
     return $http
       .post(appUrl + '/login', JSON.stringify(userData)).then(function (successResponse) {
-        console.log(successResponse);
+        console.log('headers:');
+        console.log(successResponse.headers('session_token'));
       }, function (errorResponse) {
         console.log(errorResponse);
       });
@@ -85,7 +85,7 @@ konnektApp.controller('registrationController', ['$scope', '$http', function ($s
     console.log(JSON.stringify(userData));
 
     $http.post(appUrl + '/register', JSON.stringify(userData).then(function (successResponse) {
-
+      console.log('response ok from server');
     }, function (errorResponse) {
       console.log(errorResponse);
     },
@@ -108,9 +108,9 @@ konnektApp.controller('loginController', ['$scope', '$http', 'AuthService', func
     };
 
     AuthService.login(userData).then(function (user) {
-      console.log('user data:');
-      console.log(user.headers('session_token'));
-      console.log('user:');
+      console.log('userData');
+      console.log(userData);
+      console.log('user');
       console.log(user);
     }, function () {
       console.log('login ERROR! no user data!');
