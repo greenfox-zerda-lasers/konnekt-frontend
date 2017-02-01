@@ -85,7 +85,7 @@ konnektApp.controller('registrationController', ['$scope', '$http', function ($s
     console.log(JSON.stringify(userData));
 
     $http.post(appUrl + '/register', JSON.stringify(userData).then(function (successResponse) {
-      console.log(successResponse);
+
     }, function (errorResponse) {
       console.log(errorResponse);
     },
@@ -109,7 +109,7 @@ konnektApp.controller('loginController', ['$scope', '$http', 'AuthService', func
 
     AuthService.login(userData).then(function (user) {
       console.log('user data:');
-      console.log(userData);
+      console.log(user.headers('session_token'));
       console.log('user:');
       console.log(user);
     }, function () {
