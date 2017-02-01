@@ -9,11 +9,11 @@ const appUrl = 'http://localhost:3000';
 // for raptors web
 // const appUrl = 'https://raptor-konnekt.herokuapp.com';
 
-
 var angular = require('angular');
 var ngRoute = require('angular-route');
 
 var konnektApp = angular.module('konnektApp', ['ngRoute']);
+var responseFromServer;
 
 konnektApp.config(['$routeProvider', function ($routeProvider) {
 
@@ -39,6 +39,7 @@ konnektApp.factory('AuthService', function ($http) {
 
     return $http
       .post(appUrl + '/login', JSON.stringify(userData)).then(function (successResponse) {
+        responseFromServer = successResponse.headers('session_token');
         console.log('headers:');
         console.log(successResponse.headers('session_token'));
       }, function (errorResponse) {
@@ -51,18 +52,6 @@ konnektApp.factory('AuthService', function ($http) {
       //   return res.data.user;
       // });
   };
-
-  // authService.isAuthenticated = function () {
-  //   return !!Session.userId;
-  // };
-  //
-  // authService.isAuthorized = function (authorizedRoles) {
-  //   if (!angular.isArray(authorizedRoles)) {
-  //     authorizedRoles = [authorizedRoles];
-  //   }
-  //   return (authService.isAuthenticated() &&
-  //     authorizedRoles.indexOf(Session.userRole) !== -1);
-  // };
 
   return authService;
 });
@@ -77,12 +66,10 @@ konnektApp.controller('registrationController', ['$scope', '$http', function ($s
   $scope.addNewMember = function () {
 
     var userData = {
-      username: $scope.newUser.username,
+      email: $scope.newUser.email,
       password: $scope.newUser.password,
       passwordConfirmation: $scope.newUser.passwordConfirmation,
     };
-
-    console.log(JSON.stringify(userData));
 
     $http.post(appUrl + '/register', JSON.stringify(userData).then(function (successResponse) {
       console.log('response ok from server');
@@ -108,10 +95,9 @@ konnektApp.controller('loginController', ['$scope', '$http', 'AuthService', func
     };
 
     AuthService.login(userData).then(function (user) {
-      console.log('userData');
-      console.log(userData);
-      console.log('user');
-      console.log(user);
+      console.log(`userData: ${userData}`);
+
+      $scope.header = responseFromServer;
     }, function () {
       console.log('login ERROR! no user data!');
 
