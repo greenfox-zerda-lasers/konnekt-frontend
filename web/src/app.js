@@ -1,13 +1,13 @@
 // IMPORTANT! Set your url here!
 
 // for localhost testing
-// const appUrl = 'http://localhost:3000';
+const appUrl = 'http://localhost:3000';
 
 // for lasers web
 // const appUrl = 'https://lasers-cornubite-konnekt.herokuapp.com';
 
 // for raptors web
-const appUrl = 'https://raptor-konnekt.herokuapp.com';
+// const appUrl = 'https://raptor-konnekt.herokuapp.com';
 
 
 var angular = require('angular');
@@ -34,9 +34,9 @@ konnektApp.config(['$routeProvider', function ($routeProvider) {
 
 konnektApp.controller('registrationController', ['$scope', '$http', function ($scope, $http) {
 
-  $scope.header = 'REGISZTRÁLJ.';
+  $scope.header = 'regisztrálj.';
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
-  $scope.button = 'MEHET';
+  $scope.button = 'mehet';
 
   $scope.addNewMember = function () {
 
@@ -59,9 +59,9 @@ konnektApp.controller('registrationController', ['$scope', '$http', function ($s
 
 konnektApp.controller('loginController', ['$scope', '$http', function ($scope, $http) {
 
-  $scope.header = 'Jelentkezz be';
+  $scope.header = 'lépj be';
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
-  $scope.button = 'MEHET';
+  $scope.button = 'mehet';
 
   $scope.loginMember = function () {
 
