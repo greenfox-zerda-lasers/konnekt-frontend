@@ -20,6 +20,7 @@ var angular = require('angular');
 var ngRoute = require('angular-route');
 
 var konnektApp = angular.module('konnektApp', ['ngRoute']);
+var responseFromServer;
 
 
 // APP CONFIG
@@ -51,6 +52,7 @@ konnektApp.factory('AuthService', function ($http) {
 
     return $http
       .post(appUrl + '/login', JSON.stringify(userData)).then(function (successResponse) {
+        responseFromServer = successResponse.headers('session_token');
         console.log('headers:');
         console.log(successResponse.headers('session_token'));
       }, function (errorResponse) {
@@ -97,6 +99,7 @@ konnektApp.factory('HttpService', ['$http', function ($http) {
 }]);
 
 
+<<<<<<< HEAD
 konnektApp.factory('UserService', ['HttpService', '$window', function (HttpService, $window) {
 
   var userData = {
@@ -251,5 +254,6 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
 konnektApp.controller('dashboardController', ['$scope', '$window', 'UserService', function ($scope, $window, UserService) {
 
   $scope.header = UserService.getUserData().email;
+
 
 }]);

@@ -4,7 +4,6 @@ var bodyParser = require('body-parser');
 // START SERVER
 var port = process.env.PORT || 3000;
 var app = server();
-
 var responseToken;
 var responseOk;
 let response;
@@ -22,12 +21,6 @@ app.use(function (req, res, next) {
     responseToken = '';
   }
   res.setHeader('session_token', responseToken);
-  next();
-});
-
-app.use(function(req, res, next) {
-  console.log('myheader has sessiontoken!');
-  res.setHeader('session_token', '12345');
   next();
 });
 
