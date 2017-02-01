@@ -1,13 +1,17 @@
+// *****************************************************************************
 // IMPORTANT! Set your url here!
-
+// *****************************************************************************
+//
 // for localhost testing
 const appUrl = 'http://localhost:3000';
-
+//
 // for lasers web
 // const appUrl = 'https://lasers-cornubite-konnekt.herokuapp.com';
-
+//
 // for raptors web
 // const appUrl = 'https://raptor-konnekt.herokuapp.com';
+//
+// *****************************************************************************
 
 var angular = require('angular');
 var ngRoute = require('angular-route');
@@ -26,7 +30,10 @@ konnektApp.config(['$routeProvider', function ($routeProvider) {
       templateUrl: 'registration.html',
       controller: 'registrationController',
     })
-    .otherwise({
+    .when('/dashboard', {
+      templateUrl: 'dashboard.html',
+      controller: 'dashboardController',
+    }).otherwise({
       redirectTo: '/login',
     });
 }]);
@@ -45,12 +52,6 @@ konnektApp.factory('AuthService', function ($http) {
       }, function (errorResponse) {
         console.log(errorResponse);
       });
-      // .post('/login', userData)
-      // .then(function (res) {
-      //   Session.create(res.data.id, res.data.user.id,
-      //                  res.data.user.role);
-      //   return res.data.user;
-      // });
   };
 
   return authService;
@@ -81,7 +82,7 @@ konnektApp.controller('registrationController', ['$scope', '$http', function ($s
 }]);
 
 // login controller
-konnektApp.controller('loginController', ['$scope', '$http', 'AuthService', function ($scope, $http, AuthService) {
+konnektApp.controller('loginController', ['$scope', '$http', '$window', 'AuthService', function ($scope, $http, $window, AuthService) {
 
   $scope.header = 'lépj be';
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
@@ -96,10 +97,19 @@ konnektApp.controller('loginController', ['$scope', '$http', 'AuthService', func
 
     AuthService.login(userData).then(function (user) {
       console.log(`userData: ${userData}`);
+      $window.location.href = "#!/dashboard";
 
-      $scope.header = responseFromServer;
+      // $scope.header = responseFromServer;
     }, function () {
       console.log('login ERROR! no user data!');
     });
   };
+}]);
+
+// dashboard controller
+konnektApp.controller('dashboardController', ['$scope', '$http', function ($scope, $http) {
+
+  console.log('dashboardkontroller ok');
+  $scope.header = responseFromServer;
+
 }]);
