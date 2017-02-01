@@ -76,14 +76,11 @@ konnektApp.controller('registrationController', ['$scope', '$http', function ($s
 
   $scope.addNewMember = function () {
 
-    var userData = {
-      username: $scope.newUser.username,
+    var data = {
+      email: $scope.newUser.email,
       password: $scope.newUser.password,
       passwordConfirmation: $scope.newUser.passwordConfirmation,
     };
-
-    console.log(JSON.stringify(userData));
-
     $http.post(appUrl + '/register', JSON.stringify(userData).then(function (successResponse) {
 
     }, function (errorResponse) {
@@ -100,11 +97,10 @@ konnektApp.controller('loginController', ['$scope', '$http', 'AuthService', func
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
   $scope.button = 'mehet';
 
-
   $scope.loginMember = function (userData) {
 
     var userData = {
-      username: $scope.userLogin.username,
+      email: $scope.userLogin.email,
       password: $scope.userLogin.password,
     };
 
