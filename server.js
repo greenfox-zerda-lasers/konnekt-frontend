@@ -27,7 +27,7 @@ app.use(function (req, res, next) {
 
 app.use(function(req, res, next) {
   console.log('myheader has sessiontoken!');
-  res.setHeader('sessiontoken', '12345');
+  res.setHeader('session_token', '12345');
   next();
 });
 
