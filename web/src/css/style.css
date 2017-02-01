@@ -15,15 +15,12 @@ body {
 .konnekt-logo {
   flex: 0 1 70px;
   max-width: 219px;
+  margin-bottom: 29px;
   width: 100%;
   background-image: url('images/logo-feher-hosszu.png');
   background-position: top;
   background-repeat: no-repeat;
   background-size: cover;
-}
-
-.spacer {
-  flex: 0 1 29px;
 }
 
 .form-container {
