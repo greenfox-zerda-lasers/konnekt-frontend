@@ -82,12 +82,7 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
     let userData = { email: getuserdata.email, password: getuserdata.password };
     HttpService.login(userData)
       .then(function (successResponse) {
-        console.log('itt a magic');
-        console.log(successResponse.headers('session_token'));
         getuserdata.token = successResponse.headers('session_token');
-        console.log(getuserdata.token);
-        console.log(`session token: ${getuserdata.token}`);
-        console.log(`successResponse: ${successResponse}`);
         if (isLoggedIn) {
            $window.location.href = '#!/dashboard';
         } else {
@@ -113,29 +108,29 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
 }]);
 
 
-// CONTROLLERS
-// konnektApp.controller('registrationController', ['$scope', '$http', function ($scope, $http) {
-//
-//   $scope.header = 'regisztrálj.';
-//   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
-//   $scope.button = 'mehet';
-//
-//   $scope.addNewMember = function () {
-//
-//     var userData = {
-//       email = $scope.newUser.email,
-//       password = $scope.newUser.password,
-//       passwordConfirmation = $scope.newUser.passwordConfirmation,
-//    };
-//
-//     $http.post(`${appUrl}/register`, JSON.stringify(userData).then(function () {
-//       console.log('response ok from server');
-//     }, function (errorResponse) {
-//       console.log(errorResponse);
-//     },
-//     ));
-//   };
-// }]);
+CONTROLLERS
+konnektApp.controller('registrationController', ['$scope', '$http', function ($scope, $http) {
+
+  $scope.header = 'regisztrálj.';
+  $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
+  $scope.button = 'mehet';
+
+  $scope.addNewMember = function () {
+
+    var userData = {
+      email = $scope.newUser.email,
+      password = $scope.newUser.password,
+      passwordConfirmation = $scope.newUser.passwordConfirmation,
+   };
+
+    $http.post(`${appUrl}/register`, JSON.stringify(userData).then(function () {
+      console.log('response ok from server');
+    }, function (errorResponse) {
+      console.log(errorResponse);
+    },
+    ));
+  };
+}]);
 
 
 konnektApp.controller('loginController', ['$scope', 'UserService', function ($scope, UserService) {
@@ -157,7 +152,13 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
 }]);
 
 
-konnektApp.controller('dashboardController', ['$scope', 'UserService', function ($scope, UserService) {
+konnektApp.controller('dashboardController', ['$scope', '$window', 'UserService', function ($scope, $window, UserService) {
+
+  if (!UserService.isLoggedIn) {
+    console.log('itt jartunk :)');
+    // loginController.showErrorMessage('Invalid username/password');
+    $window.location.href = '#!/login';
+  }
 
   console.log('dashboardkontroller ok');
   $scope.header = UserService.getuserdata.email;
