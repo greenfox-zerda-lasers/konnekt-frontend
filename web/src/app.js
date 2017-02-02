@@ -17,7 +17,6 @@ var angular = require('angular');
 var ngRoute = require('angular-route');
 
 var konnektApp = angular.module('konnektApp', ['ngRoute']);
-var responseFromServer;
 
 
 // APP CONFIG
@@ -39,6 +38,16 @@ konnektApp.config(['$routeProvider', function ($routeProvider) {
     .otherwise({
       redirectTo: '/login',
     });
+}]);
+
+
+// REGISTER LISTENER - watch for route changes, this event will fire every time the route changes
+konnektApp.run(['$rootScope', '$location', 'UserService', function ($rootScope, $location, UserService) {
+  $rootScope.$on('$routeChangeStart', function () {
+    if (!UserService.isLoggedIn()) {
+      $location.path('/login');
+    }
+  });
 }]);
 
 
@@ -71,7 +80,7 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
   };
 
   function isLoggedIn() {
-    if (this.getuserdata.token !== '') {
+    if (getuserdata.token !== '') {
       return true;
     }
     return false;
@@ -82,17 +91,26 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
     let userData = { email: getuserdata.email, password: getuserdata.password };
     HttpService.login(userData)
       .then(function (successResponse) {
-        getuserdata.token = successResponse.headers('session_token');
-        if (isLoggedIn) {
-           $window.location.href = '#!/dashboard';
-        } else {
-          loginController.showErrorMessage('Invalid username/password');
+        if (successResponse.status === 201) {
+          console.log('success login:');
+          console.log(successResponse);
+          getuserdata.token = successResponse.headers('session_token');
+          getuserdata.id = successResponse.data.user_id;
+          console.log(getuserdata);
+          $window.location.href = '#!/dashboard';
+        } else if (successResponse.status === 401) {
+          console.log('login error:');
+          console.log(successResponse);
+          loginController.showErrorMessage(`${successResponse.data.errors.name}: ${successResponse.data.errors.message}`);
+          getuserdata.id = -1;
+          getuserdata.email = '';
+          getuserdata.password = '';
+          getuserdata.token = '';
           $window.location.href = '#!/login';
         }
       }, function () {
         console.log('login ERROR! no user data!');
       });
-   // getuserdata.email
   }
 
   function register() {
@@ -103,7 +121,7 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
         console.log('registration data sent');
         console.log('reponse header: ', successResponse.headers('session_token'));
         getuserdata.token = successResponse.headers('session_token');
-        console.log('getuserdata.token: ',getuserdata.token);
+        console.log('getuserdata.token: ', getuserdata.token);
         console.log(`session token: ${getuserdata.token}`);
         console.log(`successResponse: ${successResponse}`);
         console.log('getuserdata: ', getuserdata);
@@ -116,7 +134,6 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
       }, function () {
         console.log('registration ERROR!');
       });
-
   }
 
   return {
@@ -143,7 +160,9 @@ konnektApp.controller('registrationController', ['$scope', 'UserService', functi
   };
 
   $scope.showErrorMessage = function (errormessage) {
-     $scope.errormessage = errormessage;
+    // $scope.errormessage = errormessage;
+    console.log('error message from server: ');
+    console.log(errormessage);
    //   ng-show = true ??
   };
 }]);
@@ -162,7 +181,8 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
   };
 
   $scope.showErrorMessage = function (errormessage) {
-    $scope.errormessage = errormessage;
+    // $scope.errormessage = errormessage;
+    console.log(errormessage);
    //   ng-show = true ??
   };
 }]);
@@ -170,13 +190,5 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
 
 konnektApp.controller('dashboardController', ['$scope', '$window', 'UserService', function ($scope, $window, UserService) {
 
-  if (!UserService.isLoggedIn) {
-    console.log('itt jartunk :)');
-    // loginController.showErrorMessage('Invalid username/password');
-    $window.location.href = '#!/login';
-  }
-
-  console.log('dashboardkontroller ok');
   $scope.header = UserService.getuserdata.email;
-
 }]);
