@@ -20,7 +20,6 @@ var angular = require('angular');
 var ngRoute = require('angular-route');
 
 var konnektApp = angular.module('konnektApp', ['ngRoute']);
-var responseFromServer;
 
 
 // APP CONFIG
@@ -43,28 +42,6 @@ konnektApp.config(['$routeProvider', function ($routeProvider) {
       redirectTo: '/login',
     });
 }]);
-
-// user identification
-konnektApp.factory('AuthService', function ($http) {
-  var authService = {};
-
-  authService.login = function (userData) {
-
-    return $http
-      .post(appUrl + '/login', JSON.stringify(userData)).then(function (successResponse) {
-        responseFromServer = successResponse.headers('session_token');
-        console.log('headers:');
-        console.log(successResponse.headers('session_token'));
-      }, function (errorResponse) {
-        console.log(errorResponse);
-      });
-      // .post('/login', userData)
-      // .then(function (res) {
-      //   Session.create(res.data.id, res.data.user.id,
-      //                  res.data.user.role);
-      //   return res.data.user;
-      // });
-  };
 
 
 // APP RUN
@@ -99,7 +76,6 @@ konnektApp.factory('HttpService', ['$http', function ($http) {
 }]);
 
 
-<<<<<<< HEAD
 konnektApp.factory('UserService', ['HttpService', '$window', function (HttpService, $window) {
 
   var userData = {
@@ -239,6 +215,7 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
   $scope.button = 'mehet';
   // console.log('ez a login controllerben van:');
   // console.log(UserService.errormessage);
+
   // error message not work
   // $scope.errormessage = UserService.errormessage;
 
@@ -254,6 +231,5 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
 konnektApp.controller('dashboardController', ['$scope', '$window', 'UserService', function ($scope, $window, UserService) {
 
   $scope.header = UserService.getUserData().email;
-
-
+  
 }]);
