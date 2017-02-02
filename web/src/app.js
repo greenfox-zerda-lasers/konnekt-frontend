@@ -1,5 +1,5 @@
 // *****************************************************************************
-// IMPORTANT! Set your url here!
+// IMPORTANT! Set your server url here!
 // *****************************************************************************
 //
 // for localhost testing
@@ -19,6 +19,8 @@ var ngRoute = require('angular-route');
 var konnektApp = angular.module('konnektApp', ['ngRoute']);
 var responseFromServer;
 
+
+// APP CONFIG
 konnektApp.config(['$routeProvider', function ($routeProvider) {
 
   $routeProvider
@@ -33,31 +35,60 @@ konnektApp.config(['$routeProvider', function ($routeProvider) {
     .when('/dashboard', {
       templateUrl: 'dashboard.html',
       controller: 'dashboardController',
-    }).otherwise({
+    })
+    .otherwise({
       redirectTo: '/login',
     });
 }]);
 
-// user identification
-konnektApp.factory('AuthService', function ($http) {
-  var authService = {};
 
-  authService.login = function (userData) {
+// FACTORIES
+konnektApp.factory('HttpService', function ($http) {
 
-    return $http
-      .post(appUrl + '/login', JSON.stringify(userData)).then(function (successResponse) {
-        responseFromServer = successResponse.headers('session_token');
-        console.log('headers:');
-        console.log(successResponse.headers('session_token'));
-      }, function (errorResponse) {
-        console.log(errorResponse);
-      });
+  function login(userData) {
+    return $http.post(`${appUrl}/login`, JSON.stringify(userData));
+  }
+
+  function register(userData) {
+    return $http.post(`${appUrl}/register`, JSON.stringify(userData));
+  }
+
+  return {
+    login: login,
+    register: register,
   };
-
-  return authService;
 });
 
-// registration controller
+
+konnektApp.factory('UserService', function () {
+
+  function isLoggedIn() {
+    // return true/false, if user id exist
+  }
+
+  function login() {
+
+  }
+
+  function register() {
+
+  }
+
+  function getuserdata() {
+    // user data (id, token, email, password,...) comes here)
+
+  }
+
+  return {
+    isLoggedIn: isLoggedIn,
+    login: login,
+    register: register,
+    getuserdata: getuserdata,
+  };
+});
+
+
+// CONTROLLERS
 konnektApp.controller('registrationController', ['$scope', '$http', function ($scope, $http) {
 
   $scope.header = 'regisztrálj.';
@@ -72,7 +103,7 @@ konnektApp.controller('registrationController', ['$scope', '$http', function ($s
       passwordConfirmation: $scope.newUser.passwordConfirmation,
     };
 
-    $http.post(appUrl + '/register', JSON.stringify(userData).then(function (successResponse) {
+    $http.post(`${appUrl}/register`, JSON.stringify(userData).then(function () {
       console.log('response ok from server');
     }, function (errorResponse) {
       console.log(errorResponse);
@@ -81,8 +112,8 @@ konnektApp.controller('registrationController', ['$scope', '$http', function ($s
   };
 }]);
 
-// login controller
-konnektApp.controller('loginController', ['$scope', '$http', '$window', 'AuthService', function ($scope, $http, $window, AuthService) {
+
+konnektApp.controller('loginController', ['$scope', '$http', '$window', 'HttpService', function ($scope, $http, $window, HttpService) {
 
   $scope.header = 'lépj be';
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
@@ -95,11 +126,11 @@ konnektApp.controller('loginController', ['$scope', '$http', '$window', 'AuthSer
       password: $scope.userLogin.password,
     };
 
-    AuthService.login(userData).then(function (user) {
-      console.log(`userData: ${userData}`);
-      $window.location.href = "#!/dashboard";
-
-      // $scope.header = responseFromServer;
+    HttpService.login(userData).then(function (successResponse) {
+      responseFromServer = successResponse.headers('session_token');
+      console.log(`session token: ${responseFromServer}`);
+      console.log(`successResponse: ${successResponse}`);
+      $window.location.href = '#!/dashboard';
     }, function () {
       console.log('login ERROR! no user data!');
 
@@ -107,8 +138,8 @@ konnektApp.controller('loginController', ['$scope', '$http', '$window', 'AuthSer
   };
 }]);
 
-// dashboard controller
-konnektApp.controller('dashboardController', ['$scope', '$http', function ($scope, $http) {
+
+konnektApp.controller('dashboardController', ['$scope', function ($scope) {
 
   console.log('dashboardkontroller ok');
   $scope.header = responseFromServer;

@@ -14,7 +14,7 @@ app.use(function(req, res, next) {
   if (registerdUsers.indexOf(req.body.email) >= 0 && req.body.password === req.body.email) {
     responseToken = `Hello, ${req.body.email}`;
   } else {
-    responseToken = 'unknown user';
+    responseToken = 'Hello, unknown';
   }
   res.setHeader('session_token', responseToken);
   next();
