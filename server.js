@@ -1,5 +1,6 @@
 var server = require('express');
 var bodyParser = require('body-parser');
+var responseOK;
 
 // START SERVER
 var port = process.env.PORT || 3000;
