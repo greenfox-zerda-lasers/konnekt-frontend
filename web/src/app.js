@@ -134,7 +134,6 @@ konnektApp.controller('loginController', ['$scope', '$window', 'UserService', fu
 
   UserService.login()
 
-   //  function ng-show állítgatás
 
     HttpService.login(userData).then(function (successResponse) {
       responseFromServer = successResponse.headers('session_token');
@@ -149,6 +148,14 @@ konnektApp.controller('loginController', ['$scope', '$window', 'UserService', fu
       console.log('login ERROR! no user data!');
     });
   };
+
+  //  function ng-show állítgatás
+
+  $scope.showErrorMessage = function (errormessage) {
+     $scope.errormessage = errormessage;
+   //   ng-show = true ??
+  };
+
 }]);
 
 
