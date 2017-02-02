@@ -147,19 +147,19 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
   $scope.loginMember = function () {
     UserService.getuserdata.email = $scope.userLogin.email;
     UserService.getuserdata.password = $scope.userLogin.password;
-    UserService.login()
+    UserService.login();
   };
 
   $scope.showErrorMessage = function (errormessage) {
-     $scope.errormessage = errormessage;
+    $scope.errormessage = errormessage;
    //   ng-show = true ??
   };
 }]);
 
 
-konnektApp.controller('dashboardController', ['$scope', function ($scope) {
+konnektApp.controller('dashboardController', ['$scope', 'UserService', function ($scope, UserService) {
 
   console.log('dashboardkontroller ok');
-  $scope.header = responseFromServer;
+  $scope.header = UserService.getuserdata.email;
 
 }]);
