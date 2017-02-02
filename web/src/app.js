@@ -62,20 +62,26 @@ konnektApp.factory('HttpService', function ($http) {
 
 konnektApp.factory('UserService', function () {
 
+   var getuserdata = {
+      id: -1,
+      token: '',
+      email: '',
+      password: ''
+   }
+
   function isLoggedIn() {
-    // return true/false, if user id exist
-  }
+    if (this.getuserdata.token !== '') {
+      return true;
+   } else {
+      return false;
+   };
+};
 
   function login() {
-
+   // getuserdata.email
   }
 
   function register() {
-
-  }
-
-  function getuserdata() {
-    // user data (id, token, email, password,...) comes here)
 
   }
 
@@ -83,7 +89,7 @@ konnektApp.factory('UserService', function () {
     isLoggedIn: isLoggedIn,
     login: login,
     register: register,
-    getuserdata: getuserdata,
+    getuserdata: getuserdata
   };
 });
 
@@ -98,10 +104,10 @@ konnektApp.controller('registrationController', ['$scope', '$http', function ($s
   $scope.addNewMember = function () {
 
     var userData = {
-      email: $scope.newUser.email,
+      email = $scope.newUser.email,
       password: $scope.newUser.password,
       passwordConfirmation: $scope.newUser.passwordConfirmation,
-    };
+   };
 
     $http.post(`${appUrl}/register`, JSON.stringify(userData).then(function () {
       console.log('response ok from server');
@@ -113,7 +119,7 @@ konnektApp.controller('registrationController', ['$scope', '$http', function ($s
 }]);
 
 
-konnektApp.controller('loginController', ['$scope', '$http', '$window', 'HttpService', function ($scope, $http, $window, HttpService) {
+konnektApp.controller('loginController', ['$scope', '$window', 'UserService', function ($scope, $window, UserService) {
 
   $scope.header = 'lépj be';
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
@@ -121,16 +127,31 @@ konnektApp.controller('loginController', ['$scope', '$http', '$window', 'HttpSer
 
   $scope.loginMember = function (userData) {
 
+<<<<<<< HEAD
     var userData = {
       username: $scope.userLogin.username,
       password: $scope.userLogin.password,
     };
+=======
+
+  UserService.getuserdata.email = $scope.userLogin.email;
+  UserService.getuserdata.password = $scope.userLogin.password;
+
+
+  UserService.login()
+
+   //  function ng-show állítgatás
+>>>>>>> kiscica
 
     HttpService.login(userData).then(function (successResponse) {
       responseFromServer = successResponse.headers('session_token');
       console.log(`session token: ${responseFromServer}`);
       console.log(`successResponse: ${successResponse}`);
-      $window.location.href = '#!/dashboard';
+      if (UserService.isLoggedIn) {
+         $window.location.href = '#!/dashboard';
+      } else {
+         megy vissza a login oldalra hibaüzenettel
+      }
     }, function () {
       console.log('login ERROR! no user data!');
 
