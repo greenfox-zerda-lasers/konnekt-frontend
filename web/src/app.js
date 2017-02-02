@@ -127,21 +127,11 @@ konnektApp.controller('loginController', ['$scope', '$window', 'UserService', fu
 
   $scope.loginMember = function (userData) {
 
-<<<<<<< HEAD
-    var userData = {
-      username: $scope.userLogin.username,
-      password: $scope.userLogin.password,
-    };
-=======
-
   UserService.getuserdata.email = $scope.userLogin.email;
   UserService.getuserdata.password = $scope.userLogin.password;
 
 
   UserService.login()
-
-   //  function ng-show állítgatás
->>>>>>> kiscica
 
     HttpService.login(userData).then(function (successResponse) {
       responseFromServer = successResponse.headers('session_token');
