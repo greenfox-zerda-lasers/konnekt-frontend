@@ -2,6 +2,7 @@
 <div class="form-container">
   <h1 class="header-text">{{ header }}</h1>
   <p class="welcome-text">{{ welcome }}</p>
+  <p class="error-message" ng-show="loginController.showErrorMessage.errormessage">piros error text<p>
   <!-- {{hibakezelő}} ng-show="{{errormessage}}" -->
   <form ng-submit="loginMember()">
     <input type="text" placeholder="e-mail címed:" ng-model='userLogin.email' novalidate>

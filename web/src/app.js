@@ -103,11 +103,11 @@ konnektApp.controller('registrationController', ['$scope', '$http', function ($s
 
   $scope.addNewMember = function () {
 
-    var userData = {
-      email = $scope.newUser.email,
-      password: $scope.newUser.password,
-      passwordConfirmation: $scope.newUser.passwordConfirmation,
-   };
+  //   var userData = {
+  //     email = $scope.newUser.email,
+  //     password: $scope.newUser.password,
+  //     passwordConfirmation: $scope.newUser.passwordConfirmation,
+  //  };
 
     $http.post(`${appUrl}/register`, JSON.stringify(userData).then(function () {
       console.log('response ok from server');
@@ -124,6 +124,7 @@ konnektApp.controller('loginController', ['$scope', '$window', 'UserService', fu
   $scope.header = 'lépj be';
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
   $scope.button = 'mehet';
+  $scope.error = 'piros error message';
 
   $scope.loginMember = function (userData) {
 
@@ -131,7 +132,7 @@ konnektApp.controller('loginController', ['$scope', '$window', 'UserService', fu
   UserService.getuserdata.email = $scope.userLogin.email;
   UserService.getuserdata.password = $scope.userLogin.password;
 
-
+  
   UserService.login()
 
 
@@ -142,7 +143,8 @@ konnektApp.controller('loginController', ['$scope', '$window', 'UserService', fu
       if (UserService.isLoggedIn) {
          $window.location.href = '#!/dashboard';
       } else {
-         megy vissza a login oldalra hibaüzenettel
+        console.log('something')
+        //  megy vissza a login oldalra hibaüzenettel
       }
     }, function () {
       console.log('login ERROR! no user data!');
@@ -153,7 +155,7 @@ konnektApp.controller('loginController', ['$scope', '$window', 'UserService', fu
 
   $scope.showErrorMessage = function (errormessage) {
      $scope.errormessage = errormessage;
-   //   ng-show = true ??
+     errormessage === true;
   };
 
 }]);
