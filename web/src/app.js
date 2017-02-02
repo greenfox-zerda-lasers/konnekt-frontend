@@ -96,6 +96,26 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
   }
 
   function register() {
+    console.log('getuserdata: ', getuserdata);
+    let userData = { email: getuserdata.email, password: getuserdata.password, password_confirmation: getuserdata.passwordConfirmation };
+    HttpService.register(userData)
+      .then(function (successResponse) {
+        console.log('registration data sent');
+        console.log('reponse header: ', successResponse.headers('session_token'));
+        getuserdata.token = successResponse.headers('session_token');
+        console.log('getuserdata.token: ',getuserdata.token);
+        console.log(`session token: ${getuserdata.token}`);
+        console.log(`successResponse: ${successResponse}`);
+        console.log('getuserdata: ', getuserdata);
+        if (isLoggedIn) {
+           $window.location.href = '#!/dashboard';
+        } else {
+          registrationController.showErrorMessage('registration error');
+          $window.location.href = '#!/register';
+        }
+      }, function () {
+        console.log('registration ERROR!');
+      });
 
   }
 
@@ -108,27 +128,23 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
 }]);
 
 
-CONTROLLERS
-konnektApp.controller('registrationController', ['$scope', '$http', function ($scope, $http) {
+// CONTROLLERS
+konnektApp.controller('registrationController', ['$scope', 'UserService', function ($scope, UserService) {
 
   $scope.header = 'regisztrálj.';
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
   $scope.button = 'mehet';
 
   $scope.addNewMember = function () {
+    UserService.getuserdata.email = $scope.newUser.email;
+    UserService.getuserdata.password = $scope.newUser.password;
+    UserService.getuserdata.passwordConfirmation = $scope.newUser.passwordConfirmation;
+    UserService.register();
+  };
 
-    var userData = {
-      email = $scope.newUser.email,
-      password = $scope.newUser.password,
-      passwordConfirmation = $scope.newUser.passwordConfirmation,
-   };
-
-    $http.post(`${appUrl}/register`, JSON.stringify(userData).then(function () {
-      console.log('response ok from server');
-    }, function (errorResponse) {
-      console.log(errorResponse);
-    },
-    ));
+  $scope.showErrorMessage = function (errormessage) {
+     $scope.errormessage = errormessage;
+   //   ng-show = true ??
   };
 }]);
 
