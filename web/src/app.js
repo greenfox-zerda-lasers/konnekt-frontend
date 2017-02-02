@@ -213,6 +213,7 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
   $scope.header = 'lépj be';
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
   $scope.button = 'mehet';
+
   // console.log('ez a login controllerben van:');
   // console.log(UserService.errormessage);
 
