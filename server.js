@@ -1,13 +1,13 @@
 var server = require('express');
 var bodyParser = require('body-parser');
-var responseOK;
-
 
 // START SERVER
 var port = process.env.PORT || 3000;
 var app = server();
+
 var responseToken;
 var responseOk;
+let response;
 var registerdUsers = ['Helga', 'Balazs', 'Attila'];
 var registerdUsersTokens = ['Helga token', 'Balazs token', 'Attila token'];
 
@@ -37,27 +37,18 @@ app.get('/', function (req, res) {
 
 app.post('/register', function (req, res) {
   console.log('registration on server');
-  let response = { user_id: 0 }
+  response = { user_id: 0 };
   res.setHeader('session_token', 'regtoken');
-  res.status(201).send(JSON.stringify(response));  // console.log(req.body);
-  res.send('success registration');
+  res.status(201).send(JSON.stringify(response));
 });
 
 app.post('/login', function (req, res) {
   console.log('login on server');
   if (responseOk) {
-    let response = { user_id: 0 }
+    response = { user_id: 0 };
     res.status(201).send(JSON.stringify(response));
   } else {
-    let response = { errors: [{ name: 'Unknown user error', message: 'not user by this name',},],};
+    response = { errors: [{ name: 'Unknown user error', message: 'not user by this name' }] };
     res.status(401).send(JSON.stringify(response));
   }
 });
-
-// app.post('/login', function (req, res) {
-//   console.log('login on server');
-//   // console.log(req.body);
-//   res.setHeader['token'] = 'oke';
-//   // res.setHeader({ "token", "oke" });
-//   res.send('success login');
-// });
