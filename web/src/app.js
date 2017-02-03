@@ -47,10 +47,15 @@ konnektApp.config(['$routeProvider', function ($routeProvider) {
 // REGISTER LISTENER - watch for route changes, this event will fire every time the route changes
 konnektApp.run(['$rootScope', '$location', 'UserService', function ($rootScope, $location, UserService) {
 
-  // ide jon a magic!
-  $rootScope.$on('$routeChangeStart', function () {
-    if (!UserService.isLoggedIn()) {
+  $rootScope.$on('$routeChangeStart', function (event, next, prev) {
+    console.log('next:');
+    console.log(next);
+    console.log(next.$$route.originalPath);
+
+    if (next.$$route.originalPath === '/register') {
       $location.path('/register');
+    } else if (!UserService.isLoggedIn()){
+      $location.path('/login');
     }
   });
 }]);
