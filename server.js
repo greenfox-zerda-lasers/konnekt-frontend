@@ -7,14 +7,16 @@ var responseOK;
 var port = process.env.PORT || 3000;
 var app = server();
 var responseToken;
+var responseOk;
 var registerdUsers = ['Helga', 'Balazs', 'Attila'];
+var registerdUsersTokens = ['Helga token', 'Balazs token', 'Attila token'];
 
 app.use(server.static(`${__dirname}/web`));
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
   if (registerdUsers.indexOf(req.body.email) >= 0 && req.body.password === req.body.email) {
     responseOk = true;
-    responseToken = 'Hi, I am a reponse token here!';
+    responseToken = registerdUsersTokens[registerdUsers.indexOf(req.body.email)];
   } else {
     responseOk = false;
     responseToken = '';
@@ -45,14 +47,7 @@ app.post('/login', function (req, res) {
     let response = { user_id: 0 }
     res.status(201).send(JSON.stringify(response));
   } else {
-    let response = {
-      errors: [
-        {
-          name: 'Unknown user error',
-          message: 'not user by this name',
-        },
-      ],
-    };
+    let response = { errors: [{ name: 'Unknown user error', message: 'not user by this name',},],};
     res.status(401).send(JSON.stringify(response));
   }
 });
