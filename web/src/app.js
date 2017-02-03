@@ -48,18 +48,16 @@ konnektApp.config(['$routeProvider', function ($routeProvider) {
 konnektApp.run(['$rootScope', '$location', 'UserService', function ($rootScope, $location, UserService) {
 
   $rootScope.$on('$routeChangeStart', function (event, next, prev) {
-    console.log('next:');
-    console.log(next);
-    console.log(next.$$route.originalPath);
 
-    if (next.$$route.originalPath === '/register') {
+    if (next.$$route) {
+      if (next.$$route.originalPath === '/register') {
       $location.path('/register');
-    } else if (!UserService.isLoggedIn()){
+      } else if (!UserService.isLoggedIn()) {
       $location.path('/login');
+      }
     }
   });
 }]);
-
 
 // FACTORIES
 konnektApp.factory('HttpService', ['$http', function ($http) {
@@ -81,15 +79,12 @@ konnektApp.factory('HttpService', ['$http', function ($http) {
 
 konnektApp.factory('UserService', ['HttpService', '$window', function (HttpService, $window) {
 
-// rename to userData
   var getuserdata = {
     id: -1,
     token: '',
     email: '',
     password: '',
   };
-
-  // getuserdata, setuserdata functions
 
   function isLoggedIn() {
     if (getuserdata.token !== '') {
@@ -98,20 +93,16 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
     return false;
   }
 
-  // $scope.showErrorMessage = function (errormessage) {
-  //   console.log(errormessage);
-  // };
-
   function login() {
     let userData = { email: getuserdata.email, password: getuserdata.password };
     HttpService.login(userData)
       .then(function (successResponse) {
         if (successResponse.status === 201) {
-          console.log('success login response:');
+          console.log('*** success login response ***');
           console.log(successResponse);
           getuserdata.token = successResponse.headers('session_token');
           getuserdata.id = successResponse.data.user_id;
-          console.log('user data:');
+          console.log('*** local user data ***');
           console.log(getuserdata);
           $window.location.href = '#!/dashboard';
         }
@@ -119,7 +110,6 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
         if (successResponse.status === 401) {
           console.log('login error 401:');
           console.log(successResponse.errormessage);
-          // loginController.showErrorMessage(`${successResponse.data.errors.name}: ${successResponse.data.errors.message}`);
           getuserdata.id = -1;
           getuserdata.email = '';
           getuserdata.password = '';
@@ -150,7 +140,6 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
       }, function (errorResponse) {
         if (successResponse.status === 403) {
           console.log('registration error 403:', errorResponse);
-          // loginController.showErrorMessage(`${successResponse.data.errors.name}: ${successResponse.data.errors.message}`);
           getuserdata.id = -1;
           getuserdata.email = '';
           getuserdata.password = '';
@@ -196,8 +185,7 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
   $scope.header = 'lépj be';
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
   $scope.button = 'mehet';
-  // error message handling
-  // $scope.errormessage = UserService.errormessage;
+
 
   $scope.loginMember = function () {
     UserService.getuserdata.email = $scope.userLogin.email;

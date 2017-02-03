@@ -3,5 +3,4 @@
 require('./css/style.css');
 require('./app.js');
 
-
-console.log('main js ok');
+console.log('app started');
