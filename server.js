@@ -37,7 +37,9 @@ app.get('/', function (req, res) {
 
 app.post('/register', function (req, res) {
   console.log('registration on server');
-  // console.log(req.body);
+  let response = { user_id: 0 }
+  res.setHeader('session_token', 'regtoken');
+  res.status(201).send(JSON.stringify(response));  // console.log(req.body);
   res.send('success registration');
 });
 
