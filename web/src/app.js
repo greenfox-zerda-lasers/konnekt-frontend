@@ -45,7 +45,7 @@ konnektApp.config(['$routeProvider', function ($routeProvider) {
 konnektApp.run(['$rootScope', '$location', 'UserService', function ($rootScope, $location, UserService) {
   $rootScope.$on('$routeChangeStart', function () {
     if (!UserService.isLoggedIn()) {
-      $location.path('/login');
+      $location.path('/register');
     }
   });
 }]);
@@ -118,21 +118,29 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
     let userData = { email: getuserdata.email, password: getuserdata.password, password_confirmation: getuserdata.passwordConfirmation };
     HttpService.register(userData)
       .then(function (successResponse) {
-        console.log('registration data sent');
-        console.log('reponse header: ', successResponse.headers('session_token'));
-        getuserdata.token = successResponse.headers('session_token');
-        console.log('getuserdata.token: ', getuserdata.token);
-        console.log(`session token: ${getuserdata.token}`);
-        console.log(`successResponse: ${successResponse}`);
-        console.log('getuserdata: ', getuserdata);
-        if (isLoggedIn) {
-           $window.location.href = '#!/dashboard';
+        if (successResponse.status === 201) {
+          console.log('success registration response:');
+          console.log(successResponse);
+          getuserdata.token = successResponse.headers('session_token');
+          getuserdata.id = successResponse.data.user_id;
+          console.log('user data:');
+          console.log(getuserdata);
+          $window.location.href = '#!/dashboard';
         } else {
-          registrationController.showErrorMessage('registration error');
-          $window.location.href = '#!/register';
+          console.log(successResponse.status);
         }
-      }, function () {
-        console.log('registration ERROR!');
+      }, function (errorResponse) {
+        if (successResponse.status === 403) {
+          console.log('registration error 403:', errorResponse);
+          // loginController.showErrorMessage(`${successResponse.data.errors.name}: ${successResponse.data.errors.message}`);
+          getuserdata.id = -1;
+          getuserdata.email = '';
+          getuserdata.password = '';
+          getuserdata.token = '';
+          $window.location.href = '#!/register';
+        } else {
+          console.log('registration ERROR! ', errorResponse);
+        }
       });
   }
 
@@ -154,6 +162,14 @@ konnektApp.controller('registrationController', ['$scope', '$http', function ($s
 
   $scope.addNewMember = function () {
 
+    UserService.getuserdata.email = $scope.newUser.email;
+    if($scope.newUser.password === $scope.newUser.passwordConfirmation){
+      UserService.getuserdata.password = $scope.newUser.password;
+      UserService.getuserdata.passwordConfirmation = $scope.newUser.passwordConfirmation;
+      UserService.register();
+    } else {
+      // pw confirmation error message
+    };
   };
 
   $scope.showErrorMessage = function (errormessage) {
