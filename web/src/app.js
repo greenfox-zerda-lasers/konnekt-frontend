@@ -231,4 +231,5 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
 konnektApp.controller('dashboardController', ['$scope', '$window', 'UserService', function ($scope, $window, UserService) {
 
   $scope.header = UserService.getUserData().email;
+  
 }]);
