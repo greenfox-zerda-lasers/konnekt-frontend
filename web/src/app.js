@@ -11,6 +11,9 @@ const appUrl = 'http://localhost:3000';
 // for raptors web
 // const appUrl = 'https://raptor-konnekt.herokuapp.com';
 //
+// for api docs web
+// const appUrl = 'https://konnekt-api-spec.herokuapp.com';
+//
 // *****************************************************************************
 
 var angular = require('angular');
@@ -43,6 +46,8 @@ konnektApp.config(['$routeProvider', function ($routeProvider) {
 
 // REGISTER LISTENER - watch for route changes, this event will fire every time the route changes
 konnektApp.run(['$rootScope', '$location', 'UserService', function ($rootScope, $location, UserService) {
+
+  // ide jon a magic!
   $rootScope.$on('$routeChangeStart', function () {
     if (!UserService.isLoggedIn()) {
       $location.path('/login');
@@ -71,6 +76,7 @@ konnektApp.factory('HttpService', ['$http', function ($http) {
 
 konnektApp.factory('UserService', ['HttpService', '$window', function (HttpService, $window) {
 
+// rename to userData
   var getuserdata = {
     id: -1,
     token: '',
@@ -78,12 +84,18 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
     password: '',
   };
 
+  // getuserdata, setuserdata functions
+
   function isLoggedIn() {
     if (getuserdata.token !== '') {
       return true;
     }
     return false;
   }
+
+  // $scope.showErrorMessage = function (errormessage) {
+  //   console.log(errormessage);
+  // };
 
   function login() {
     let userData = { email: getuserdata.email, password: getuserdata.password };
@@ -98,9 +110,10 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
           console.log(getuserdata);
           $window.location.href = '#!/dashboard';
         }
-      }, function () {
+      }, function (successResponse) {
         if (successResponse.status === 401) {
           console.log('login error 401:');
+          console.log(successResponse.errormessage);
           // loginController.showErrorMessage(`${successResponse.data.errors.name}: ${successResponse.data.errors.message}`);
           getuserdata.id = -1;
           getuserdata.email = '';
@@ -158,13 +171,6 @@ konnektApp.controller('registrationController', ['$scope', 'UserService', functi
     UserService.getuserdata.passwordConfirmation = $scope.newUser.passwordConfirmation;
     UserService.register();
   };
-
-  $scope.showErrorMessage = function (errormessage) {
-    // $scope.errormessage = errormessage;
-    console.log('error message from server: ');
-    console.log(errormessage);
-   //   ng-show = true ??
-  };
 }]);
 
 
@@ -173,17 +179,13 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
   $scope.header = 'lépj be';
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
   $scope.button = 'mehet';
+  // error message handling
+  // $scope.errormessage = UserService.errormessage;
 
   $scope.loginMember = function () {
     UserService.getuserdata.email = $scope.userLogin.email;
     UserService.getuserdata.password = $scope.userLogin.password;
     UserService.login();
-  };
-
-  $scope.showErrorMessage = function (errormessage) {
-    // $scope.errormessage = errormessage;
-    console.log(errormessage);
-   //   ng-show = true ??
   };
 }]);
 
