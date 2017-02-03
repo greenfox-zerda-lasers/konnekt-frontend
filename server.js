@@ -40,7 +40,6 @@ app.post('/register', function (req, res) {
   response = { user_id: 0 };
   res.setHeader('session_token', 'regtoken');
   res.status(201).send(JSON.stringify(response));
-});
 
 app.post('/login', function (req, res) {
   console.log('login on server');
