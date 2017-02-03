@@ -134,6 +134,7 @@ konnektApp.controller('registrationController', ['$scope', 'UserService', functi
   $scope.header = 'regisztrálj.';
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
   $scope.button = 'mehet';
+  $scope.errormessage = 'piros error message'
 
   $scope.addNewMember = function () {
     UserService.getuserdata.email = $scope.newUser.email;
@@ -144,6 +145,7 @@ konnektApp.controller('registrationController', ['$scope', 'UserService', functi
 
   $scope.showErrorMessage = function (errormessage) {
      $scope.errormessage = errormessage;
+
    //   ng-show = true ??
   };
 }]);
@@ -154,7 +156,7 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
   $scope.header = 'lépj be';
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
   $scope.button = 'mehet';
-  $scope.error = 'piros error message';
+  $scope.errormessage = 'piros error message';
 
   $scope.loginMember = function () {
     UserService.getuserdata.email = $scope.userLogin.email;
@@ -164,7 +166,7 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
 
   $scope.showErrorMessage = function (errormessage) {
      $scope.errormessage = errormessage;
-     errormessage === true;
+    //  errormessage === true;
 
   };
 }]);
