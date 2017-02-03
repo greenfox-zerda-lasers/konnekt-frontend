@@ -55,7 +55,6 @@ konnektApp.run(['$rootScope', '$location', 'UserService', function ($rootScope, 
 konnektApp.factory('HttpService', ['$http', function ($http) {
 
   function login(userData) {
-    console.log(userData);
     return $http.post(`${appUrl}/login`, JSON.stringify(userData));
   }
 
@@ -87,29 +86,30 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
   }
 
   function login() {
-    console.log(getuserdata);
     let userData = { email: getuserdata.email, password: getuserdata.password };
     HttpService.login(userData)
       .then(function (successResponse) {
         if (successResponse.status === 201) {
-          console.log('success login:');
+          console.log('success login response:');
           console.log(successResponse);
           getuserdata.token = successResponse.headers('session_token');
           getuserdata.id = successResponse.data.user_id;
+          console.log('user data:');
           console.log(getuserdata);
           $window.location.href = '#!/dashboard';
-        } else if (successResponse.status === 401) {
-          console.log('login error:');
-          console.log(successResponse);
-          loginController.showErrorMessage(`${successResponse.data.errors.name}: ${successResponse.data.errors.message}`);
+        }
+      }, function () {
+        if (successResponse.status === 401) {
+          console.log('login error 401:');
+          // loginController.showErrorMessage(`${successResponse.data.errors.name}: ${successResponse.data.errors.message}`);
           getuserdata.id = -1;
           getuserdata.email = '';
           getuserdata.password = '';
           getuserdata.token = '';
           $window.location.href = '#!/login';
+        } else {
+          console.log('login ERROR! no user data!');
         }
-      }, function () {
-        console.log('login ERROR! no user data!');
       });
   }
 
