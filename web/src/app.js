@@ -81,7 +81,7 @@ konnektApp.factory('HttpService', ['$http', function ($http) {
 }]);
 
 
-konnektApp.factory('UserService', ['HttpService', '$window', function (HttpService, $window) {
+konnektApp.factory('UserService', ['HttpService', 'ContactService', '$window', function (HttpService, ContactService, $window) {
 
   var userData = {
     id: -1,
@@ -91,7 +91,7 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
     passwordConfirmation: '',
   };
 
-// error message not work
+  // error message not work
   // var errormessage = 'Alma';
 
   function getUserData() {
@@ -100,7 +100,6 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
 
   function setUserData(newUserData) {
     userData = Object.assign(userData, newUserData);
-    console.log('stored user data: ', userData);
   }
 
   function logoutUser() {
@@ -129,22 +128,18 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
           newUserData.token = successResponse.headers('session_token');
           newUserData.id = successResponse.data.user_id;
           setUserData(newUserData);
-          console.log('user data after login: ', newUserData);
+          ContactService.setAllContacts();
           $window.location.href = '#!/dashboard';
         }
       }, function (errorResponse) {
         if (errorResponse.status === 401) {
-
-          // error msg to screen!!!
-          // error message not work
-          // console.log('itt kellene kiirni a hibát');
           logoutUser();
           // error message not work
           // errormessage = 'ez egy nagyon nagy hiba!';
           // console.log(errormessage);
           $window.location.href = '#!/login';
         } else {
-          // error msg to screen!!!
+          // missing error msg to screen!!!
           console.log('login ERROR! no user data from server!');
           logoutUser();
           $window.location.href = '#!/login';
@@ -157,13 +152,10 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
     HttpService.register(data)
       .then(function (successResponse) {
         if (successResponse.status === 201) {
-          console.log('success registration response:');
-          console.log(successResponse);
           let newUserData = {};
           newUserData.token = successResponse.headers('session_token');
           newUserData.id = successResponse.data.user_id;
           setUserData(newUserData);
-          console.log('user data login: ', newUserData);
           $window.location.href = '#!/dashboard';
         } else {
           console.log(successResponse.status);
@@ -192,22 +184,29 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
 }]);
 
 
-konnektApp.factory('ContactService', ['UserService', 'HttpService', function (UserService, HttpService) {
+konnektApp.factory('ContactService', ['HttpService', function (HttpService) {
 
   let contactsData = {};
 
-  function getAllContacts() {
+  function setAllContacts() {
     HttpService.getContacts().then(function (successResponse) {
-      contactsData = successResponse.data;
-      console.log(contactsData);
+      if (successResponse.status === 200) {
+        console.log('data from server:');
+        contactsData = successResponse.data.contacts;
+        console.log(contactsData);
+      }
     }, function (errorResponse) {
       console.log(errorResponse.data);
     });
   }
 
+  function getAllContacts() {
+    return contactsData;
+  }
+
   return {
     getAllContacts: getAllContacts,
-
+    setAllContacts: setAllContacts,
   };
 }]);
 
@@ -240,11 +239,6 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
   $scope.header = 'lépj be';
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
   $scope.button = 'mehet';
-  // console.log('ez a login controllerben van:');
-  // console.log(UserService.errormessage);
-
-  // error message not work
-  // $scope.errormessage = UserService.errormessage;
 
   $scope.loginMember = function () {
     let newUserData = {};
@@ -258,5 +252,6 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
 konnektApp.controller('dashboardController', ['$scope', '$window', 'UserService', 'ContactService', function ($scope, $window, UserService, ContactService) {
 
   $scope.header = UserService.getUserData().email;
-  $scope.contactsData = ContactService.getAllContacts();
+  console.log(ContactService.getAllContacts());
+  $scope.allContacts = ContactService.getAllContacts();
 }]);

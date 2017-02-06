@@ -71,7 +71,7 @@ app.get('/contacts', function (req, res) {
       {
         id: 0,
         user: {
-          id: 0,
+          id: 1,
           name: 'Ms. Smith',
           email: 'ms_Smith@smith.com',
         },
@@ -81,7 +81,7 @@ app.get('/contacts', function (req, res) {
     ],
   };
 
-  // response for test:
+  // response for testing:
   responseOk = true;
 
   if (responseOk) {

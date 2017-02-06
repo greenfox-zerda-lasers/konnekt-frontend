@@ -3,6 +3,6 @@
 </div>
 <div class="contact-list">
   <ul>
-    <li ng-repeat="contact in contactsData">{{ contact }}</li>
+    <li ng-repeat="contact in allContacts">név: {{ contact.user.name }}, email: {{ contact.user.email }}, id: {{ contact.user.id }}, ismerős: {{ contact.name }}, leírás: {{ contact.description }}</li>
   </ul>
 </div>
