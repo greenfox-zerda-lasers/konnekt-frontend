@@ -3,10 +3,10 @@
 // *****************************************************************************
 //
 // for localhost testing
-// const appUrl = 'http://localhost:3000';
+const appUrl = 'http://localhost:3000';
 //
 // for lasers web
-const appUrl = 'https://lasers-cornubite-konnekt.herokuapp.com';
+// const appUrl = 'https://lasers-cornubite-konnekt.herokuapp.com';
 //
 // for raptors web
 // const appUrl = 'https://raptor-konnekt.herokuapp.com';
@@ -44,20 +44,19 @@ konnektApp.config(['$routeProvider', function ($routeProvider) {
 }]);
 
 
-// REGISTER LISTENER - watch for route changes, this event will fire every time the route changes
+// APP RUN
 konnektApp.run(['$rootScope', '$location', 'UserService', function ($rootScope, $location, UserService) {
 
-  $rootScope.$on('$routeChangeStart', function (event, next, prev) {
+  $rootScope.$on('$routeChangeStart', function (event, next) {
 
-    if (next.$$route) {
-      if (next.$$route.originalPath === '/register') {
+    if (next.templateUrl === 'registration.html') {
       $location.path('/register');
-      } else if (!UserService.isLoggedIn()) {
+    } else if (!UserService.isLoggedIn()) {
       $location.path('/login');
-      }
     }
   });
 }]);
+
 
 // FACTORIES
 konnektApp.factory('HttpService', ['$http', function ($http) {
@@ -79,71 +78,87 @@ konnektApp.factory('HttpService', ['$http', function ($http) {
 
 konnektApp.factory('UserService', ['HttpService', '$window', function (HttpService, $window) {
 
-  var getuserdata = {
+  var userData = {
     id: -1,
     token: '',
     email: '',
     password: '',
+    passwordConfirmation: '',
   };
 
+  function getUserData() {
+    return userData;
+  }
+
+  function setUserData(newUserData) {
+    userData = Object.assign(userData, newUserData);
+    console.log('stored user data: ', userData);
+  }
+
+  function logoutUser() {
+    userData = {
+      id: -1,
+      token: '',
+      email: '',
+      password: '',
+      passwordConfirmation: '',
+    };
+  }
+
   function isLoggedIn() {
-    if (getuserdata.token !== '') {
+    if (getUserData.token !== '') {
       return true;
     }
     return false;
   }
 
   function login() {
-    let userData = { email: getuserdata.email, password: getuserdata.password };
-    HttpService.login(userData)
+    let data = { email: getUserData().email, password: getUserData().password };
+    HttpService.login(data)
       .then(function (successResponse) {
         if (successResponse.status === 201) {
-          console.log('*** success login response ***');
-          console.log(successResponse);
-          getuserdata.token = successResponse.headers('session_token');
-          getuserdata.id = successResponse.data.user_id;
-          console.log('*** local user data ***');
-          console.log(getuserdata);
+          let newUserData = { token: '', id: -1 };
+          newUserData.token = successResponse.headers('session_token');
+          newUserData.id = successResponse.data.user_id;
+          setUserData(newUserData);
+          console.log('user data after login: ', newUserData);
           $window.location.href = '#!/dashboard';
         }
-      }, function (successResponse) {
-        if (successResponse.status === 401) {
-          console.log('login error 401:');
-          console.log(successResponse.errormessage);
-          getuserdata.id = -1;
-          getuserdata.email = '';
-          getuserdata.password = '';
-          getuserdata.token = '';
+      }, function (errorResponse) {
+        if (errorResponse.status === 401) {
+          // error msg to screen!!!
+          // console.log(`${successResponse.data.errors[0].name}: ${successResponse.data.errors[0].message}`);
+          logoutUser();
           $window.location.href = '#!/login';
         } else {
-          console.log('login ERROR! no user data!');
+          // error msg to screen!!!
+          console.log('login ERROR! no user data from server!');
+          logoutUser();
+          $window.location.href = '#!/login';
         }
       });
   }
 
   function register() {
-    console.log('getuserdata: ', getuserdata);
-    let userData = { email: getuserdata.email, password: getuserdata.password, password_confirmation: getuserdata.passwordConfirmation };
-    HttpService.register(userData)
+    let data = { email: getUserData().email, password: getUserData().password, password_confirmation: getUserData().passwordConfirmation };
+    HttpService.register(data)
       .then(function (successResponse) {
         if (successResponse.status === 201) {
           console.log('success registration response:');
           console.log(successResponse);
-          getuserdata.token = successResponse.headers('session_token');
-          getuserdata.id = successResponse.data.user_id;
-          console.log('user data:');
-          console.log(getuserdata);
+          let newUserData = {};
+          newUserData.token = successResponse.headers('session_token');
+          newUserData.id = successResponse.data.user_id;
+          setUserData(newUserData);
+          console.log('user data login: ', newUserData);
           $window.location.href = '#!/dashboard';
         } else {
           console.log(successResponse.status);
         }
       }, function (errorResponse) {
-        if (successResponse.status === 403) {
+        if (errorResponse.status === 403) {
           console.log('registration error 403:', errorResponse);
-          getuserdata.id = -1;
-          getuserdata.email = '';
-          getuserdata.password = '';
-          getuserdata.token = '';
+          logoutUser();
           $window.location.href = '#!/register';
         } else {
           console.log('registration ERROR! ', errorResponse);
@@ -155,7 +170,8 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
     isLoggedIn: isLoggedIn,
     login: login,
     register: register,
-    getuserdata: getuserdata,
+    getUserData: getUserData,
+    setUserData: setUserData,
   };
 }]);
 
@@ -168,10 +184,12 @@ konnektApp.controller('registrationController', ['$scope', 'UserService', functi
   $scope.button = 'mehet';
 
   $scope.addNewMember = function () {
-    UserService.getuserdata.email = $scope.newUser.email;
-    if($scope.newUser.password === $scope.newUser.passwordConfirmation){
-      UserService.getuserdata.password = $scope.newUser.password;
-      UserService.getuserdata.passwordConfirmation = $scope.newUser.passwordConfirmation;
+    if ($scope.newUser.password === $scope.newUser.passwordConfirmation) {
+      let newUserData = {};
+      newUserData.email = $scope.newUser.email;
+      newUserData.password = $scope.newUser.password;
+      newUserData.passwordConfirmation = $scope.newUser.passwordConfirmation;
+      UserService.setUserData(newUserData);
       UserService.register();
     } else {
       // pw confirmation error message
@@ -179,23 +197,22 @@ konnektApp.controller('registrationController', ['$scope', 'UserService', functi
   };
 }]);
 
-
 konnektApp.controller('loginController', ['$scope', 'UserService', function ($scope, UserService) {
 
   $scope.header = 'lépj be';
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
   $scope.button = 'mehet';
 
-
   $scope.loginMember = function () {
-    UserService.getuserdata.email = $scope.userLogin.email;
-    UserService.getuserdata.password = $scope.userLogin.password;
+    let newUserData = {};
+    newUserData.email = $scope.userLogin.email;
+    newUserData.password = $scope.userLogin.password;
+    UserService.setUserData(newUserData);
     UserService.login();
   };
 }]);
 
-
 konnektApp.controller('dashboardController', ['$scope', '$window', 'UserService', function ($scope, $window, UserService) {
 
-  $scope.header = UserService.getuserdata.email;
+  $scope.header = UserService.getUserData().email;
 }]);
