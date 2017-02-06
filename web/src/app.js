@@ -69,9 +69,14 @@ konnektApp.factory('HttpService', ['$http', function ($http) {
     return $http.post(`${appUrl}/register`, JSON.stringify(userData));
   }
 
+  function getContacts(userData) {
+    return $http.get(`${appUrl}/contacts`, JSON.stringify(userData));
+  }
+
   return {
     login: login,
     register: register,
+    getContacts: getContacts,
   };
 }]);
 
@@ -187,6 +192,26 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
 }]);
 
 
+konnektApp.factory('ContactService', ['UserService', 'HttpService', function (UserService, HttpService) {
+
+  let contactsData = {};
+
+  function getAllContacts() {
+    HttpService.getContacts().then(function (successResponse) {
+      contactsData = successResponse.data;
+      console.log(contactsData);
+    }, function (errorResponse) {
+      console.log(errorResponse.data);
+    });
+  }
+
+  return {
+    getAllContacts: getAllContacts,
+
+  };
+}]);
+
+
 // CONTROLLERS
 konnektApp.controller('registrationController', ['$scope', 'UserService', function ($scope, UserService) {
 
@@ -228,7 +253,8 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
   };
 }]);
 
-konnektApp.controller('dashboardController', ['$scope', '$window', 'UserService', function ($scope, $window, UserService) {
+konnektApp.controller('dashboardController', ['$scope', '$window', 'UserService', 'ContactService', function ($scope, $window, UserService, ContactService) {
 
   $scope.header = UserService.getUserData().email;
+  $scope.contactsData = ContactService.getAllContacts();
 }]);
