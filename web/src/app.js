@@ -86,6 +86,9 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
     passwordConfirmation: '',
   };
 
+// error message not work
+  // var errormessage = 'Alma';
+
   function getUserData() {
     return userData;
   }
@@ -117,7 +120,7 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
     HttpService.login(data)
       .then(function (successResponse) {
         if (successResponse.status === 201) {
-          let newUserData = { token: '', id: -1 };
+          let newUserData = {};
           newUserData.token = successResponse.headers('session_token');
           newUserData.id = successResponse.data.user_id;
           setUserData(newUserData);
@@ -126,9 +129,14 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
         }
       }, function (errorResponse) {
         if (errorResponse.status === 401) {
+
           // error msg to screen!!!
-          // console.log(`${successResponse.data.errors[0].name}: ${successResponse.data.errors[0].message}`);
+          // error message not work
+          // console.log('itt kellene kiirni a hibát');
           logoutUser();
+          // error message not work
+          // errormessage = 'ez egy nagyon nagy hiba!';
+          // console.log(errormessage);
           $window.location.href = '#!/login';
         } else {
           // error msg to screen!!!
@@ -167,6 +175,9 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
   }
 
   return {
+    // errorCondition: errorCondition,
+    // error message not work
+    // errormessage: errormessage,
     isLoggedIn: isLoggedIn,
     login: login,
     register: register,
@@ -193,7 +204,7 @@ konnektApp.controller('registrationController', ['$scope', 'UserService', functi
       UserService.register();
     } else {
       // pw confirmation error message
-    };
+    }
   };
 }]);
 
@@ -202,6 +213,11 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
   $scope.header = 'lépj be';
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
   $scope.button = 'mehet';
+  // console.log('ez a login controllerben van:');
+  // console.log(UserService.errormessage);
+
+  // error message not work
+  // $scope.errormessage = UserService.errormessage;
 
   $scope.loginMember = function () {
     let newUserData = {};
