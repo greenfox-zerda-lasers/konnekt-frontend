@@ -109,7 +109,7 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
   }
 
   function isLoggedIn() {
-    if (getUserData.token !== '') {
+    if (getUserData().token !== '') {
       return true;
     }
     return false;
