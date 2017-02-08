@@ -3,10 +3,10 @@
 // *****************************************************************************
 //
 // for localhost testing
-const appUrl = 'http://localhost:3000';
+// const appUrl = 'http://localhost:3000';
 //
 // for lasers web
-// const appUrl = 'https://lasers-cornubite-konnekt.herokuapp.com';
+const appUrl = 'https://lasers-cornubite-konnekt.herokuapp.com';
 //
 // for raptors web
 // const appUrl = 'https://raptor-konnekt.herokuapp.com';
