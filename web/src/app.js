@@ -130,6 +130,8 @@ konnektApp.factory('UserService', ['HttpService', '$window', 'DataHandling', fun
             logoutUser();
             $window.location.href = '#!/login';
           } else {
+            console.log('contact data:');
+            console.log(successResponse.headers());
             console.log(`session token: ${successResponse.headers('session_token')}`);
             newUserData.id = successResponse.data.user_id;
             setUserData(newUserData);
