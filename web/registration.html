@@ -1,11 +1,14 @@
-<h1 class="header-text">{{ header }}</h1>
-<p class="welcome-text">{{ welcome }}</p>
-<form ng-submit="addNewMember()">
-  <input type="email" placeholder="e-mail címed:" ng-model='newUser.username'>
-  <input type="password" placeholder="jelszavad:" ng-model='newUser.password'>
-  <input type="password" placeholder="jelszavad mégegyszer:" ng-model='newUser.passwordConfirmation'>
-  <button class="register-button">
-    <p class="button-text">{{ button }}</p>
-  </button>
-</form>
-<p class="footer-text">(Inkább <a href="#!/login">belépnék</a>)</p>
+<div class="konnekt-logo"></div>
+<div class="form-container">
+  <h1 class="header-text">{{ header }}</h1>
+  <p class="welcome-text">{{ welcome }}</p>
+  <form ng-submit="addNewMember()">
+    <input type="text" placeholder="e-mail címed:" ng-model='newUser.email' novalidate>
+    <input type="password" placeholder="jelszavad:" ng-model='newUser.password'>
+    <input type="password" placeholder="jelszavad mégegyszer:" ng-model='newUser.passwordConfirmation'>
+    <button class="register-button">
+      <p class="button-text">{{ button }}</p>
+    </button>
+  </form>
+  <p class="footer-text">(Inkább <a href="#!/login">belépnék</a>)</p>
+</div>

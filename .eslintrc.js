@@ -21,7 +21,8 @@ module.exports = {
         "padded-blocks": "off",
         "wrap-iife": "off",
         "object-shorthand": "off",
-        "no-unused-vars": 1
+        "no-unused-vars": 1,
+        "no-param-reassign": "off"
       },
       "env": {
         "es6": true,
