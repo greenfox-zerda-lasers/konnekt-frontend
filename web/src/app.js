@@ -13,7 +13,7 @@ const appUrl = 'https://lasers-cornubite-konnekt.herokuapp.com';
 //
 // for api docs web
 // const appUrl = 'https://konnekt-api-spec.herokuapp.com';
-//
+// 
 // *****************************************************************************
 
 var angular = require('angular');
