@@ -76,6 +76,10 @@ body {
   background-color: rgba(0, 195, 187, 0.3);
 }
 
+.dashboard-p:nth-child(even) {
+  background-color: white;
+}
+
 
 .header-text {
   margin: 0px;

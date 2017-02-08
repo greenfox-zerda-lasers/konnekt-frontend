@@ -3,13 +3,13 @@
 // *****************************************************************************
 //
 // for localhost testing
-// const appUrl = 'http://localhost:3000';
+const appUrl = 'http://localhost:3000';
 //
 // for lasers web
 // const appUrl = 'https://lasers-cornubite-konnekt.herokuapp.com';
 //
 // for raptors web
-const appUrl = 'https://raptor-konnekt.herokuapp.com';
+// const appUrl = 'https://raptor-konnekt.herokuapp.com';
 //
 // for api docs web
 // const appUrl = 'https://konnekt-api-spec.herokuapp.com';
@@ -69,18 +69,19 @@ konnektApp.factory('HttpService', ['$http', function ($http) {
     return $http.post(`${appUrl}/register`, JSON.stringify(userData));
   }
 
-  function register(userData) {
-    return $http.get(`${appUrl}/contacts`, JSON.stringify(userData));
+  function getAllContacts(userToken) {
+    return $http.get(`${appUrl}/contacts`, JSON.stringify(userToken));
   }
 
   return {
     login: login,
     register: register,
+    getAllContacts: getAllContacts,
   };
 }]);
 
 
-konnektApp.factory('UserService', ['HttpService', '$window', function (HttpService, $window) {
+konnektApp.factory('UserService', ['HttpService', '$window', 'DataHandling', function (HttpService, $window, DataHandling) {
 
   var userData = {
     id: -1,
@@ -89,9 +90,6 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
     password: '',
     passwordConfirmation: '',
   };
-
-// error message not work
-  // var errormessage = 'Alma';
 
   function getUserData() {
     return userData;
@@ -124,31 +122,28 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
     HttpService.login(data)
       .then(function (successResponse) {
         if (successResponse.status === 201) {
+          // check if successResponse.status === 201 but NOT token arrive!
           let newUserData = {};
-          console.log('success response:');
-          console.log(successResponse);
-          console.log('response header:');
-          console.log(successResponse.headers);
-          newUserData.token = successResponse('session_token');
-          newUserData.id = successResponse.data.user_id;
-          setUserData(newUserData);
-          console.log('user data after login: ', newUserData);
-          $window.location.href = '#!/dashboard';
+          newUserData.token = successResponse.headers('session_token');
+          if (newUserData.token === '') {
+            console.log('success response, but no token from server');
+            logoutUser();
+            $window.location.href = '#!/login';
+          } else {
+            console.log(`session token: ${successResponse.headers('session_token')}`);
+            newUserData.id = successResponse.data.user_id;
+            setUserData(newUserData);
+            DataHandling.setContactData();
+            $window.location.href = '#!/dashboard';
+          }
         }
       }, function (errorResponse) {
         if (errorResponse.status === 401) {
-
-          // error msg to screen!!!
-          // error message not work
-          // console.log('itt kellene kiirni a hibát');
+          console.log('ERROR: 401 status from server');
           logoutUser();
-          // error message not work
-          // errormessage = 'ez egy nagyon nagy hiba!';
-          // console.log(errormessage);
           $window.location.href = '#!/login';
         } else {
-          // error msg to screen!!!
-          console.log('login ERROR! no user data from server!');
+          console.log('ERROR: no data from server');
           logoutUser();
           $window.location.href = '#!/login';
         }
@@ -186,14 +181,41 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
   }
 
   return {
-    // errorCondition: errorCondition,
-    // error message not work
-    // errormessage: errormessage,
     isLoggedIn: isLoggedIn,
     login: login,
     register: register,
     getUserData: getUserData,
     setUserData: setUserData,
+  };
+}]);
+
+
+konnektApp.factory('DataHandling', ['HttpService', function (HttpService) {
+
+  var contactData = {};
+
+  function getContactData() {
+    return contactData;
+  }
+
+  function setContactData() {
+    // token needs here!
+    HttpService.getAllContacts()
+    .then(function (successResponse) {
+      // token error handling needs here!
+      if (successResponse.status === 200) {
+        contactData = Object.assign(contactData, successResponse.data.contacts);
+        console.log('stored contact data:');
+        console.log(contactData);
+      } else {
+        console.log('contact data loading error');
+      }
+    });
+  }
+
+  return {
+    getContactData: getContactData,
+    setContactData: setContactData,
   };
 }]);
 
@@ -224,11 +246,6 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
   $scope.header = 'lépj be';
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
   $scope.button = 'mehet';
-  // console.log('ez a login controllerben van:');
-  // console.log(UserService.errormessage);
-
-  // error message not work
-  // $scope.errormessage = UserService.errormessage;
 
   $scope.loginMember = function () {
     let newUserData = {};
@@ -239,7 +256,7 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
   };
 }]);
 
-konnektApp.controller('dashboardController', ['$scope', '$window', 'UserService', function ($scope, $window, UserService) {
+konnektApp.controller('dashboardController', ['$scope', 'UserService', 'DataHandling', function ($scope, UserService, DataHandling) {
 
-  $scope.header = UserService.getUserData().email;
+  $scope.allContacts = DataHandling.getContactData();
 }]);
