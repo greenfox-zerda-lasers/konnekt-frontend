@@ -84,10 +84,8 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
     email: '',
     password: '',
     passwordConfirmation: '',
+    errormessage: ''
   };
-
-// error message not work
-  // var errormessage = 'Alma';
 
   function getUserData() {
     return userData;
@@ -105,6 +103,7 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
       email: '',
       password: '',
       passwordConfirmation: '',
+      errormessage: ''
     };
   }
 
@@ -129,17 +128,11 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
         }
       }, function (errorResponse) {
         if (errorResponse.status === 401) {
-
-          // error msg to screen!!!
-          // error message not work
-          // console.log('itt kellene kiirni a hibát');
           logoutUser();
-          // error message not work
-          // errormessage = 'ez egy nagyon nagy hiba!';
-          // console.log(errormessage);
           $window.location.href = '#!/login';
+          userData.errormessage = errorResponse.status;
+          console.log(userData);
         } else {
-          // error msg to screen!!!
           console.log('login ERROR! no user data from server!');
           logoutUser();
           $window.location.href = '#!/login';
@@ -168,6 +161,7 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
           console.log('registration error 403:', errorResponse);
           logoutUser();
           $window.location.href = '#!/register';
+          userdata.errormessage = errorResponse.status;
         } else {
           console.log('registration ERROR! ', errorResponse);
         }
@@ -175,9 +169,6 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
   }
 
   return {
-    // errorCondition: errorCondition,
-    // error message not work
-    // errormessage: errormessage,
     isLoggedIn: isLoggedIn,
     login: login,
     register: register,
@@ -193,7 +184,7 @@ konnektApp.controller('registrationController', ['$scope', 'UserService', functi
   $scope.header = 'regisztrálj.';
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
   $scope.button = 'mehet';
-  $scope.errormessage = 'piros error message';
+  // $scope.errormessage = 'piros error message';
 
   $scope.addNewMember = function () {
     if ($scope.newUser.password === $scope.newUser.passwordConfirmation) {
@@ -214,12 +205,7 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
   $scope.header = 'lépj be';
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
   $scope.button = 'mehet';
-
-  $scope.errormessage = 'piros error message';
-
-
-  // $scope.errormessage = UserService.errormessage;
-
+  $scope.errormessage = UserService.errormessage;
 
   $scope.loginMember = function () {
     let newUserData = {};
@@ -229,20 +215,13 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
     UserService.login();
     //login case: defining the error conditions
     $scope.errorCondition = function() {
-      if (UserService.getuserdata.email === '' || UserService.getuserdata.password === '') {
+      if (UserService.userData.email === '' || UserService.userData.password === '') {
         return true;
       } else {
         return false;
       }
     };
   };
-
-
-  // $scope.showErrorMessage = function (errormessage) {
-  //    $scope.errormessage = errormessage;
-  //   //  errormessage === true;
-  //
-  // };
 }]);
 
 konnektApp.controller('dashboardController', ['$scope', '$window', 'UserService', function ($scope, $window, UserService) {

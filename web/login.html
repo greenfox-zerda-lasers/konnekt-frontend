@@ -4,16 +4,16 @@
   <p class="welcome-text">{{ welcome }}</p>
 
 
+
   <!-- <p class="error-message" ng-show="loginController.showErrorMessage.errormessage">{{error}}<p> -->
-  <!-- <div ng-show="!errorCondition">
-    <p>nincs probléma, lépj be</p>
+  <div ng-show="!errorCondition">
   </div>
   <div ng-show="errorCondition">
-    <p>kérlek helyesen add meg a belépő adataidat!</p>
-  </div> -->
+    <p>{{userData.errormessage}}</p>
+  </div>
 
 
-  <p class="error-text">{{ errormessage }}</p>
+  <!-- <p class="error-text">{{ errormessage }}</p> -->
 
 
 
