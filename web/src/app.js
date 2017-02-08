@@ -3,13 +3,13 @@
 // *****************************************************************************
 //
 // for localhost testing
-// const appUrl = 'http://localhost:3000';
+const appUrl = 'http://localhost:3000';
 //
 // for lasers web
 // const appUrl = 'https://lasers-cornubite-konnekt.herokuapp.com';
 //
 // for raptors web
-const appUrl = 'https://raptor-konnekt.herokuapp.com';
+// const appUrl = 'https://raptor-konnekt.herokuapp.com';
 //
 // for api docs web
 // const appUrl = 'https://konnekt-api-spec.herokuapp.com';
@@ -127,9 +127,11 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
           let newUserData = {};
           console.log('success response:');
           console.log(successResponse);
-          console.log('response header:');
-          console.log(successResponse.headers);
-          newUserData.token = successResponse('session_token');
+          console.log('session_token');
+          console.log(successResponse.headers('session_token'));
+          console.log('Session_token');
+          console.log(successResponse.headers('Session_token'));
+          newUserData.token = successResponse.headers('session_token');
           newUserData.id = successResponse.data.user_id;
           setUserData(newUserData);
           console.log('user data after login: ', newUserData);
