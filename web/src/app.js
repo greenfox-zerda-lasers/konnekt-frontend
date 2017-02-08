@@ -128,8 +128,8 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
           console.log('success response:');
           console.log(successResponse);
           console.log('response header:');
-          console.log(successResponse.headers());
-          newUserData.token = successResponse.headers()('session_token');
+          console.log(successResponse.headers);
+          newUserData.token = successResponse('session_token');
           newUserData.id = successResponse.data.user_id;
           setUserData(newUserData);
           console.log('user data after login: ', newUserData);
