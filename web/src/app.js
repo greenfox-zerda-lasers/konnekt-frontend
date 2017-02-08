@@ -148,7 +148,12 @@ konnektApp.factory('UserService', ['HttpService', 'ContactService', '$window', f
   }
 
   function register() {
-    let data = { email: getUserData().email, password: getUserData().password, password_confirmation: getUserData().passwordConfirmation };
+    let data = {
+      email: getUserData().email,
+      password: getUserData().password,
+      password_confirmation: getUserData().passwordConfirmation,
+    };
+
     HttpService.register(data)
       .then(function (successResponse) {
         if (successResponse.status === 201) {
@@ -247,9 +252,7 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
   };
 }]);
 
-konnektApp.controller('dashboardController', ['$scope', '$window', 'UserService', 'ContactService', function ($scope, $window, UserService, ContactService) {
+konnektApp.controller('dashboardController', ['$scope', 'UserService', 'ContactService', function ($scope, UserService, ContactService) {
 
-  $scope.header = UserService.getUserData().email;
-  console.log(ContactService.getAllContacts());
   $scope.allContacts = ContactService.getAllContacts();
 }]);
