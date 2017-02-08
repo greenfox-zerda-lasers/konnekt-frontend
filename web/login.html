@@ -3,13 +3,19 @@
   <h1 class="header-text">{{ header }}</h1>
   <p class="welcome-text">{{ welcome }}</p>
 
+
   <!-- <p class="error-message" ng-show="loginController.showErrorMessage.errormessage">{{error}}<p> -->
-  <div ng-show="!errorCondition">
+  <!-- <div ng-show="!errorCondition">
     <p>nincs probléma, lépj be</p>
   </div>
   <div ng-show="errorCondition">
     <p>kérlek helyesen add meg a belépő adataidat!</p>
-  </div>
+  </div> -->
+
+
+  <p class="error-text">{{ errormessage }}</p>
+
+
 
   <form ng-submit="loginMember()">
     <input type="text" placeholder="e-mail címed:" ng-model='userLogin.email' novalidate>
