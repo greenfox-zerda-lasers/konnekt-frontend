@@ -218,7 +218,6 @@ konnektApp.factory('ContactService', ['HttpService', function (HttpService) {
 
 // CONTROLLERS
 konnektApp.controller('registrationController', ['$scope', 'UserService', function ($scope, UserService) {
->>>>>>> working on contact list
 
   $scope.header = 'regisztrálj.';
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
