@@ -79,6 +79,16 @@ app.get('/contacts', function (req, res) {
         name: 'Lo Bela',
         description: 'this is a sample stupid text',
       },
+      {
+        id: 0,
+        user: {
+          id: 2,
+          name: 'Gipsz Jakab',
+          email: 'gipsz@jakab.hu',
+        },
+        name: 'Senkié',
+        description: 'hellobello',
+      },
     ],
   };
 

@@ -1,11 +1,46 @@
 <div class="body-dashboard">
   <div class="konnekt-logo-dashboard"></div>
-    <div class="dashboard">
-      <div class="dashboard-list">
-        <ul>
-          <li ng-repeat="contact in allContacts"><p class="dashboard-p">ismerős: {{ contact.name }}, ki ez: {{ contact.description }}, kinek az ism.: {{ contact.user.name }}, id: {{ contact.user.id }}, </p></li>
-        </ul>
+
+  <div class="dashboard-container">
+    <div class="dashboard-table">
+      <div class="add-new-contact"></div>
+        <div class="table-header">
+          <div class="table-row1">
+            <p class="table-header-p">Ismerős Neve</p>
+          </div>
+          <div class="table-row2">
+            <p class="table-header-p">Ki ez?</p>
+          </div>
+          <div class="table-row3">
+            <p class="table-header-p">Kinek az ismerőse?</p>
+          </div>
+        </div>
+
+        <div class="table">
+          <div class="table-data" ng-repeat="contact in allContacts">
+            <div class="table-row1">
+              <p class="table-p-name">{{ contact.name }}</p>
+            </div>
+            <div class="table-row2">
+              <p class="table-p-desc">{{ contact.description }}</p>
+            </div>
+            <div class="table-row3">
+              <p class="table-p-whoes">{{ contact.user.name }}</p>
+            </div>
+            <div class="table-row4">
+
+            </div>
+            <div class="table-row5">
+
+            </div>
+        </div>
       </div>
     </div>
+    <br>
+    <br>
+      <!--
+      <ul>
+        <li ng-repeat="contact in allContacts"><p class="dashboard-p">ismerős: {{ contact.name }}, ki ez: {{ contact.description }}, kinek az ism.: {{ contact.user.name }}, id: {{ contact.user.id }}, </p></li>
+      </ul> -->
   </div>
 </div>

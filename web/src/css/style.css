@@ -18,10 +18,9 @@ body {
 }
 
 .body-dashboard {
-  display: flex;
-  flex-direction: column;
-  align-items: baseline;
-  justify-content: flex-start;
+  display: block;
+  margin: 0px auto;
+  height: 100%;
 }
 
 .konnekt-logo {
@@ -30,27 +29,125 @@ body {
   margin-bottom: 29px;
   width: 100%;
   background-image: url('images/logo-feher-hosszu.png');
-  background-position: top;
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .konnekt-logo-dashboard {
-  flex: 0 1 70px;
+  height: 70px;
   max-width: 219px;
   width: 100%;
-  margin: 15px;
-  justify-content: center;
+  margin: 15px 0px 0px 15px;
   background-image: url('images/logo-feher-hosszu.png');
   background-position: top;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-.dashboard {
-  flex: 0 1 auto;
+.dashboard-container {
   width: 100%;
+  padding-top: 45px;
   background-color: white;
+}
+
+.dashboard-table {
+  margin: 0px auto;
+  max-width: 780px;
+  width: 100%;
+}
+
+.table {
+  border: solid 2px #00c4bc;
+}
+
+.table-header {
+  padding-top: 30px;
+}
+
+.table-header, .table-data {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.add-new-contact {
+  height: 40px;
+  width: 165px;
+  background-image: url('images/newcontact.png');
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.table-row1 {
+  flex: 0 1 200px;
+  height: 100%;
+}
+
+.table-row2 {
+  flex: 0 1 280px;
+  height: 100%;
+}
+
+.table-row3 {
+  flex: 0 1 230px;
+  height: 100%;
+}
+
+.table-row4 {
+  flex: 0 0 30px;
+  height: 20px;
+  background-image: url('images/pen.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.table-row5 {
+  flex: 0 0 30px;
+  height: 20px;
+  background-image: url('images/bin.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.table-p-name {
+  font-family: Raleway, sans-serif;
+  padding-left: 19px;
+  font-size: 16px;
+  font-weight: 800;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #012d61;
+  padding-left: 19px;
+}
+
+.table-p-desc {
+  font-family: Raleway;
+  font-size: 12px;
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #012d61;
+}
+
+.table-p-whoes {
+  font-family: Raleway;
+  font-size: 16px;
+  padding-left: 19px;
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #012d61;
 }
 
 .dashboard-list {
@@ -68,15 +165,26 @@ body {
   background-color: #00c4bc;
 }
 
-.dashboard-p {
-  margin: 15px;
+.table-header-p {
+  margin: 0px 0px 10px 20px;
+  padding: 0px;
+  font-family: Merriweather, serif;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: italic;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #012d61;
+  border: none;
 }
 
-.dashboard-p:nth-child(odd) {
+.table-data:nth-child(odd) {
   background-color: rgba(0, 195, 187, 0.3);
 }
 
-.dashboard-p:nth-child(even) {
+.table-data:nth-child(even) {
   background-color: white;
 }
 
@@ -85,7 +193,7 @@ body {
   margin: 0px;
 	padding-top: 50px;
 	height: 42px;
-	font-family: 'Raleway', sans-serif;
+	font-family: Raleway, sans-serif;
 	font-size: 36px;
 	font-weight: 800;
 	font-style: normal;
@@ -100,10 +208,10 @@ form {
   margin-top: 15px;
 }
 
-.welcome-text {
+.welcome-text  {
   margin: 0px;
 	padding-bottom: 25px;
-	font-family: 'Merriweather', serif;
+	font-family: Merriweather, serif;
 	height: 15px;
 	font-size: 12px;
 	font-weight: normal;
@@ -132,7 +240,7 @@ form {
 
 .button-text {
 	margin: 0px;
-	font-family: 'Raleway', sans-serif;
+	font-family: Raleway, sans-serif;
 	font-size: 24px;
 	font-weight: 800;
 	font-style: normal;
@@ -146,7 +254,7 @@ form {
 
 .footer-text {
 	margin: 12px 0px 50px 0px;
-	font-family: 'Merriweather', serif;
+	font-family: Merriweather, serif;
 	font-size: 12px;
 	font-weight: normal;
 	font-style: italic;
@@ -169,7 +277,7 @@ input {
 	height: 46px;
   background-color: #ffffff;
   box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.23);
-	font-family: 'Merriweather', serif;
+	font-family: Merriweather, serif;
 	font-size: 12px;
 	font-weight: normal;
 	font-style: italic;
@@ -184,7 +292,7 @@ input {
 ::-webkit-input-placeholder {
 
 	height: 100%;
-	font-family: 'Merriweather', serif;
+	font-family: Merriweather, serif;
 	font-size: 12px;
 	font-weight: normal;
 	font-style: italic;
@@ -196,7 +304,7 @@ input {
 }
 
 :-ms-input-placeholder {
-	font-family: 'Merriweather', serif;
+	font-family: Merriweather, serif;
 	font-size: 12px;
 	font-weight: normal;
 	font-style: italic;
@@ -208,7 +316,7 @@ input {
 }
 
 ::-moz-placeholder {
-	font-family: 'Merriweather', serif;
+	font-family: Merriweather, serif;
 	font-size: 12px;
 	font-weight: normal;
 	font-style: italic;
@@ -220,7 +328,7 @@ input {
 }
 
 :-moz-placeholder {
-	font-family: 'Merriweather', serif;
+	font-family: Merriweather, serif;
 	font-size: 12px;
 	font-weight: normal;
 	font-style: italic;
@@ -247,7 +355,7 @@ a:hover {
 
 h2 {
   color: white;
-  font-family: 'Raleway', sans-serif;
+  font-family: Raleway, sans-serif;
   font-size: 42px;
   float: right;
   margin-right: 50px;
