@@ -69,6 +69,10 @@ konnektApp.factory('HttpService', ['$http', function ($http) {
     return $http.post(`${appUrl}/register`, JSON.stringify(userData));
   }
 
+  function register(userData) {
+    return $http.get(`${appUrl}/contacts`, JSON.stringify(userData));
+  }
+
   return {
     login: login,
     register: register,
@@ -124,8 +128,8 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
           console.log('success response:');
           console.log(successResponse);
           console.log('response header:');
-          console.log(successResponse.headers);
-          newUserData.token = successResponse.headers('session_token');
+          console.log(successResponse.headers());
+          newUserData.token = successResponse.headers()('session_token');
           newUserData.id = successResponse.data.user_id;
           setUserData(newUserData);
           console.log('user data after login: ', newUserData);
