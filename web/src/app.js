@@ -123,6 +123,8 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
           let newUserData = {};
           console.log('success response:');
           console.log(successResponse);
+          console.log('response header:');
+          console.log(successResponse.headers);
           newUserData.token = successResponse.headers('session_token');
           newUserData.id = successResponse.data.user_id;
           setUserData(newUserData);
@@ -156,6 +158,9 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
         if (successResponse.status === 201) {
           console.log('success registration response:');
           console.log(successResponse);
+          console.log('response header:');
+          console.log(successResponse.headers);
+
           let newUserData = {};
           newUserData.token = successResponse.headers('session_token');
           newUserData.id = successResponse.data.user_id;
