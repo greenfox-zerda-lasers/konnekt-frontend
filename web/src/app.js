@@ -6,14 +6,14 @@
 // const appUrl = 'http://localhost:3000';
 //
 // for lasers web
-const appUrl = 'https://lasers-cornubite-konnekt.herokuapp.com';
+// const appUrl = 'https://lasers-cornubite-konnekt.herokuapp.com';
 //
 // for raptors web
-// const appUrl = 'https://raptor-konnekt.herokuapp.com';
+const appUrl = 'https://raptor-konnekt.herokuapp.com';
 //
 // for api docs web
 // const appUrl = 'https://konnekt-api-spec.herokuapp.com';
-// 
+//
 // *****************************************************************************
 
 var angular = require('angular');
