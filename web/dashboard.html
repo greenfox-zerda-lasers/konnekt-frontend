@@ -1,3 +1,11 @@
-<div class="logged-in">
-  <h2>{{ header }}</h2>
+<div class="body-dashboard">
+  <div class="konnekt-logo-dashboard"></div>
+    <div class="dashboard">
+      <div class="dashboard-list">
+        <ul>
+          <li ng-repeat="contact in allContacts"><p class="dashboard-p">ismerős: {{ contact.name }}, ki ez: {{ contact.description }}, kinek az ism.: {{ contact.user.name }}, id: {{ contact.user.id }}, </p></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>

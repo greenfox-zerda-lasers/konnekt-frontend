@@ -1,15 +1,17 @@
-<div class="konnekt-logo"></div>
-<div class="form-container">
-  <h1 class="header-text">{{ header }}</h1>
-  <p class="welcome-text">{{ welcome }}</p>
-  <p class="error-text">{{ errormessage }}</p>
+<div class="body-container">
+  <div class="konnekt-logo"></div>
+  <div class="form-container">
+    <h1 class="header-text">{{ header }}</h1>
+    <p class="welcome-text">{{ welcome }}</p>
+    <p class="error-text">{{ errormessage }}</p>
 
-  <form ng-submit="loginMember()">
-    <input type="text" placeholder="e-mail címed:" ng-model='userLogin.email' novalidate>
-    <input type="password" placeholder="jelszavad:" ng-model='userLogin.password'>
-    <button class="login-button">
-      <p class="button-text">{{ button }}</p>
-    </button>
-  </form>
-  <p class="footer-text">(Inkább <a href="#!/register">regisztrálnék</a>)</p>
+    <form ng-submit="loginMember()">
+      <input type="text" placeholder="e-mail címed:" ng-model='userLogin.email' novalidate>
+      <input type="password" placeholder="jelszavad:" ng-model='userLogin.password'>
+      <button class="login-button">
+        <p class="button-text">{{ button }}</p>
+      </button>
+    </form>
+    <p class="footer-text">(Inkább <a href="#!/register">regisztrálnék</a>)</p>
+  </div>
 </div>
