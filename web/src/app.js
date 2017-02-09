@@ -122,21 +122,18 @@ konnektApp.factory('UserService', ['HttpService', '$window', 'DataHandling', fun
     HttpService.login(data)
       .then(function (successResponse) {
         if (successResponse.status === 201) {
-          // check if successResponse.status === 201 but NOT token arrive!
           let newUserData = {};
-          newUserData.token = successResponse.headers('session_token');
-          if (newUserData.token === '') {
-            console.log('success response, but no token from server');
-            logoutUser();
-            $window.location.href = '#!/login';
-          } else {
-            console.log('contact data:');
-            console.log(successResponse.headers());
-            console.log(`session token: ${successResponse.headers('session_token')}`);
+          newUserData.token = successResponse.headers().session_token;
+          if (newUserData.token !== '') {
             newUserData.id = successResponse.data.user_id;
+            console.log(`user data after login: ${newUserData}`);
             setUserData(newUserData);
             DataHandling.setContactData();
             $window.location.href = '#!/dashboard';
+          } else {
+            console.log('ERROR: success response, but no token from server');
+            logoutUser();
+            $window.location.href = '#!/login';
           }
         }
       }, function (errorResponse) {
@@ -154,30 +151,36 @@ konnektApp.factory('UserService', ['HttpService', '$window', 'DataHandling', fun
 
   function register() {
     let data = { email: getUserData().email, password: getUserData().password, password_confirmation: getUserData().passwordConfirmation };
+    console.log('register data sent:');
+    console.log(data);
     HttpService.register(data)
       .then(function (successResponse) {
         if (successResponse.status === 201) {
-          console.log('success registration response:');
-          console.log(successResponse);
-          console.log('response header:');
-          console.log(successResponse.headers);
-
           let newUserData = {};
-          newUserData.token = successResponse.headers('session_token');
-          newUserData.id = successResponse.data.user_id;
-          setUserData(newUserData);
-          console.log('user data login: ', newUserData);
-          $window.location.href = '#!/dashboard';
+          newUserData.token = successResponse.headers().session_token;
+          if (newUserData.token !== '') {
+            console.log('success registration response:');
+            console.log(successResponse);
+
+            newUserData.id = successResponse.data.user_id;
+            setUserData(newUserData);
+            console.log(`user data login: ${newUserData}`);
+            $window.location.href = '#!/dashboard';
+          } else {
+            console.log('ERROR: success response, but no token from server');
+            logoutUser();
+            $window.location.href = '#!/login';
+          }
         } else {
           console.log(successResponse.status);
         }
       }, function (errorResponse) {
         if (errorResponse.status === 403) {
-          console.log('registration error 403:', errorResponse);
+          console.log(`ERROR: registration error 403: ${errorResponse}`);
           logoutUser();
           $window.location.href = '#!/register';
         } else {
-          console.log('registration ERROR! ', errorResponse);
+          console.log(`ERROR: registration error! ${errorResponse}`);
         }
       });
   }
