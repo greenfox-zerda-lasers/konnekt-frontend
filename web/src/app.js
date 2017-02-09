@@ -62,16 +62,16 @@ konnektApp.run(['$rootScope', '$location', 'UserService', function ($rootScope, 
 konnektApp.factory('HttpService', ['$http', function ($http) {
 
   function login(userData) {
-    return $http.post(`${appUrl}/login`, JSON.stringify(userData));
+    return $http.post(`${appUrl}/login`, JSON.stringify(userData), { withCredentials: true });
   }
 
   function register(userData) {
     return $http.post(`${appUrl}/register`, JSON.stringify(userData));
   }
 
-  function register(userData) {
-    return $http.get(`${appUrl}/contacts`, JSON.stringify(userData));
-  }
+  // function register() {
+  //   return $http.get(`${appUrl}/contacts`, { withCredentials: true });
+  // }
 
   return {
     login: login,
