@@ -42,6 +42,7 @@ app.post('/register', function (req, res) {
   res.status(201).send(JSON.stringify(response));
 });
 
+
 app.post('/login', function (req, res) {
   console.log('login on server');
   if (responseOk) {
@@ -49,6 +50,45 @@ app.post('/login', function (req, res) {
     res.status(201).send(JSON.stringify(response));
   } else {
     response = { errors: [{ name: 'Unknown user error', message: 'not user by this name' }] };
+    res.status(401).send(JSON.stringify(response));
+  }
+});
+
+app.get('/contacts', function (req, res) {
+  console.log('login on server');
+  const contacts = {
+    count: 2,
+    contacts: [
+      {
+        id: 0,
+        user: {
+          id: 0,
+          name: 'John Smith',
+          email: 'john@smith.com',
+        },
+        name: 'Lo Bela',
+        description: 'Bela real superhero!',
+      },
+      {
+        id: 0,
+        user: {
+          id: 1,
+          name: 'Ms. Smith',
+          email: 'ms_Smith@smith.com',
+        },
+        name: 'Lo Bela',
+        description: 'this is a sample stupid text',
+      },
+    ],
+  };
+
+  // response for testing:
+  responseOk = true;
+
+  if (responseOk) {
+    res.status(200).send(JSON.stringify(contacts));
+  } else {
+    response = { errors: [{ name: 'Unknown contacts', message: 'no contats here' }] };
     res.status(401).send(JSON.stringify(response));
   }
 });
