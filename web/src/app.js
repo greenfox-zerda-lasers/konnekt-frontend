@@ -69,8 +69,8 @@ konnektApp.factory('HttpService', ['$http', function ($http) {
     return $http.post(`${appUrl}/register`, JSON.stringify(userData));
   }
 
-  function getAllContacts(userToken) {
-    return $http.get(`${appUrl}/contacts`, JSON.stringify(userToken));
+  function getAllContacts(sessionToken) {
+    return $http.get(`${appUrl}/contacts`, { headers: { 'session_token': sessionToken } });
   }
 
   return {
@@ -126,9 +126,9 @@ konnektApp.factory('UserService', ['HttpService', '$window', 'DataHandling', fun
           newUserData.token = successResponse.headers().session_token;
           if (newUserData.token !== '') {
             newUserData.id = successResponse.data.user_id;
-            console.log(`user data after login: ${newUserData}`);
+            console.log('user data after login: ', newUserData);
             setUserData(newUserData);
-            DataHandling.setContactData();
+            DataHandling.setContactData(newUserData.token);
             $window.location.href = '#!/dashboard';
           } else {
             console.log('ERROR: success response, but no token from server');
@@ -164,7 +164,8 @@ konnektApp.factory('UserService', ['HttpService', '$window', 'DataHandling', fun
 
             newUserData.id = successResponse.data.user_id;
             setUserData(newUserData);
-            console.log(`user data login: ${newUserData}`);
+            console.log('user data login:');
+            console.log(newUserData);
             $window.location.href = '#!/dashboard';
           } else {
             console.log('ERROR: success response, but no token from server');
@@ -176,11 +177,11 @@ konnektApp.factory('UserService', ['HttpService', '$window', 'DataHandling', fun
         }
       }, function (errorResponse) {
         if (errorResponse.status === 403) {
-          console.log(`ERROR: registration error 403: ${errorResponse}`);
+          console.log('ERROR: registration error 403: ', errorResponse);
           logoutUser();
           $window.location.href = '#!/register';
         } else {
-          console.log(`ERROR: registration error! ${errorResponse}`);
+          console.log('ERROR: registration error! ', errorResponse);
         }
       });
   }
@@ -203,15 +204,12 @@ konnektApp.factory('DataHandling', ['HttpService', function (HttpService) {
     return contactData;
   }
 
-  function setContactData() {
-    // token needs here!
-    HttpService.getAllContacts()
+  function setContactData(sessionToken) {
+    HttpService.getAllContacts(sessionToken)
     .then(function (successResponse) {
-      // token error handling needs here!
       if (successResponse.status === 200) {
         contactData = Object.assign(contactData, successResponse.data.contacts);
-        console.log('stored contact data:');
-        console.log(contactData);
+        console.log('stored contact data: ', contactData);
       } else {
         console.log('contact data loading error');
       }

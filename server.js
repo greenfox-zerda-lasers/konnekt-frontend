@@ -89,6 +89,156 @@ app.get('/contacts', function (req, res) {
         name: 'Senkié',
         description: 'hellobello',
       },
+      {
+        id: 0,
+        user: {
+          id: 0,
+          name: 'John Smith',
+          email: 'john@smith.com',
+        },
+        name: 'Lo Bela',
+        description: 'Bela real superhero!',
+      },
+      {
+        id: 0,
+        user: {
+          id: 1,
+          name: 'Ms. Smith',
+          email: 'ms_Smith@smith.com',
+        },
+        name: 'Lo Bela',
+        description: 'this is a sample stupid text',
+      },
+      {
+        id: 0,
+        user: {
+          id: 2,
+          name: 'Gipsz Jakab',
+          email: 'gipsz@jakab.hu',
+        },
+        name: 'Senkié',
+        description: 'hellobello',
+      },
+      {
+        id: 0,
+        user: {
+          id: 0,
+          name: 'John Smith',
+          email: 'john@smith.com',
+        },
+        name: 'Lo Bela',
+        description: 'Bela real superhero!',
+      },
+      {
+        id: 0,
+        user: {
+          id: 1,
+          name: 'Ms. Smith',
+          email: 'ms_Smith@smith.com',
+        },
+        name: 'Lo Bela',
+        description: 'this is a sample stupid text',
+      },
+      {
+        id: 0,
+        user: {
+          id: 2,
+          name: 'Gipsz Jakab',
+          email: 'gipsz@jakab.hu',
+        },
+        name: 'Senkié',
+        description: 'hellobello',
+      },
+      {
+        id: 0,
+        user: {
+          id: 0,
+          name: 'John Smith',
+          email: 'john@smith.com',
+        },
+        name: 'Lo Bela',
+        description: 'Bela real superhero!',
+      },
+      {
+        id: 0,
+        user: {
+          id: 1,
+          name: 'Ms. Smith',
+          email: 'ms_Smith@smith.com',
+        },
+        name: 'Lo Bela',
+        description: 'this is a sample stupid text',
+      },
+      {
+        id: 0,
+        user: {
+          id: 2,
+          name: 'Gipsz Jakab',
+          email: 'gipsz@jakab.hu',
+        },
+        name: 'Senkié',
+        description: 'hellobello',
+      },
+      {
+        id: 0,
+        user: {
+          id: 0,
+          name: 'John Smith',
+          email: 'john@smith.com',
+        },
+        name: 'Lo Bela',
+        description: 'Bela real superhero!',
+      },
+      {
+        id: 0,
+        user: {
+          id: 1,
+          name: 'Ms. Smith',
+          email: 'ms_Smith@smith.com',
+        },
+        name: 'Lo Bela',
+        description: 'this is a sample stupid text',
+      },
+      {
+        id: 0,
+        user: {
+          id: 2,
+          name: 'Gipsz Jakab',
+          email: 'gipsz@jakab.hu',
+        },
+        name: 'Senkié',
+        description: 'hellobello',
+      },
+      {
+        id: 0,
+        user: {
+          id: 0,
+          name: 'John Smith',
+          email: 'john@smith.com',
+        },
+        name: 'Lo Bela',
+        description: 'Bela real superhero!',
+      },
+      {
+        id: 0,
+        user: {
+          id: 1,
+          name: 'Ms. Smith',
+          email: 'ms_Smith@smith.com',
+        },
+        name: 'Lo Bela',
+        description: 'this is a sample stupid text',
+      },
+      {
+        id: 0,
+        user: {
+          id: 2,
+          name: 'Gipsz Jakab',
+          email: 'gipsz@jakab.hu',
+        },
+        name: 'Senkié',
+        description: 'hellobello',
+      },
     ],
   };
 
