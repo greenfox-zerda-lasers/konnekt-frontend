@@ -6,10 +6,8 @@
 
 
   <!-- <p class="error-message" ng-show="loginController.showErrorMessage.errormessage">{{error}}<p> -->
-  <div ng-show="!errorCondition">
-  </div>
-  <div ng-show="errorCondition">
-    <p>{{userData.errormessage}}</p>
+  <div class="errorText" ng-show="errormessage">
+    <p>{{errormessage}}</p>
   </div>
 
 
