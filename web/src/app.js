@@ -127,13 +127,9 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
           let newUserData = {};
           console.log('success response:');
           console.log(successResponse);
-          console.log('header');
-          console.log(successResponse.headers());
-          console.log('getAllResponseHeaders()');
-          console.log(HttpService.getAllResponseHeaders());
-          // console.log(successResponse.headers.session_token);
-          // console.log(successResponse.headers['session_token']);
           newUserData.token = successResponse.headers().session_token;
+          console.log('header token:');
+          console.log(newUserData.token);
           newUserData.id = successResponse.data.user_id;
           setUserData(newUserData);
           console.log('user data after login: ', newUserData);
@@ -141,17 +137,9 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
         }
       }, function (errorResponse) {
         if (errorResponse.status === 401) {
-
-          // error msg to screen!!!
-          // error message not work
-          // console.log('itt kellene kiirni a hibát');
           logoutUser();
-          // error message not work
-          // errormessage = 'ez egy nagyon nagy hiba!';
-          // console.log(errormessage);
           $window.location.href = '#!/login';
         } else {
-          // error msg to screen!!!
           console.log('login ERROR! no user data from server!');
           logoutUser();
           $window.location.href = '#!/login';
