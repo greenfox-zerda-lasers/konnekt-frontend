@@ -149,19 +149,22 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
 
   function register() {
     let data = { email: getUserData().email, password: getUserData().password, password_confirmation: getUserData().passwordConfirmation };
+    console.log('register data sent:');
+    console.log(data);
     HttpService.register(data)
       .then(function (successResponse) {
         if (successResponse.status === 201) {
           console.log('success registration response:');
           console.log(successResponse);
-          console.log('response header:');
-          console.log(successResponse.headers);
+          console.log('response token:');
+          console.log(successResponse.headers().session_token);
 
           let newUserData = {};
-          newUserData.token = successResponse.headers('session_token');
+          newUserData.token = successResponse.headers().session_token;
           newUserData.id = successResponse.data.user_id;
           setUserData(newUserData);
-          console.log('user data login: ', newUserData);
+          console.log('user data after registration: ');
+          console.log(getUserData());
           $window.location.href = '#!/dashboard';
         } else {
           console.log(successResponse.status);
