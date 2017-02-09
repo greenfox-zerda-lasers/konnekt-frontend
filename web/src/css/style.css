@@ -249,3 +249,10 @@ h2 {
   margin-right: 50px;
   margin-top: 60px;
 }
+
+.errorText {
+  color: red;
+  text-align: center;
+  font-family: 'Merriweather', serif;
+	font-size: 12px;
+}
