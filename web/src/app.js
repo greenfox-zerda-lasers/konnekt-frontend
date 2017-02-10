@@ -261,5 +261,6 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
 
 konnektApp.controller('dashboardController', ['$scope', 'UserService', 'DataHandling', function ($scope, UserService, DataHandling) {
 
+  $scope.newContact = 'új kontakt'
   $scope.allContacts = DataHandling.getContactData();
 }]);

@@ -37,7 +37,7 @@ body {
 
 .konnekt-logo-background {
   margin: 0px;
-  padding: 0px;
+  padding: 1px;
   width: 100%;
   height: 100px;
   opacity: 0.49;
@@ -89,12 +89,35 @@ body {
 }
 
 .add-new-contact {
+  border: solid 2px #00c4bc;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   height: 40px;
-  width: 165px;
-  background-image: url('images/newcontact.png');
-  background-position: left;
+  width: 150px;
+  background: url('images/add.svg');
   background-repeat: no-repeat;
-  background-size: cover;
+  background-position: 15px center;
+  background-size: 29px;
+  padding-right: 13px;
+}
+
+.add-new-contact:hover {
+  background-color: rgba(0, 195, 187, 0.3);
+  transition: 0.2s;
+}
+
+.add-new-contact-text {
+  font-family: Raleway, sans-serif;
+  font-size: 16px;
+  margin: 0px;
+  font-weight: 800;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  color: #012d61;
 }
 
 .table-row1 {
