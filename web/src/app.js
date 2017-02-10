@@ -3,13 +3,13 @@
 // *****************************************************************************
 //
 // for localhost testing
-const appUrl = 'http://localhost:3000';
+// const appUrl = 'http://localhost:3000';
 //
 // for lasers web
 // const appUrl = 'https://lasers-cornubite-konnekt.herokuapp.com';
 //
 // for raptors web
-// const appUrl = 'https://raptor-konnekt.herokuapp.com';
+const appUrl = 'https://raptor-konnekt.herokuapp.com';
 //
 // for api docs web
 // const appUrl = 'https://konnekt-api-spec.herokuapp.com';
@@ -79,12 +79,16 @@ konnektApp.run(['$rootScope', '$location', 'UserService', function ($rootScope, 
 konnektApp.factory('HttpService', ['$http', function ($http) {
 
   function login(userData) {
-    return $http.post(`${appUrl}/login`, JSON.stringify(userData));
+    return $http.post(`${appUrl}/login`, JSON.stringify(userData), { withCredentials: true });
   }
 
   function register(userData) {
     return $http.post(`${appUrl}/register`, JSON.stringify(userData));
   }
+
+  // function register() {
+  //   return $http.get(`${appUrl}/contacts`, { withCredentials: true });
+  // }
 
   return {
     login: login,
@@ -137,7 +141,11 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
       .then(function (successResponse) {
         if (successResponse.status === 201) {
           let newUserData = {};
-          newUserData.token = successResponse.headers('session_token');
+          console.log('success response:');
+          console.log(successResponse);
+          newUserData.token = successResponse.headers().session_token;
+          console.log('header token:');
+          console.log(newUserData.token);
           newUserData.id = successResponse.data.user_id;
           setUserData(newUserData);
           console.log('user data after login: ', newUserData);
@@ -159,16 +167,22 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
 
   function register() {
     let data = { email: getUserData().email, password: getUserData().password, password_confirmation: getUserData().passwordConfirmation };
+    console.log('register data sent:');
+    console.log(data);
     HttpService.register(data)
       .then(function (successResponse) {
         if (successResponse.status === 201) {
           console.log('success registration response:');
           console.log(successResponse);
+          console.log('response token:');
+          console.log(successResponse.headers().session_token);
+
           let newUserData = {};
-          newUserData.token = successResponse.headers('session_token');
+          newUserData.token = successResponse.headers().session_token;
           newUserData.id = successResponse.data.user_id;
           setUserData(newUserData);
-          console.log('user data login: ', newUserData);
+          console.log('user data after registration: ');
+          console.log(getUserData());
           $window.location.href = '#!/dashboard';
         } else {
           console.log(successResponse.status);
