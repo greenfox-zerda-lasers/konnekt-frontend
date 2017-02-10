@@ -3,13 +3,13 @@
 // *****************************************************************************
 //
 // for localhost testing
-// const appUrl = 'http://localhost:3000';
+const appUrl = 'http://localhost:3000';
 //
 // for lasers web
 // const appUrl = 'https://lasers-cornubite-konnekt.herokuapp.com';
 //
 // for raptors web
-const appUrl = 'https://raptor-konnekt.herokuapp.com';
+// const appUrl = 'https://raptor-konnekt.herokuapp.com';
 //
 // for api docs web
 // const appUrl = 'https://konnekt-api-spec.herokuapp.com';
@@ -38,6 +38,10 @@ konnektApp.config(['$routeProvider', function ($routeProvider) {
       templateUrl: 'dashboard.html',
       controller: 'dashboardController',
     })
+    .when('/create', {
+      templateUrl: 'create.html',
+      controller: 'createController',
+    })
     .otherwise({
       redirectTo: '/login',
     });
@@ -45,17 +49,17 @@ konnektApp.config(['$routeProvider', function ($routeProvider) {
 
 
 // APP RUN
-konnektApp.run(['$rootScope', '$location', 'UserService', function ($rootScope, $location, UserService) {
-
-  $rootScope.$on('$routeChangeStart', function (event, next) {
-
-    if (next.templateUrl === 'registration.html') {
-      $location.path('/register');
-    } else if (!UserService.isLoggedIn()) {
-      $location.path('/login');
-    }
-  });
-}]);
+// konnektApp.run(['$rootScope', '$location', 'UserService', function ($rootScope, $location, UserService) {
+//
+//   $rootScope.$on('$routeChangeStart', function (event, next) {
+//
+//     if (next.templateUrl === 'registration.html') {
+//       $location.path('/register');
+//     } else if (!UserService.isLoggedIn()) {
+//       $location.path('/login');
+//     }
+//   });
+// }]);
 
 
 // FACTORIES
@@ -238,4 +242,21 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
 konnektApp.controller('dashboardController', ['$scope', '$window', 'UserService', function ($scope, $window, UserService) {
 
   $scope.header = UserService.getUserData().email;
+}]);
+
+konnektApp.controller('createController', ['$scope', 'UserService', function ($scope, UserService) {
+
+  $scope.create_header = 'új kontakt';
+  $scope.create_welcome = 'Adj hozzá egy hasznos ismerőst!';
+  $scope.button = 'mehet';
+
+  $scope.createName = createName;
+  $scope.createDesc = createDesc;
+
+  $scope.createContact = function () {
+    let newContactData = {};
+    newContactData.name = createName;
+    newContactData.desc = createDesc;
+  };
+
 }]);
