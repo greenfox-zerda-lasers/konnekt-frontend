@@ -38,10 +38,27 @@ konnektApp.config(['$routeProvider', function ($routeProvider) {
       templateUrl: 'dashboard.html',
       controller: 'dashboardController',
     })
+    .when('/create', {
+      templateUrl: 'create.html',
+      controller: 'createController',
+    })
     .otherwise({
       redirectTo: '/login',
     });
 }]);
+
+//contactokat kezelő controllert majd kiszervezni factoryba
+//template és controller működése után
+//route-template-controller-factory
+
+//get- beégetett adatot lekérek -- put-szerkesztek --edit esetében
+//create esetében csak put
+
+
+
+
+
+
 
 
 // APP RUN
@@ -162,10 +179,12 @@ konnektApp.factory('UserService', ['HttpService', '$window', function (HttpServi
           // ha két jelszó nem egyezik hibaüzenet, foglalt névnél hibaüzenet, (hosszra ellenőrizni)
           console.log('registration error 403:', errorResponse);
           logoutUser();
-          $window.location.href = '#!/register';
-          userData.errormessage = errorResponse.data.errors[0].name + ' : ' + errorResponse.data.errors[0].message;
+          // userData.errormessage = errorResponse.data.errors[0].name + ' : ' + errorResponse.data.errors[0].message;
+          // $window.location.href = '#!/register';
         } else {
           console.log('registration ERROR! ', errorResponse);
+          $window.location.href = '#!/register';
+          userData.errormessage = "babbalala";
         }
       });
   }
@@ -225,3 +244,7 @@ konnektApp.controller('dashboardController', ['$scope', '$window', 'UserService'
 
   $scope.header = UserService.getUserData().email;
 }]);
+
+// konnektApp.controller('createController', ['$scope', '$window', function ($scope, $window) {
+//   $scope.
+// }]);
