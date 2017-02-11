@@ -38,6 +38,10 @@ konnektApp.config(['$routeProvider', function ($routeProvider) {
       templateUrl: 'dashboard.html',
       controller: 'dashboardController',
     })
+    .when('/edit', {
+      templateUrl: 'edit.html',
+      controller: 'editController',
+    })
     .otherwise({
       redirectTo: '/login',
     });
@@ -45,17 +49,17 @@ konnektApp.config(['$routeProvider', function ($routeProvider) {
 
 
 // APP RUN
-konnektApp.run(['$rootScope', '$location', 'UserService', function ($rootScope, $location, UserService) {
-
-  $rootScope.$on('$routeChangeStart', function (event, next) {
-
-    if (next.templateUrl === 'registration.html') {
-      $location.path('/register');
-    } else if (!UserService.isLoggedIn()) {
-      $location.path('/login');
-    }
-  });
-}]);
+// konnektApp.run(['$rootScope', '$location', 'UserService', function ($rootScope, $location, UserService) {
+//
+//   $rootScope.$on('$routeChangeStart', function (event, next) {
+//
+//     if (next.templateUrl === 'registration.html') {
+//       $location.path('/register');
+//     } else if (!UserService.isLoggedIn()) {
+//       $location.path('/login');
+//     }
+//   });
+// }]);
 
 
 // FACTORIES
@@ -238,4 +242,18 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
 konnektApp.controller('dashboardController', ['$scope', '$window', 'UserService', function ($scope, $window, UserService) {
 
   $scope.header = UserService.getUserData().email;
+}]);
+
+konnektApp.controller('editController', ['$scope', 'UserService', function ($scope, UserService) {
+
+  $scope.header = 'kontakt szerk';
+  $scope.welcome = 'Változtass az ismerőseiden!';
+  $scope.button = 'mehet';
+  $scope.editName = 'Béla';
+  $scope.editDescription = 'rövid leírás: (pl. "Béla orvosit  végzett, most a NASAnál takarító")';
+
+  $scope.editContact = function () {
+    console.log($scope.editName);
+    console.log($scope.editDescription);
+  };
 }]);
