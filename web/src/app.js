@@ -36,7 +36,7 @@ konnektApp.config(['$routeProvider', function ($routeProvider) {
     })
     .when('/dashboard', {
       templateUrl: 'dashboard.html',
-      controller: 'dashboardController',
+      controller: 'dashboardController as dashboard',
     })
     .otherwise({
       redirectTo: '/login',
@@ -83,55 +83,84 @@ konnektApp.factory('HttpService', ['$http', function ($http) {
 
 konnektApp.factory('UserService', ['HttpService', '$window', 'DataHandling', function (HttpService, $window, DataHandling) {
 
-  var userData = {
-    id: -1,
-    token: '',
-    email: '',
-    password: '',
-    passwordConfirmation: '',
-  };
+  var userData = {};
 
+  // return with logged in user data;
   function getUserData() {
     return userData;
   }
 
+  // set & update logged user data
   function setUserData(newUserData) {
     userData = Object.assign(userData, newUserData);
-    console.log('stored user data: ', userData);
   }
 
+  // logout user, reset stored user data;
   function logoutUser() {
-    userData = {
-      id: -1,
-      token: '',
-      email: '',
-      password: '',
-      passwordConfirmation: '',
-    };
+    userData = {};
+    window.localStorage.removeItem('session_token');
+    window.localStorage.removeItem('user_id');
+    window.localStorage.removeItem('username');
+    window.localStorage.removeItem('password');
   }
 
+  // check if user logged in or not
   function isLoggedIn() {
-    if (getUserData().token !== '') {
+    if (getUserData().session_token !== '') {
       return true;
     }
     return false;
   }
 
+  // store user data in browser local storage
+  function setUserLocalStorage() {
+    // Check browser support
+    if (typeof (Storage) !== 'undefined') {
+      window.localStorage.setItem('session_token', getUserData().session_token);
+      window.localStorage.setItem('user_id', getUserData().id);
+      window.localStorage.setItem('username', getUserData().email);
+      window.localStorage.setItem('password', getUserData().password);
+    }
+  }
+
+  // read user data in browser local storage; return True is it is exist and
+  // set it to logged in user; return false if no stored user data
+  function getUserLocalStorage() {
+    // Check browser support
+    if (window.localStorage.getItem('session_token')) {
+      if ((window.localStorage.getItem('session_token')) !== 'undefined') {
+        let newUserData = {};
+        newUserData.session_token = $window.localStorage.getItem('session_token');
+        newUserData.id = $window.localStorage.getItem('user_id');
+        newUserData.email = $window.localStorage.getItem('username');
+        newUserData.password = $window.localStorage.getItem('password');
+        setUserData(newUserData);
+        return true;
+      }
+      // session_token exist, but no value;
+      return false;
+    }
+    // session_token not defined;
+    return false;
+  }
+
+  // login user
   function login() {
     let data = { email: getUserData().email, password: getUserData().password };
     HttpService.login(data)
       .then(function (successResponse) {
         if (successResponse.status === 201) {
           let newUserData = {};
-          newUserData.token = successResponse.headers().session_token;
-          if (newUserData.token !== '') {
+          newUserData.session_token = successResponse.headers().session_token;
+          if (newUserData.session_token !== '') {
             newUserData.id = successResponse.data.user_id;
-            console.log('user data after login: ', newUserData);
             setUserData(newUserData);
-            DataHandling.setContactData(newUserData.token);
-            $window.location.href = '#!/dashboard';
+            setUserLocalStorage();
+            DataHandling.setContactData(newUserData.session_token).then(function () {
+              $window.location.href = '#!/dashboard';
+            })
           } else {
-            console.log('ERROR: success response, but no token from server');
+            console.log('ERROR: success response, but no session_token from server');
             logoutUser();
             $window.location.href = '#!/login';
           }
@@ -149,6 +178,7 @@ konnektApp.factory('UserService', ['HttpService', '$window', 'DataHandling', fun
       });
   }
 
+  // user registration
   function register() {
     let data = { email: getUserData().email, password: getUserData().password, password_confirmation: getUserData().passwordConfirmation };
     console.log('register data sent:');
@@ -157,18 +187,19 @@ konnektApp.factory('UserService', ['HttpService', '$window', 'DataHandling', fun
       .then(function (successResponse) {
         if (successResponse.status === 201) {
           let newUserData = {};
-          newUserData.token = successResponse.headers().session_token;
-          if (newUserData.token !== '') {
+          newUserData.session_token = successResponse.headers().session_token;
+          if (newUserData.session_token !== '') {
             console.log('success registration response:');
             console.log(successResponse);
 
             newUserData.id = successResponse.data.user_id;
             setUserData(newUserData);
+            setUserLocalStorage();
             console.log('user data login:');
             console.log(newUserData);
             $window.location.href = '#!/dashboard';
           } else {
-            console.log('ERROR: success response, but no token from server');
+            console.log('ERROR: success response, but no session_token from server');
             logoutUser();
             $window.location.href = '#!/login';
           }
@@ -189,9 +220,12 @@ konnektApp.factory('UserService', ['HttpService', '$window', 'DataHandling', fun
   return {
     isLoggedIn: isLoggedIn,
     login: login,
+    logoutUser: logoutUser,
     register: register,
     getUserData: getUserData,
     setUserData: setUserData,
+    getUserLocalStorage: getUserLocalStorage,
+    setUserLocalStorage: setUserLocalStorage,
   };
 }]);
 
@@ -200,16 +234,17 @@ konnektApp.factory('DataHandling', ['HttpService', function (HttpService) {
 
   var contactData = {};
 
+  // returns stored contact info
   function getContactData() {
     return contactData;
   }
 
+  // read contact info from server
   function setContactData(sessionToken) {
-    HttpService.getAllContacts(sessionToken)
+    return HttpService.getAllContacts(sessionToken)
     .then(function (successResponse) {
       if (successResponse.status === 200) {
         contactData = Object.assign(contactData, successResponse.data.contacts);
-        console.log('stored contact data: ', contactData);
       } else {
         console.log('contact data loading error');
       }
@@ -257,10 +292,35 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
     UserService.setUserData(newUserData);
     UserService.login();
   };
+
+  if (UserService.getUserLocalStorage()) {
+    console.log('automatic log on');
+    UserService.login();
+  }
+
 }]);
 
-konnektApp.controller('dashboardController', ['$scope', 'UserService', 'DataHandling', function ($scope, UserService, DataHandling) {
+konnektApp.controller('dashboardController', ['UserService', 'DataHandling', '$window', function (UserService, DataHandling, $window) {
 
-  $scope.newContact = 'új kontakt'
-  $scope.allContacts = DataHandling.getContactData();
+  let vm = this;
+  vm.newContact = 'új kontakt';
+  vm.logoutUser = 'kilépés';
+
+  vm.logoutMember = function () {
+    UserService.logoutUser();
+    $window.location.href = '#!/login';
+  };
+
+  // if user reload browser, needs update data from browser's local storage (inspirated by Tibi);
+  if (typeof UserService.getUserData().id === 'undefined') {
+    if (UserService.getUserLocalStorage()) {
+      DataHandling.setContactData();
+    } else {
+      UserService.logoutUser();
+    }
+  }
+
+  vm.loggedInUserId = UserService.getUserData().id;
+  vm.allContacts = DataHandling.getContactData();
+
 }]);
