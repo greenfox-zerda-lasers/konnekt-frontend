@@ -363,7 +363,7 @@ form {
 	color: #012d61;
 }
 
-input {
+input, .description {
   box-sizing: border-box;
   border: none;
   display: block;
@@ -384,6 +384,11 @@ input {
 	letter-spacing: normal;
 	text-align: left;
 	color: #012d61;
+}
+
+.description {
+  height: 90px;
+  padding: 16px 5px 0px 13px;
 }
 
 /*placeholder for MS, Firefox 19+, Firefox 18-, Chrome*/
@@ -458,4 +463,11 @@ h2 {
   float: right;
   margin-right: 50px;
   margin-top: 60px;
+}
+
+.errorText {
+  color: red;
+  text-align: center;
+  font-family: 'Merriweather', serif;
+	font-size: 12px;
 }

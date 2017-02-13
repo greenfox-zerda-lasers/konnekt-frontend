@@ -38,6 +38,10 @@ konnektApp.config(['$routeProvider', function ($routeProvider) {
       templateUrl: 'dashboard.html',
       controller: 'dashboardController as dashboard',
     })
+    .when('/edit', {
+      templateUrl: 'edit.html',
+      controller: 'editController',
+    })
     .otherwise({
       redirectTo: '/login',
     });
@@ -45,24 +49,24 @@ konnektApp.config(['$routeProvider', function ($routeProvider) {
 
 
 // APP RUN
-konnektApp.run(['$rootScope', '$location', 'UserService', function ($rootScope, $location, UserService) {
-
-  $rootScope.$on('$routeChangeStart', function (event, next) {
-
-    if (next.templateUrl === 'registration.html') {
-      $location.path('/register');
-    } else if (!UserService.isLoggedIn()) {
-      $location.path('/login');
-    }
-  });
-}]);
+// konnektApp.run(['$rootScope', '$location', 'UserService', function ($rootScope, $location, UserService) {
+//
+//   $rootScope.$on('$routeChangeStart', function (event, next) {
+//
+//     if (next.templateUrl === 'registration.html') {
+//       $location.path('/register');
+//     } else if (!UserService.isLoggedIn()) {
+//       $location.path('/login');
+//     }
+//   });
+// }]);
 
 
 // FACTORIES
 konnektApp.factory('HttpService', ['$http', function ($http) {
 
   function login(userData) {
-    return $http.post(`${appUrl}/login`, JSON.stringify(userData));
+    return $http.post(`${appUrl}/login`, JSON.stringify(userData), { withCredentials: true });
   }
 
   function register(userData) {
@@ -97,12 +101,21 @@ konnektApp.factory('UserService', ['HttpService', '$window', 'ContactDataHandlin
 
   // logout user, reset stored user data;
   function logoutUser() {
+
     userData = {};
     window.localStorage.removeItem('session_token');
     window.localStorage.removeItem('user_id');
     window.localStorage.removeItem('username');
     window.localStorage.removeItem('password');
-  }
+
+ //   userData = {
+ //     id: -1,
+ //     token: '',
+ //     email: '',
+ //     password: '',
+ //     passwordConfirmation: '',
+ //     errormessage: false
+ // }
 
   // check if user logged in or not
   function isLoggedIn() {
@@ -147,10 +160,11 @@ konnektApp.factory('UserService', ['HttpService', '$window', 'ContactDataHandlin
   // login user
   function login() {
     let data = { email: getUserData().email, password: getUserData().password };
-    HttpService.login(data)
+    return HttpService.login(data)
       .then(function (successResponse) {
         if (successResponse.status === 201) {
           let newUserData = {};
+
           newUserData.session_token = successResponse.headers().session_token;
           if (newUserData.session_token !== '') {
             newUserData.id = successResponse.data.user_id;
@@ -170,6 +184,8 @@ konnektApp.factory('UserService', ['HttpService', '$window', 'ContactDataHandlin
           console.log('ERROR: 401 status from server');
           logoutUser();
           $window.location.href = '#!/login';
+          userData.errormessage = errorResponse.data.errors[0].name + ' : ' + errorResponse.data.errors[0].message;
+          console.log(userData);
         } else {
           console.log('ERROR: no data from server');
           logoutUser();
@@ -208,9 +224,12 @@ konnektApp.factory('UserService', ['HttpService', '$window', 'ContactDataHandlin
         }
       }, function (errorResponse) {
         if (errorResponse.status === 403) {
-          console.log('ERROR: registration error 403: ', errorResponse);
+          // beenged a dashboardra reg nélkül, nincs 403 hiba
+          // ha két jelszó nem egyezik hibaüzenet, foglalt névnél hibaüzenet, (hosszra ellenőrizni)
+          console.log('registration error 403:', errorResponse);
           logoutUser();
           $window.location.href = '#!/register';
+          userData.errormessage = errorResponse.data.errors[0].name + ' : ' + errorResponse.data.errors[0].message;
         } else {
           console.log('ERROR: registration error! ', errorResponse);
         }
@@ -274,7 +293,8 @@ konnektApp.controller('registrationController', ['$scope', 'UserService', functi
       UserService.setUserData(newUserData);
       UserService.register();
     } else {
-      // pw confirmation error message
+      userData.errormessage = "Kérlek add meg a regisztrációs adataidat!";
+
     }
   };
 }]);
@@ -284,13 +304,17 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
   $scope.header = 'lépj be';
   $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
   $scope.button = 'mehet';
+  $scope.errormessage = UserService.getUserData().errormessage;
 
   $scope.loginMember = function () {
     let newUserData = {};
     newUserData.email = $scope.userLogin.email;
     newUserData.password = $scope.userLogin.password;
     UserService.setUserData(newUserData);
-    UserService.login();
+    UserService.login()
+    .then(function() {
+      $scope.errormessage = UserService.getUserData().errormessage;
+    });
   };
 
   if (UserService.getUserLocalStorage()) {
@@ -323,4 +347,18 @@ konnektApp.controller('dashboardController', ['UserService', 'ContactDataHandlin
   vm.loggedInUserId = UserService.getUserData().id;
   vm.allContacts = ContactDataHandling.getContactData();
 
+}]);
+
+konnektApp.controller('editController', ['$scope', 'UserService', function ($scope, UserService) {
+
+  $scope.header = 'kontakt szerk';
+  $scope.welcome = 'Változtass az ismerőseiden!';
+  $scope.button = 'mehet';
+  $scope.editName = 'Béla';
+  $scope.editDescription = 'rövid leírás: (pl. "Béla orvosit  végzett, most a NASAnál takarító")';
+
+  $scope.editContact = function () {
+    console.log($scope.editName);
+    console.log($scope.editDescription);
+  };
 }]);
