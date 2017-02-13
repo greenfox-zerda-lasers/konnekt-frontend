@@ -81,7 +81,7 @@ konnektApp.factory('HttpService', ['$http', function ($http) {
 }]);
 
 
-konnektApp.factory('UserService', ['HttpService', '$window', 'DataHandling', function (HttpService, $window, DataHandling) {
+konnektApp.factory('UserService', ['HttpService', '$window', 'ContactDataHandling', function (HttpService, $window, ContactDataHandling) {
 
   var userData = {};
 
@@ -156,7 +156,7 @@ konnektApp.factory('UserService', ['HttpService', '$window', 'DataHandling', fun
             newUserData.id = successResponse.data.user_id;
             setUserData(newUserData);
             setUserLocalStorage();
-            DataHandling.setContactData(newUserData.session_token).then(function () {
+            ContactDataHandling.setContactData(newUserData.session_token).then(function () {
               $window.location.href = '#!/dashboard';
             })
           } else {
@@ -230,7 +230,7 @@ konnektApp.factory('UserService', ['HttpService', '$window', 'DataHandling', fun
 }]);
 
 
-konnektApp.factory('DataHandling', ['HttpService', function (HttpService) {
+konnektApp.factory('ContactDataHandling', ['HttpService', function (HttpService) {
 
   var contactData = {};
 
@@ -300,7 +300,7 @@ konnektApp.controller('loginController', ['$scope', 'UserService', function ($sc
 
 }]);
 
-konnektApp.controller('dashboardController', ['UserService', 'DataHandling', '$window', function (UserService, DataHandling, $window) {
+konnektApp.controller('dashboardController', ['UserService', 'ContactDataHandling', '$window', function (UserService, ContactDataHandling, $window) {
 
   let vm = this;
   vm.newContact = 'új kontakt';
@@ -314,13 +314,13 @@ konnektApp.controller('dashboardController', ['UserService', 'DataHandling', '$w
   // if user reload browser, needs update data from browser's local storage (inspirated by Tibi);
   if (typeof UserService.getUserData().id === 'undefined') {
     if (UserService.getUserLocalStorage()) {
-      DataHandling.setContactData();
+      ContactDataHandling.setContactData();
     } else {
       UserService.logoutUser();
     }
   }
 
   vm.loggedInUserId = UserService.getUserData().id;
-  vm.allContacts = DataHandling.getContactData();
+  vm.allContacts = ContactDataHandling.getContactData();
 
 }]);
