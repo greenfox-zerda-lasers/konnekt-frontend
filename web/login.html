@@ -1,9 +1,12 @@
-<div class="body-container">
+ <div class="body-container">
   <div class="konnekt-logo"></div>
   <div class="form-container">
     <h1 class="header-text">{{ header }}</h1>
     <p class="welcome-text">{{ welcome }}</p>
-    <p class="error-text">{{ errormessage }}</p>
+
+    <div class="errorText" ng-show="errormessage">
+      <p>{{errormessage}}</p>
+    </div>
 
     <form ng-submit="loginMember()">
       <input type="text" placeholder="e-mail címed:" ng-model='userLogin.email' novalidate>
