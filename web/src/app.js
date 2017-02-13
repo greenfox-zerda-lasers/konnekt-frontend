@@ -108,14 +108,14 @@ konnektApp.factory('UserService', ['HttpService', '$window', 'ContactDataHandlin
     window.localStorage.removeItem('username');
     window.localStorage.removeItem('password');
 
- //   userData = {
- //     id: -1,
- //     token: '',
- //     email: '',
- //     password: '',
- //     passwordConfirmation: '',
- //     errormessage: false
- // }
+     // userData = {
+     // id: -1,
+     // token: '',
+     // email: '',
+     // password: '',
+     // passwordConfirmation: '',
+     // errormessage: false
+  }
 
   // check if user logged in or not
   function isLoggedIn() {
