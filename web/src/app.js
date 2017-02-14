@@ -392,8 +392,4 @@ konnektApp.controller('createController', ['$scope', '$window', 'UserService', f
 
   console.log(contactData);
 
-  // $scope.createContact = function () {
-  //   console.log($scope.createName + $scope.createDesc)
-  // };
-
 }]);
