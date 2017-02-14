@@ -60,12 +60,16 @@ body {
   border: solid 2px #00c4bc;
 }
 
-.form-container {
+.form-container, .create-form-container {
 	opacity: 0.9;
   flex: 0 1 auto;
   max-width: 388px;
   width: 100%;
   background-color: #00c4bc;
+}
+
+.create-form-container {
+  min-height: 411px;
 }
 
 .dashboard-p {
@@ -77,7 +81,7 @@ body {
 }
 
 
-.header-text {
+.header-text, .create-header-text {
   margin: 0px;
 	padding-top: 50px;
 	height: 42px;
@@ -96,7 +100,7 @@ form {
   margin-top: 15px;
 }
 
-.welcome-text {
+.welcome-text, .create-welcome-text {
   margin: 0px;
 	padding-bottom: 25px;
 	font-family: 'Merriweather', serif;
@@ -153,8 +157,8 @@ form {
 	color: #012d61;
 }
 
-input, .create_description {
-  box-sizing: border-box;
+input, textarea {
+  /*box-sizing: border-box;*/
   border: none;
   display: block;
   max-width: 328px;
@@ -175,6 +179,13 @@ input, .create_description {
 	text-align: left;
 	color: #012d61;
 }
+
+textarea {
+  height: 90px;
+  padding-top: 16.6px;
+}
+
+
 
 /*placeholder for MS, Firefox 19+, Firefox 18-, Chrome*/
 ::-webkit-input-placeholder {

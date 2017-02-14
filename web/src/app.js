@@ -250,13 +250,13 @@ konnektApp.controller('createController', ['$scope', 'UserService', function ($s
   $scope.create_welcome = 'Adj hozzá egy hasznos ismerőst!';
   $scope.button = 'mehet';
 
-  $scope.createName = createName;
-  $scope.createDesc = createDesc;
-
-  $scope.createContact = function () {
-    let newContactData = {};
-    newContactData.name = createName;
-    newContactData.desc = createDesc;
-  };
+  // $scope.createName = createName;
+  // $scope.createDesc = createDesc;
+  //
+  // $scope.createContact = function () {
+  //   let newContactData = {};
+  //   newContactData.name = createName;
+  //   newContactData.desc = createDesc;
+  // };
 
 }]);
