@@ -2,7 +2,7 @@
 
 
 module.exports = {
-  entry: './web/src/main.js',
+  entry: './web/src/app.js',
 
   output: {
     path: './web/dist',
@@ -26,7 +26,7 @@ module.exports = {
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         path: './web/images',
-        loader: 'file-loader?name=images/[name].[ext]&publicPath=dist/', 
+        loader: 'file-loader?name=images/[name].[ext]&publicPath=dist/',
       },
     ],
   },

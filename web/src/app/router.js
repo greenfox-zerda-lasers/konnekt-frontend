@@ -1,0 +1,30 @@
+'use strict';
+
+(function () {
+
+  const konnektApp = angular.module('konnektApp', ['ngRoute']);
+
+  konnektApp.config(['$routeProvider', function ($routeProvider) {
+
+    $routeProvider
+      .when('/login', {
+        templateUrl: 'login.html',
+        controller: 'loginController',
+      })
+      .when('/register', {
+        templateUrl: 'registration.html',
+        controller: 'registrationController',
+      })
+      .when('/dashboard', {
+        templateUrl: 'dashboard.html',
+        controller: 'dashboardController as dashboard',
+      })
+      .when('/edit', {
+        templateUrl: 'edit.html',
+        controller: 'editController',
+      })
+      .otherwise({
+        redirectTo: '/login',
+      });
+  }]);
+})();
