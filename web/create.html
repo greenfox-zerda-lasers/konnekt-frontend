@@ -1,0 +1,13 @@
+<div class="body-container">
+  <div class="create-form-container">
+    <h1 class="create-header-text">{{ create_header }}</h1>
+    <p class="create-welcome-text">{{ create_welcome }}</p>
+    <form ng-submit="createContact()">
+      <input type="text" placeholder="ismerős neve:" ng-model="createName">
+      <textarea class="create_description" placeholder="rövid leírás: &#x0a; (pl. &quot;Béla orvosit végzett, most a NASAnál takarító&quot;)" ng-model:"createDesc"></textarea>
+      <button class="login-button">
+        <p class="button-text">{{ button }}</p>
+      </button>
+    </form>
+  </div>
+</div>

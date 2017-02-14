@@ -3,13 +3,13 @@
 // *****************************************************************************
 //
 // for localhost testing
-// const appUrl = 'http://localhost:3000';
+const appUrl = 'http://localhost:3000';
 //
 // for lasers web
 // const appUrl = 'https://lasers-cornubite-konnekt.herokuapp.com';
 //
 // for raptors web
-const appUrl = 'https://raptor-konnekt.herokuapp.com';
+// const appUrl = 'https://raptor-konnekt.herokuapp.com';
 //
 // for api docs web
 // const appUrl = 'https://konnekt-api-spec.herokuapp.com';
@@ -41,6 +41,10 @@ konnektApp.config(['$routeProvider', function ($routeProvider) {
     .when('/edit', {
       templateUrl: 'edit.html',
       controller: 'editController',
+    })
+    .when('/create', {
+      templateUrl: 'create.html',
+      controller: 'createController',
     })
     .otherwise({
       redirectTo: '/login',
@@ -361,4 +365,21 @@ konnektApp.controller('editController', ['$scope', 'UserService', function ($sco
     console.log($scope.editName);
     console.log($scope.editDescription);
   };
+}]);
+
+konnektApp.controller('createController', ['$scope', 'UserService', function ($scope, UserService) {
+
+  $scope.create_header = 'új kontakt';
+  $scope.create_welcome = 'Adj hozzá egy hasznos ismerőst!';
+  $scope.button = 'mehet';
+
+  // $scope.createName = createName;
+  // $scope.createDesc = createDesc;
+  //
+  // $scope.createContact = function () {
+  //   let newContactData = {};
+  //   newContactData.name = createName;
+  //   newContactData.desc = createDesc;
+  // };
+
 }]);
