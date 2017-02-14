@@ -1,10 +1,51 @@
 <div class="body-dashboard">
-  <div class="konnekt-logo-dashboard"></div>
-    <div class="dashboard">
-      <div class="dashboard-list">
-        <ul>
-          <li ng-repeat="contact in allContacts"><p class="dashboard-p">ismerős: {{ contact.name }}, ki ez: {{ contact.description }}, kinek az ism.: {{ contact.user.name }}, id: {{ contact.user.id }}, </p></li>
-        </ul>
+  <div class="konnekt-logo-background">
+    <div class="konnekt-logo-dashboard"></div>
+  </div>
+
+  <div class="dashboard-table-header-container">
+    <div class="dashboard-table-header">
+      <div class="add-new-contact"><p class="add-new-contact-text">{{ dashboard.newContact }}</p></div>
+      <div class="logout-user" ng-click="dashboard.logoutMember()"><p class="logout-user-text">{{ dashboard.logoutUser }}</p></div>
+      <div class="table-header">
+        <div class="table-row1">
+          <p class="table-header-p">Ismerős Neve</p>
+        </div>
+        <div class="table-row2">
+          <p class="table-header-p">Ki ez?</p>
+        </div>
+        <div class="table-row3">
+          <p class="table-header-p">Kinek az ismerőse?</p>
+        </div>
+        <div class="table-row4-header">
+
+        </div>
+        <div class="table-row5-header">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <div class="table">
+      <div class="table-data" ng-repeat="contact in dashboard.allContacts">
+        <div class="table-row1">
+          <p class="table-p-name">{{ contact.name }}</p>
+        </div>
+        <div class="table-row2">
+          <p class="table-p-desc">{{ contact.description }}</p>
+        </div>
+        <div class="table-row3">
+          <p class="table-p-whoes">{{ contact.user.name }}</p>
+        </div>
+        <div class="table-row4">
+          <div class="icon-edit" ng-show="{{ contact.user.id }} === {{ dashboard.loggedInUserId }}"></div>
+        </div>
+        <div class="table-row5" ng-switch="{{ contact.user.id }} === {{ dashboard.loggedInUserId }}">
+          <div class="icon-delete" ng-switch-when="true"></div>
+          <div class="icon-mail" ng-switch-when="false"></div>
+        </div>
       </div>
     </div>
   </div>
