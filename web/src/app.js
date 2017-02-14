@@ -383,11 +383,17 @@ konnektApp.controller('createController', ['$scope', '$window', 'UserService', f
     console.log('saved contact data: ', contactData);
   };
 
-  $scope.addContact = function () {
+  $scope.createContact = function () {
     let newContactData = {};
     newContactData.name = $scope.createName;
-    newContactData.desc = $scope.createDesc;
+    newContactData.description = $scope.createDescription;
     saveContact(newContactData);
   };
+
+  console.log(contactData);
+
+  // $scope.createContact = function () {
+  //   console.log($scope.createName + $scope.createDesc)
+  // };
 
 }]);
