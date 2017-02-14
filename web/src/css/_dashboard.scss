@@ -1,0 +1,283 @@
+$text-color: #012d61;
+$green-color: #00c4bc;
+$white-color: #ffffff;
+$red-color: red;
+$header-dashboard-color: #979797;
+$box-shadow-color: rgba(0, 0, 0, 0.23);
+$background-color: rgba(0, 196, 188, 0.49);
+$text-font: Merriweather, serif;
+$header-font: Raleway, sans-serif;
+
+.dashboard {
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    margin: 0px auto;
+    height: 100vh;
+  }
+
+  .konnekt-logo {
+    height: 70px;
+    max-width: 219px;
+    width: 100%;
+    margin: 15px 0px 0px 15px;
+    background-image: url('images/logo-feher-hosszu.png');
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .header {
+    margin: 0px;
+    padding: 1px;
+    width: 100%;
+    flex: 0 0 100px;
+    background-color: $background-color;
+    border: solid 1px $header-dashboard-color;
+  }
+
+  .table-header {
+    margin: 0px auto;
+    padding-top: 45px;
+    max-width: 900px;
+    width: 90%;
+  }
+
+  .button {
+      border: solid 2px $green-color;
+      display: inline-block;
+      height: 40px;
+      width: 165px;
+      transition: 0.2s;
+    }
+
+  .button:hover {
+    background-color: rgba(0, 195, 187, 0.3);
+    transition: 0.2s;
+    display: inline-block;
+  }
+
+  .button-text {
+    font-family: $header-font;
+    font-size: 16px;
+    text-align: center;
+    margin: 0px;
+    padding: 10px 0px 0px 45px;
+    font-weight: 800;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-transform: uppercase;
+    color: $text-color;
+  }
+
+  .icon-add {
+    background: url('images/add.svg');
+    background-repeat: no-repeat;
+    background-position: 15px center;
+    background-size: 29px;
+  }
+
+  .icon-logout {
+    background: url('images/logout.svg');
+    background-repeat: no-repeat;
+    background-position: 15px center;
+    background-size: 29px;
+  }
+
+  .table-header-container {
+    flex: 0 0 95px;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    background-color: white;
+  }
+
+  .table-header {
+    margin: 0px auto;
+    padding-top: 45px;
+    max-width: 900px;
+    width: 90%;
+  }
+
+  .table-header-text-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 30px;
+  }
+
+  .table-header-text {
+    margin: 0px 0px 10px 20px;
+    padding: 0px;
+    font-family: $text-font;
+    font-size: 12px;
+    font-weight: normal;
+    font-style: italic;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: $text-color;
+    border: none;
+  }
+
+  .table-header-row1 {
+    flex: 0 1 250px;
+    height: 100%;
+  }
+
+  .table-header-row2 {
+    flex: 0 1 320px;
+    height: 100%;
+  }
+
+  .table-header-row3 {
+    flex: 0 1 250px;
+    height: 100%;
+  }
+
+  .table-header-row4 {
+    flex: 0 0 30px;
+    height: 20px;
+  }
+
+  .table-header-row5 {
+    flex: 0 0 30px;
+    height: 20px;
+  }
+
+  .table-container {
+    flex: 1 1 500px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    background-color: $white-color;
+  }
+
+  .table {
+    margin: 0px auto;
+    max-width: 900px;
+    width: 90%;
+    border: solid 2px $green-color;
+    flex: 1 1 500px;
+    overflow: scroll;
+    margin-bottom: 10px;
+  }
+
+  .table-data {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;;
+  }
+
+  .table-data:nth-child(odd) {
+    background-color: rgba(0, 195, 187, 0.3);
+    transition: 0.2s;
+  }
+
+  .table-data:nth-child(even) {
+    background-color: $white-color;
+    transition: 0.2s;
+  }
+
+  .table-data:hover {
+    background-color: $green-color;
+    transition: 0.2s;
+    transform: translateX(-1px);
+  }
+
+  .table-row1 {
+    flex: 0 1 250px;
+    height: 100%;
+  }
+
+  .table-row2 {
+    flex: 0 1 320px;
+    height: 100%;
+  }
+
+  .table-row3 {
+    flex: 0 1 250px;
+    height: 100%;
+  }
+
+  .table-row4 {
+    flex: 0 0 30px;
+    height: 20px;
+  }
+
+  .table-row5 {
+    flex: 0 0 30px;
+    height: 20px;
+  }
+
+  .table-name {
+    font-family: $header-font;
+    margin: 20px 10px 20px 20px;
+    font-size: 16px;
+    font-weight: 800;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: $text-color;
+  }
+
+  .table-desc {
+    font-family: Raleway;
+    margin: 20px 10px 20px 20px;
+    font-size: 12px;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: $text-color;
+  }
+
+  .table-whoes {
+    font-family: Raleway;
+    font-size: 16px;
+    margin: 20px 10px 20px 20px;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: $text-color;
+  }
+
+  .table-icon-edit {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url('images/pen.svg');
+  }
+
+  .table-icon-delete {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url('images/bin.svg');
+  }
+
+  .table-icon-mail {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url('images/mail.svg');
+  }
+}

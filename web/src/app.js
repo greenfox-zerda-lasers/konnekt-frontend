@@ -3,13 +3,13 @@
 // *****************************************************************************
 //
 // for localhost testing
-// const appUrl = 'http://localhost:3000';
+const appUrl = 'http://localhost:3000';
 //
 // for lasers web
 // const appUrl = 'https://lasers-cornubite-konnekt.herokuapp.com';
 //
 // for raptors web
-const appUrl = 'https://raptor-konnekt.herokuapp.com';
+// const appUrl = 'https://raptor-konnekt.herokuapp.com';
 //
 // for api docs web
 // const appUrl = 'https://konnekt-api-spec.herokuapp.com';
@@ -49,17 +49,17 @@ konnektApp.config(['$routeProvider', function ($routeProvider) {
 
 
 // APP RUN
-// konnektApp.run(['$rootScope', '$location', 'UserService', function ($rootScope, $location, UserService) {
-//
-//   $rootScope.$on('$routeChangeStart', function (event, next) {
-//
-//     if (next.templateUrl === 'registration.html') {
-//       $location.path('/register');
-//     } else if (!UserService.isLoggedIn()) {
-//       $location.path('/login');
-//     }
-//   });
-// }]);
+konnektApp.run(['$rootScope', '$location', 'UserService', function ($rootScope, $location, UserService) {
+
+  $rootScope.$on('$routeChangeStart', function (event, next) {
+
+    if (next.templateUrl === 'registration.html') {
+      $location.path('/register');
+    } else if (!UserService.isLoggedIn()) {
+      $location.path('/login');
+    }
+  });
+}]);
 
 
 // FACTORIES

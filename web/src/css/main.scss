@@ -1,0 +1,22 @@
+@external _popup.scss;
+@external _dashboard.scss;
+
+$text-color: #012d61;
+$green-color: #00c4bc;
+$white-color: #ffffff;
+$red-color: red;
+$header-dashboard-color: #979797;
+$box-shadow-color: rgba(0, 0, 0, 0.23);
+$background-color: rgba(0, 196, 188, 0.49);
+$text-font: Merriweather, serif;
+$header-font: Raleway, sans-serif;
+
+body {
+  margin: 0px auto;
+  height: 100vh;
+  box-sizing: border-box;
+  background-image: url('images/konnekt-team.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
