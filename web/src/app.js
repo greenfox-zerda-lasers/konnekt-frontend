@@ -1,20 +1,4 @@
-// *****************************************************************************
-// IMPORTANT! Set your server url here!
-// *****************************************************************************
-//
-// for localhost testing
-const appUrl = 'http://localhost:3000';
-//
-// for lasers web
-// const appUrl = 'https://lasers-cornubite-konnekt.herokuapp.com';
-//
-// for raptors web
-// const appUrl = 'https://raptor-konnekt.herokuapp.com';
-//
-// for api docs web
-// const appUrl = 'https://konnekt-api-spec.herokuapp.com';
-//
-// *****************************************************************************
+'use strict';
 
 require('./css/style.css');
 
@@ -25,19 +9,6 @@ const konnektApp = angular.module('konnektApp', ['ngRoute']);
 
 // APP CONFIG
 require('./app/router.js');
-
-// APP RUN
-// konnektApp.run(['$rootScope', '$location', 'UserService', function ($rootScope, $location, UserService) {
-//
-//   $rootScope.$on('$routeChangeStart', function (event, next) {
-//
-//     if (next.templateUrl === 'registration.html') {
-//       $location.path('/register');
-//     } else if (!UserService.isLoggedIn()) {
-//       $location.path('/login');
-//     }
-//   });
-// }]);
 
 // FACTORIES
 require('./app/httpservice.js');
