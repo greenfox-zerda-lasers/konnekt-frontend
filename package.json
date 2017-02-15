@@ -11,7 +11,8 @@
     "test": "karma start",
     "start": "nodemon server.js",
     "build": "webpack",
-    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress"
+    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress",
+    "watch": "webpack --watch"
   },
   "repository": {
     "type": "git",
