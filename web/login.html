@@ -1,20 +1,18 @@
-<div class="popup body-container">
-  <div class="popup body-container">
-    <div class="popup konnekt-logo"></div>
-    <div class="popup form-container">
-      <h1>{{ header }}</h1>
-      <p class="popup welcome-text">{{ welcome }}</p>
-      <div class="popup errorText" ng-show="errormessage">
-        <p>{{ errormessage }}</p>
-      </div>
-      <form class="popup form" ng-submit="loginMember()">
-        <input type="text" placeholder="e-mail címed:" ng-model='userLogin.email' novalidate>
-        <input type="password" placeholder="jelszavad:" ng-model='userLogin.password'>
-        <button class="popup button">
-          <p class="popup button-text">{{ button }}</p>
-        </button>
-      </form>
-      <p class="popup footer-text">(Inkább <a href="#!/register">regisztrálnék</a>)</p>
+<div class="popup">
+  <div class="konnekt-logo"></div>
+  <div class="form-container">
+    <h1>{{ header }}</h1>
+    <p class="welcome-text">{{ welcome }}</p>
+    <div class="errorText" ng-show="errormessage">
+      <p>{{ errormessage }}</p>
     </div>
+    <form ng-submit="loginMember()">
+      <input type="text" placeholder="e-mail címed:" ng-model='userLogin.email' novalidate>
+      <input type="password" placeholder="jelszavad:" ng-model='userLogin.password'>
+      <button class="button">
+        <p class="button-text">{{ button }}</p>
+      </button>
+    </form>
+    <p class="footer-text">(Inkább <a href="#!/register">regisztrálnék</a>)</p>
   </div>
 </div>

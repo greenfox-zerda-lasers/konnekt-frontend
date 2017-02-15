@@ -1,57 +1,52 @@
-<!DOCTYPE html>
-<html>
-  <div class="dashboard body">
-    <div class="dashboard body">
-      <div class="dashboard header">
-        <div class="dashboard konnekt-logo"></div>
-      </div>
+<div class="dashboard">
+  <div class="header">
+    <div class="konnekt-logo"></div>
+  </div>
 
-      <div class="dashboard table-header-container">
-        <div class="dashboard table-header">
-          <div class="dashboard button dashboard icon-add"><p class="dashboard button-text">{{ dashboard.newContact }}</p></div>
-          <div class="dashboard button icon-logout" ng-click="dashboard.logoutMember()"><p class="dashboard button-text">{{ dashboard.logoutUser }}</p></div>
-          <div class="dashboard table-header-text-container">
-            <div class="dashboard table-header-row1">
-              <p class="dashboard table-header-text">Ismerős Neve</p>
-            </div>
-            <div class="dashboard table-header-row2">
-              <p class="dashboard table-header-text">Ki ez?</p>
-            </div>
-            <div class="dashboard table-header-row3">
-              <p class="dashboard table-header-text">Kinek az ismerőse?</p>
-            </div>
-            <div class="dashboard table-header-row4">
-
-            </div>
-            <div class="dashboard table-header-row5">
-
-            </div>
-          </div>
+  <div class="table-header-container">
+    <div class="table-header">
+      <div class="button icon-add"><p class="button-text">{{ dashboard.newContact }}</p></div>
+      <div class="button icon-logout" ng-click="dashboard.logoutMember()"><p class="button-text">{{ dashboard.logoutUser }}</p></div>
+      <div class="table-header-text-container">
+        <div class="table-header-row1">
+          <p class="table-header-text">Ismerős Neve</p>
         </div>
-      </div>
+        <div class="table-header-row2">
+          <p class="table-header-text">Ki ez?</p>
+        </div>
+        <div class="table-header-row3">
+          <p class="table-header-text">Kinek az ismerőse?</p>
+        </div>
+        <div class="table-header-row4">
 
-      <div class="dashboard table-container">
-        <div class="dashboard table">
-          <div class="dashboard table-data" ng-repeat="contact in dashboard.allContacts">
-            <div class="dashboard table-row1">
-              <p class="dashboard table-name">{{ contact.name }}</p>
-            </div>
-            <div class="dashboard table-row2">
-              <p class="dashboard table-desc">{{ contact.description }}</p>
-            </div>
-            <div class="dashboard table-row3">
-              <p class="dashboard table-whoes">{{ contact.user.name }}</p>
-            </div>
-            <div class="dashboard table-row4">
-              <div class="dashboard table-icon-edit" ng-show="{{ contact.user.id }} === {{ dashboard.loggedInUserId }}"></div>
-            </div>
-            <div class="dashboard table-row5" ng-switch="{{ contact.user.id }} === {{ dashboard.loggedInUserId }}">
-              <div class="dashboard table-icon-delete" ng-switch-when="true"></div>
-              <div class="dashboard table-icon-mail" ng-switch-when="false"></div>
-            </div>
-          </div>
+        </div>
+        <div class="table-header-row5">
+
         </div>
       </div>
     </div>
   </div>
-</html>
+
+  <div class="table-container">
+    <div class="table">
+      <div class="table-data" ng-repeat="contact in dashboard.allContacts">
+        <div class="table-row1">
+          <p class="table-name">{{ contact.name }}</p>
+        </div>
+        <div class="table-row2">
+          <p class="table-desc">{{ contact.description }}</p>
+        </div>
+        <div class="table-row3">
+          <p class="table-whoes">{{ contact.user.name }}</p>
+        </div>
+        <div class="table-row4">
+          <div class="table-icon-edit" ng-show="{{ contact.user.id }} === {{ dashboard.loggedInUserId }}"></div>
+        </div>
+        <div class="table-row5" ng-switch="{{ contact.user.id }} === {{ dashboard.loggedInUserId }}">
+          <div class="table-icon-delete" ng-switch-when="true" ng-click="dashboard.deleteContact(contact.id)"></div>
+          <div class="table-icon-mail" ng-switch-when="false"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
