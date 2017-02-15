@@ -5,13 +5,13 @@
 // *****************************************************************************
 //
 // for localhost testing
-const appUrl = 'http://localhost:3000';
+// const appUrl = 'http://localhost:3000';
 //
 // for lasers web
 // const appUrl = 'https://lasers-cornubite-konnekt.herokuapp.com';
 //
 // for raptors web
-// const appUrl = 'https://raptor-konnekt.herokuapp.com';
+const appUrl = 'https://raptor-konnekt.herokuapp.com';
 //
 // for api docs web
 // const appUrl = 'https://konnekt-api-spec.herokuapp.com';
@@ -34,9 +34,14 @@ konnektApp.factory('HttpService', ['$http', function ($http) {
     return $http.get(`${appUrl}/contacts`, { headers: { 'session_token': sessionToken } });
   }
 
+  function editContact(sessionToken, userData) {
+    return $http.put(`${appUrl}/contact/` + userData.user_id, JSON.stringify(userData), { headers: { 'session_token': sessionToken } });
+  }
+
   return {
     login: login,
     register: register,
     getAllContacts: getAllContacts,
+    editContact: editContact
   };
 }]);
