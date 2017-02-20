@@ -23,6 +23,10 @@
         templateUrl: 'edit.html',
         controller: 'editController',
       })
+      .when('/create', {
+        templateUrl: 'create.html',
+        controller: 'createController',
+      })
       .otherwise({
         redirectTo: '/login',
       });
