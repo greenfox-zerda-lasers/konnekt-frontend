@@ -30,5 +30,9 @@
 
     console.log(contactData);
 
+    $scope.closeWindow = function () {
+
+    };
+
   }]);
 })();
