@@ -11,6 +11,7 @@
     $scope.button = 'mehet';
 
     var contactData = {
+      user_id: UserService.userData.user_id,
       name: '',
       description: ''
     };
