@@ -53,7 +53,15 @@ app.post('/login', function (req, res) {
     res.status(401).send(JSON.stringify(response));
   }
 });
-
+/////////////////////////////////////////////////////
+app.post('/contacts', function (req, res) {
+  if (responseOk) {
+    console.log(req.body)
+  } else {
+    console.log('error')
+  }
+});
+////////////////////////////////////////////////////
 app.get('/contacts', function (req, res) {
   console.log('login on server');
   const contacts = {
