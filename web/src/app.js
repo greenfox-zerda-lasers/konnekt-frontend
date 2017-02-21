@@ -3,17 +3,10 @@
 // *****************************************************************************
 //
 // for localhost testing
-const appUrl = 'http://localhost:3000';
-//
-// for lasers web
-// const appUrl = 'https://lasers-cornubite-konnekt.herokuapp.com';
+// const appUrl = 'http://localhost:3000';
 //
 // for raptors web
-// const appUrl = 'https://raptor-konnekt.herokuapp.com';
-//
-// for api docs web
-// const appUrl = 'https://konnekt-api-spec.herokuapp.com';
-//
+const appUrl = 'https://raptor-konnekt.herokuapp.com';
 // *****************************************************************************
 
 var angular = require('angular');
@@ -107,14 +100,6 @@ konnektApp.factory('UserService', ['HttpService', '$window', 'ContactDataHandlin
     window.localStorage.removeItem('user_id');
     window.localStorage.removeItem('username');
     window.localStorage.removeItem('password');
-
-     // userData = {
-     // id: -1,
-     // token: '',
-     // email: '',
-     // password: '',
-     // passwordConfirmation: '',
-     // errormessage: false
   }
 
   // check if user logged in or not
