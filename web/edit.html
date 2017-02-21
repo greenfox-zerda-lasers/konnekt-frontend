@@ -1,17 +1,15 @@
-<div class="body-container">
+<div class="popup">
   <div class="form-container">
     <div class="close-window" ng-click="closeWindow()"></div>
     <h1 class="header-text">{{ header }}</h1>
     <p class="welcome-text">{{ welcome }}</p>
     <p class="error-text">{{ errormessage }}</p>
-
     <form ng-submit="editContact()">
       <input type="text" placeholder="{{editName}}" ng-model="editName">
       <textarea class="description" rows="3" ng-model="editDescription">{{ editDescription }}</textarea>
-      <button class="login-button">
+      <button>
         <p class="button-text">{{ button }}</p>
       </button>
     </form>
-    <p></p>
   </div>
 </div>

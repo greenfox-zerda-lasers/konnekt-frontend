@@ -1,0 +1,247 @@
+$text-color: #012d61;
+$green-color: #00c4bc;
+$white-color: #ffffff;
+$red-color: red;
+$header-dashboard-color: #979797;
+$box-shadow-color: rgba(0, 0, 0, 0.23);
+$background-color: rgba(0, 196, 188, 0.49);
+$text-font: Merriweather, serif;
+$header-font: Raleway, sans-serif;
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  margin: 0px auto;
+  height: 100vh;
+  overflow: hidden;
+  color: $text-color;
+
+  .header {
+    margin: 0px;
+    padding: 1px;
+    width: 100%;
+    flex: 0 0 100px;
+    background-color: $background-color;
+    border: solid 1px $header-dashboard-color;
+
+    .konnekt-logo {
+      height: 70px;
+      max-width: 219px;
+      width: 100%;
+      margin: 15px 0px 0px 15px;
+      background-image: url('images/logo-feher-hosszu.png');
+      background-position: top;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
+
+  .body {
+    flex: 1;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    margin: 0px auto;
+    width: 100%;
+    overflow: hidden;
+
+
+    .buttons {
+      flex: 0 0 40px;
+      max-width: 900px;
+      width: 90%;
+      margin: 0px auto;
+      margin-top: 45px;
+
+      .button {
+        border: solid 2px $green-color;
+        display: inline-block;
+        width: 165px;
+        height: 40px;
+        transition: 0.2s;
+
+        &:hover {
+          background-color: rgba(0, 195, 187, 0.3);
+          transition: 0.2s;
+          display: inline-block;
+        }
+
+        .text {
+          font-family: $header-font;
+          font-size: 16px;
+          text-align: center;
+          margin: 0px;
+          padding: 10px 0px 0px 45px;
+          font-weight: 800;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          text-transform: uppercase;
+        }
+      }
+
+      .icon-add {
+        background: url('images/add.svg');
+        background-repeat: no-repeat;
+        background-position: 15px center;
+        background-size: 29px;
+      }
+
+      .icon-logout {
+        background: url('images/logout.svg');
+        background-repeat: no-repeat;
+        background-position: 15px center;
+        background-size: 29px;
+      }
+    }
+
+    .table-header {
+      width: 100%;
+      flex: 0 0 40px;
+      padding-top: 20px;
+    }
+
+    .table-body {
+      width: 100%;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      .content {
+        flex: 1;
+        margin-bottom: 10px;
+        border: solid 2px #00c4bc;
+
+        tr {
+          &:nth-child(odd) {
+            background-color: rgba(0, 195, 187, 0.3);
+            transition: 0.2s;
+            font: $header-font;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+          }
+
+          &:nth-child(even) {
+            background-color: $white-color;
+            transition: 0.2s;
+          }
+
+          &:hover {
+            background-color: $green-color;
+            transition: 0.2s;
+            transform: translateX(-1px);
+          }
+
+          .row1 {
+            font-size: 16px;
+            font-weight: 800;
+          }
+
+          .row2 {
+            font-size: 12px;
+
+          }
+
+          .row3 {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+
+    table {
+      margin: 0px auto;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      max-width: 900px;
+      width: 90%;
+      overflow: auto;
+
+      tbody {
+        flex: 1;
+      }
+
+      tr {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        width: 100%;
+
+        th {
+          flex: 1;
+          padding: 0px 10px 0px 10px;
+          font-family: $text-font;
+          font-size: 12px;
+          font-weight: normal;
+          font-style: italic;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          text-align: left;
+          border: none;
+        }
+
+        td {
+          align-items: center;
+          padding: 14px 10px 14px 10px;
+        }
+
+        .row1 {
+          flex: 0 1 220px;
+          width: 100%;
+          height: 100%;
+        }
+
+        .row2 {
+          flex: 0 1 400px;
+          height: 100%;
+          width: 100%;
+        }
+
+        .row3 {
+          flex: 0 1 220px;
+          height: 100%;
+          width: 100%;
+        }
+
+        .row4, .row5 {
+          flex: 0 0 30px;
+          height: 20px;
+          width: 100%;
+        }
+      }
+    }
+
+    .edit {
+      width: 100%;
+      height: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-image: url('images/pen.svg');
+    }
+
+    .delete {
+      width: 100%;
+      height: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-image: url('images/bin.svg');
+    }
+
+    .mail {
+      width: 100%;
+      height: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-image: url('images/mail.svg');
+    }
+  }
+}
