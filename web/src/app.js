@@ -1,8 +1,8 @@
 'use strict';
 
-require('./css/style.css');
-require('./css/_popup.scss');
+require('./css/main.scss');
 require('./css/_dashboard.scss');
+require('./css/_popup.scss');
 
 const angular = require('angular');
 const ngRoute = require('angular-route');
