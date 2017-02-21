@@ -1,6 +1,7 @@
 <div class="popup">
   <div class="form-container">
-    <h1>{{ header }}</h1>
+    <div class="close-window" ng-click="closeWindow()"></div>
+    <h1 class="header-text">{{ header }}</h1>
     <p class="welcome-text">{{ welcome }}</p>
     <p class="error-text">{{ errormessage }}</p>
     <form ng-submit="editContact()">
