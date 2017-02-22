@@ -19,7 +19,7 @@
     function saveContact(newContactData) {
       contactData = Object.assign(contactData, newContactData);
       console.log('saved contact data: ', contactData);
-      HttpService.create();
+      HttpService.create(sessionToken, contactData);
     };
 
     $scope.createContact = function () {
