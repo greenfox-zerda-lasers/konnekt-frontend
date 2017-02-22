@@ -19,7 +19,7 @@
         templateUrl: 'dashboard.html',
         controller: 'dashboardController as dashboard',
       })
-      .when('/edit', {
+      .when('/edit/:id', {
         templateUrl: 'edit.html',
         controller: 'editController',
       })

@@ -27,5 +27,12 @@
     vm.loggedInUserId = UserService.getUserData().id;
     vm.allContacts = ContactDataHandling.getContactData();
 
+    vm.editContact = function (contactId) {
+      // let data = { user_id: UserService.getUserData().id, name: $scope.editName, description: $scope.editDescription };
+      // console.log(data);
+      console.log(contactId);
+      $window.location.href = `#!/edit/${contactId}`;
+    };
+
   }]);
 })();
