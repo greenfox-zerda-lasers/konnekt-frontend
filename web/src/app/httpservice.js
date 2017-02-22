@@ -5,10 +5,10 @@
 // *****************************************************************************
 //
 // for localhost testing
-// const appUrl = 'http://localhost:3000';
+const appUrl = 'http://localhost:3000';
 //
 // for raptors web
-const appUrl = 'https://raptor-konnekt.herokuapp.com';
+// const appUrl = 'https://raptor-konnekt.herokuapp.com';
 //
 // *****************************************************************************
 

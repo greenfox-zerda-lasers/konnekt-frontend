@@ -4,14 +4,14 @@
 
   const konnektApp = angular.module('konnektApp');
 
-  konnektApp.controller('createController', ['$scope', '$window', 'UserService', 'HttpService' function ($scope, $window, UserService, HttpService) {
+  konnektApp.controller('createController', ['$scope', '$window', 'UserService', 'HttpService', function ($scope, $window, UserService, HttpService) {
 
     $scope.create_header = 'új kontakt';
     $scope.create_welcome = 'Adj hozzá egy hasznos ismerőst!';
     $scope.button = 'mehet';
 
     var contactData = {
-      user_id: UserService.userData.user_id,
+      user_id: UserService.getUserData().id,
       name: '',
       description: ''
     };
