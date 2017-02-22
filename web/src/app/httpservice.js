@@ -28,8 +28,8 @@ konnektApp.factory('HttpService', ['$http', function ($http) {
     return $http.get(`${appUrl}/contacts`, { headers: { 'session_token': sessionToken } });
   }
 
-  function editContact(sessionToken, userData) {
-    return $http.put(`${appUrl}/contact/` + userData.user_id, JSON.stringify(userData), { headers: { 'session_token': sessionToken } });
+  function editContact(id, sessionToken, userData) {
+    return $http.put(`${appUrl}/contact/` + id, JSON.stringify(userData), { headers: { 'session_token': sessionToken } });
   }
 
   return {
