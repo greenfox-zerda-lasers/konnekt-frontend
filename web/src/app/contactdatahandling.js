@@ -23,8 +23,8 @@ konnektApp.factory('ContactDataHandling', ['HttpService', '$window', function (H
     });
   }
 
-  function editContactData(sessionToken, userData) {
-    return HttpService.editContact(sessionToken, userData)
+  function editContactData(id, sessionToken, userData) {
+    return HttpService.editContact(id, sessionToken, userData)
     .then(function (successResponse) {
       if (successResponse.status === 200) {
         setContactData(sessionToken).then(function () {
