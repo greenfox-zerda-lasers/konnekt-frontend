@@ -1,13 +1,13 @@
-<div class="body-container">
-  <div class="create-form-container">
-    <div class="close-window" ng-click="closeWindow()"></div>
-    <h1 class="create-header-text">{{ create_header }}</h1>
-    <p class="create-welcome-text">{{ create_welcome }}</p>
+<div class="popup body-container">
+  <div class="popup create-form-container">
+    <div class="popup close-window" ng-click="closeWindow()"></div>
+    <h1 class="popup create-header-text">{{ create_header }}</h1>
+    <p class="popup create-welcome-text">{{ create_welcome }}</p>
     <form>
       <input type="text" placeholder="ismerős neve:" ng-model="createName">
-      <textarea class="create_description" placeholder="rövid leírás: &#x0a; (pl. &quot;Béla orvosit végzett, most a NASAnál takarító&quot;)" ng-model="createDescription"></textarea>
-      <button class="login-button" ng-click="createContact()">
-        <p class="button-text">{{ button }}</p>
+      <textarea class="popup create_description" placeholder="rövid leírás: &#x0a; (pl. &quot;Béla orvosit végzett, most a NASAnál takarító&quot;)" ng-model="createDescription"></textarea>
+      <button class="popup login-button" ng-click="createContact()">
+        <p class="popup button-text">{{ button }}</p>
       </button>
     </form>
   </div>
