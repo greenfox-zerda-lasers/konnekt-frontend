@@ -27,6 +27,7 @@
       newContactData.name = $scope.createName;
       newContactData.description = $scope.createDescription;
       saveContact(newContactData);
+      ContactDataHandling.createContactData(UserService.getUserData().session_token, contactData);
     };
 
     console.log(contactData);
@@ -34,10 +35,6 @@
     $scope.closeWindow = function () {
       $window.location.href = '#!/dashboard';
     };
-
-    // $scope.openContact = function () {
-    //   $window.location.href = '#!/create';
-    // };
 
   }]);
 })();
