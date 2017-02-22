@@ -4,7 +4,7 @@
 
   const konnektApp = angular.module('konnektApp');
 
-  konnektApp.controller('createController', ['$scope', '$window', 'UserService', function ($scope, $window, UserService) {
+  konnektApp.controller('createController', ['$scope', '$window', 'UserService', 'HttpService' function ($scope, $window, UserService, HttpService) {
 
     $scope.create_header = 'új kontakt';
     $scope.create_welcome = 'Adj hozzá egy hasznos ismerőst!';
@@ -19,6 +19,7 @@
     function saveContact(newContactData) {
       contactData = Object.assign(contactData, newContactData);
       console.log('saved contact data: ', contactData);
+      HttpService.create();
     };
 
     $scope.createContact = function () {
