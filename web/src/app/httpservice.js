@@ -30,7 +30,7 @@ konnektApp.factory('HttpService', ['$http', function ($http) {
     return $http.post(`${appUrl}/register`, JSON.stringify(userData));
   }
 
-  function create(sessionToken, userData) {
+  function create(sessionToken, contactData) {
     return $http.post(`${appUrl}/contacts`, JSON.stringify(contactData));
   }
 

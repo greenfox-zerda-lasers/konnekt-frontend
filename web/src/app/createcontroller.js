@@ -31,7 +31,7 @@
     console.log(contactData);
 
     $scope.closeWindow = function () {
-
+      $window.location.href = '#!/dashboard';
     };
 
   }]);
