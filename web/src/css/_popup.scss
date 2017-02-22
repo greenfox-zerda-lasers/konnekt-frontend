@@ -1,0 +1,211 @@
+$text-color: #012d61;
+$green-color: #00c4bc;
+$white-color: #ffffff;
+$red-color: red;
+$header-dashboard-color: #979797;
+$box-shadow-color: rgba(0, 0, 0, 0.23);
+$background-color: rgba(0, 196, 188, 0.49);
+$text-font: Merriweather, serif;
+$header-font: Raleway, sans-serif;
+
+.popup {
+
+    display: flex;
+    height: 100vh;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+  .konnekt-logo {
+    flex: 0 1 70px;
+    max-width: 219px;
+    margin-bottom: 29px;
+    width: 100%;
+    background-image: url('images/logo-feher-hosszu.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .form-container {
+  	opacity: 0.9;
+    flex: 0 1 auto;
+    max-width: 388px;
+    width: 100%;
+    background-color: $green-color;
+
+    h1 {
+      text-transform: uppercase;
+      margin: 0px;
+      padding-top: 50px;
+      height: 42px;
+      font-family: Raleway, sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    .welcome-text  {
+      margin: 0px;
+      padding-bottom: 25px;
+      font-family: $text-font;
+      height: 15px;
+      font-size: 12px;
+      font-weight: normal;
+      font-style: italic;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: $text-color;
+    }
+
+    .errorText {
+      color: $red-color;
+      text-align: center;
+      font-family: 'Merriweather', serif;
+      font-size: 12px;
+    }
+
+    form {
+      margin-top: 15px;
+
+      input, .description, textarea {
+        box-sizing: border-box;
+        border: none;
+        display: block;
+        max-width: 328px;
+        width: 100%;
+        margin: 0px auto;
+        margin-bottom: 15px;
+        padding: 0px 5px 0px 13px;
+        height: 46px;
+        background-color: $white-color;
+        box-shadow: inset 0 1px 0 0 $box-shadow-color;
+        font-family: $text-font;
+        font-size: 12px;
+        font-weight: normal;
+        font-style: italic;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: $text-color;
+      }
+
+      .description {
+        height: 90px;
+        padding: 16px 5px 0px 13px;
+      }
+
+      /*placeholder for MS, Firefox 19+, Firefox 18-, Chrome*/
+      ::-webkit-input-placeholder {
+
+      	height: 100%;
+      	font-family: $text-font;
+      	font-size: 12px;
+      	font-weight: normal;
+      	font-style: italic;
+      	font-stretch: normal;
+      	line-height: normal;
+      	letter-spacing: normal;
+      	text-align: left;
+      	color: $text-color;
+      }
+
+      :-ms-input-placeholder {
+      	font-family: $text-font;
+      	font-size: 12px;
+      	font-weight: normal;
+      	font-style: italic;
+      	font-stretch: normal;
+      	line-height: normal;
+      	letter-spacing: normal;
+      	text-align: left;
+      	color: $text-color;
+      }
+
+      ::-moz-placeholder {
+      	font-family: $text-font;
+      	font-size: 12px;
+      	font-weight: normal;
+      	font-style: italic;
+      	font-stretch: normal;
+      	line-height: normal;
+      	letter-spacing: normal;
+      	text-align: left;
+      	color: $text-color;
+      }
+
+      :-moz-placeholder {
+      	font-family: $text-font;
+      	font-size: 12px;
+      	font-weight: normal;
+      	font-style: italic;
+      	font-stretch: normal;
+      	line-height: normal;
+      	letter-spacing: normal;
+      	text-align: left;
+      	color: $text-color;
+      }
+
+      button {
+        margin: 0 auto;
+        display: block;
+      	width: 142px;
+      	height: 47px;
+      	border: solid 2px $white-color;
+      	background-color: $green-color;
+        transition: 0.2s;
+
+        &:hover {
+          background-color: $white-color;
+          transition: 0.2s;
+        }
+
+        .button-text {
+          margin: 0px;
+          font-family: Raleway, sans-serif;
+          font-size: 24px;
+          font-weight: 800;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          text-align: center;
+          text-transform: uppercase;
+          color: $text-color;
+        }
+      }
+    }
+
+    .footer-text {
+      margin: 12px 0px 50px 0px;
+      font-family: $text-font;
+      font-size: 12px;
+      font-weight: normal;
+      font-style: italic;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: $text-color;
+
+      a {
+      	color: $text-color;
+        text-decoration: none;
+        border-bottom: 1px solid $white-color;
+
+        &:hover {
+          color: $white-color;
+        }
+      }
+    }
+  }
+}

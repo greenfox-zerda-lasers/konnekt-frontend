@@ -1,52 +1,42 @@
-<div class="body-dashboard">
-  <div class="konnekt-logo-background">
-    <div class="konnekt-logo-dashboard"></div>
+<div class="dashboard">
+
+  <div class="header">
+    <div class="konnekt-logo"></div>
   </div>
 
-  <div class="dashboard-table-header-container">
-    <div class="dashboard-table-header">
-      <div class="add-new-contact"><p class="add-new-contact-text">{{ dashboard.newContact }}</p></div>
-      <div class="logout-user" ng-click="dashboard.logoutMember()"><p class="logout-user-text">{{ dashboard.logoutUser }}</p></div>
-      <div class="table-header">
-        <div class="table-row1">
-          <p class="table-header-p">Ismerős Neve</p>
-        </div>
-        <div class="table-row2">
-          <p class="table-header-p">Ki ez?</p>
-        </div>
-        <div class="table-row3">
-          <p class="table-header-p">Kinek az ismerőse?</p>
-        </div>
-        <div class="table-row4-header">
-
-        </div>
-        <div class="table-row5-header">
-
-        </div>
-      </div>
+  <div class="body">
+    <div class="buttons">
+      <div class="button icon-add"><p class="text">{{ dashboard.newContact }}</p></div>
+      <div class="button icon-logout" ng-click="dashboard.logoutMember()"><p class="text">{{ dashboard.logoutUser }}</p></div>
     </div>
-  </div>
 
-  <div class="table-container">
-    <div class="table">
-      <div class="table-data" ng-repeat="contact in dashboard.allContacts">
-        <div class="table-row1">
-          <p class="table-p-name">{{ contact.name }}</p>
-        </div>
-        <div class="table-row2">
-          <p class="table-p-desc">{{ contact.description }}</p>
-        </div>
-        <div class="table-row3">
-          <p class="table-p-whoes">{{ contact.user.name }}</p>
-        </div>
-        <div class="table-row4">
-          <div class="icon-edit" ng-show="{{ contact.user.id }} === {{ dashboard.loggedInUserId }}"></div>
-        </div>
-        <div class="table-row5" ng-switch="{{ contact.user.id }} === {{ dashboard.loggedInUserId }}">
-          <div class="icon-delete" ng-switch-when="true"></div>
-          <div class="icon-mail" ng-switch-when="false"></div>
-        </div>
-      </div>
+    <div class="table-header">
+      <table>
+        <tr>
+          <th class='row1'>Ismerős Neve</th>
+          <th class='row2'>Ki ez?</th>
+          <th class='row3'>Kinek az ismerőse?</th>
+          <th class='row4'></th>
+          <th class='row5'></th>
+        </tr>
+      </table>
+    </div>
+
+    <div class="table-body">
+      <table class="content">
+        <tr ng-repeat="contact in dashboard.allContacts">
+          <td class='row1'>{{ contact.name }}</td>
+          <td class='row2'>{{ contact.description }}</td>
+          <td class='row3'>{{ contact.user.name }}</td>
+          <td class='row4'>
+            <div class="edit" ng-show="{{ contact.user.id }} === {{ dashboard.loggedInUserId }}"></div>
+          </td>
+          <td class='row5' ng-switch="{{ contact.user.id }} === {{ dashboard.loggedInUserId }}">
+            <div class="delete" ng-switch-when="true" ng-click="dashboard.deleteContact(contact.id)"></div>
+            <div class="mail" ng-switch-when="false"></div>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>

@@ -53,7 +53,7 @@ app.post('/login', function (req, res) {
     res.status(401).send(JSON.stringify(response));
   }
 });
-/////////////////////////////////////////////////////
+
 app.post('/contacts', function (req, res) {
   if (responseOk) {
     console.log(req.body)
@@ -61,7 +61,18 @@ app.post('/contacts', function (req, res) {
     console.log('error')
   }
 });
-////////////////////////////////////////////////////
+
+app.put('/contacts/1', function (req, res) {
+  if (responseOk) {
+    delete contacts.contacts[0];
+    res.status(201).send('Got a PUT request at /contacts');
+  } else {
+    console.log(req.body);
+    // response = { errors: [{ name: 'Unknown user error', message: 'not user by this name' }] };
+    // res.status(401).send(JSON.stringify(response));
+  }
+});
+
 app.get('/contacts', function (req, res) {
   console.log('login on server');
   const contacts = {
