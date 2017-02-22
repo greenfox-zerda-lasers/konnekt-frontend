@@ -51,6 +51,17 @@ $header-font: Raleway, sans-serif;
       color: #ffffff;
     }
 
+    .close-window {
+      width: 100%;
+      height: 18px;
+      float: right;
+      margin: 10px;
+      background-image: url('images/csuk.svg');
+      background-position: right;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
     .welcome-text  {
       margin: 0px;
       padding-bottom: 25px;

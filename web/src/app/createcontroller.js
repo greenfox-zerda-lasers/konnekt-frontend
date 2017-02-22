@@ -35,9 +35,9 @@
       $window.location.href = '#!/dashboard';
     };
 
-    $scope.openContact = function () {
-      $window.location.href = '#!/create';
-    };
+    // $scope.openContact = function () {
+    //   $window.location.href = '#!/create';
+    // };
 
   }]);
 })();

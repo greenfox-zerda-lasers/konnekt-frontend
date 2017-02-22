@@ -27,5 +27,9 @@
     vm.loggedInUserId = UserService.getUserData().id;
     vm.allContacts = ContactDataHandling.getContactData();
 
+    vm.openContact = function () {
+      $window.location.href = '#!/create';
+    };
+
   }]);
 })();
