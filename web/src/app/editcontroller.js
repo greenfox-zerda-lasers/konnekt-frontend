@@ -16,12 +16,11 @@
 
       var contactObject = ContactDataHandling.getContactData();
 
-      for (let i = 0; i < Object.keys(contactObject).length; i++) {
-        if (contactObject[i].id === id) {
+      for (let i = 0; i < contactObject.length; i++) {
+        if (contactObject[i].id === parseInt(id, 10)) {
           contactObjectEdit = contactObject[i];
         }
       }
-
       $scope.editName = contactObjectEdit.name;
       $scope.editDescription = contactObjectEdit.description;
     });
