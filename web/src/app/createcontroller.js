@@ -13,28 +13,25 @@
     var contactData = {
       user_id: UserService.getUserData().id,
       name: '',
-      description: ''
+      description: '',
     };
 
+    // save new contact
     function saveContact(sessionToken, newContactData) {
       contactData = Object.assign(contactData, newContactData);
       console.log('saved contact data: ', contactData);
-      // HttpService.createContact(sessionToken, contactData);
-    };
+    }
 
     $scope.createContact = function () {
-      let newContactData = {};
+      const newContactData = {};
       newContactData.name = $scope.createName;
       newContactData.description = $scope.createDescription;
       saveContact(UserService.getUserData().session_token, newContactData);
       ContactDataHandling.createContactData(UserService.getUserData().session_token, contactData);
     };
 
-    console.log(contactData);
-
     $scope.closeWindow = function () {
       $window.location.href = '#!/dashboard';
     };
-
   }]);
 })();

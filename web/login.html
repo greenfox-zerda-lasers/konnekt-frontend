@@ -7,8 +7,8 @@
       <p>{{ errormessage }}</p>
     </div>
     <form ng-submit="loginMember()">
-      <input type="text" placeholder="e-mail címed:" ng-model='userLogin.email' novalidate>
-      <input type="password" placeholder="jelszavad:" ng-model='userLogin.password'>
+      <input type="text" placeholder="e-mail címed:" ng-model='userLogin.email' ng-required="true">
+      <input type="password" placeholder="jelszavad:" ng-model='userLogin.password' ng-required="true">
       <button class="button">
         <p class="button-text">{{ button }}</p>
       </button>

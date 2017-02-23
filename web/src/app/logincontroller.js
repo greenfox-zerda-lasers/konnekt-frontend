@@ -12,12 +12,12 @@
     $scope.errormessage = UserService.getUserData().errormessage;
 
     $scope.loginMember = function () {
-      let newUserData = {};
+      const newUserData = {};
       newUserData.email = $scope.userLogin.email;
       newUserData.password = $scope.userLogin.password;
       UserService.setUserData(newUserData);
       UserService.login()
-      .then(function() {
+      .then(function () {
         $scope.errormessage = UserService.getUserData().errormessage;
       });
     };
@@ -26,6 +26,5 @@
       console.log('automatic log on');
       UserService.login();
     }
-
   }]);
 })();

@@ -6,7 +6,7 @@
 
   konnektApp.controller('dashboardController', ['UserService', 'ContactDataHandling', '$window', 'HttpService', function (UserService, ContactDataHandling, $window, HttpService) {
 
-    let vm = this;
+    const vm = this;
     vm.newContact = 'új kontakt';
     vm.logoutUser = 'kilépés';
 
@@ -18,7 +18,7 @@
     // if user reload browser, refresh contats data from browser's local storage;
     if (typeof UserService.getUserData().id === 'undefined') {
       if (UserService.getUserLocalStorage()) {
-        let sessionToken = UserService.getUserData().session_token;
+        const sessionToken = UserService.getUserData().session_token;
         ContactDataHandling.setContactData(sessionToken)
         .then(function () {
           vm.allContacts = ContactDataHandling.getContactData();
@@ -28,10 +28,10 @@
       }
     }
 
-    vm.loggedInUserId = UserService.getUserData().id;
+    vm.loggedInUser = UserService.getUserData();
     vm.allContacts = ContactDataHandling.getContactData();
-    console.log(ContactDataHandling.getContactData());
 
+    // edit contact data
     vm.editContact = function (contactId) {
       $window.location.href = `#!/edit/${contactId}`;
     };
@@ -42,8 +42,7 @@
 
     // delete contacts
     vm.deleteContact = function (contactId) {
-      console.log('deleted contact id: ', contactId);
-      let sessionToken = UserService.getUserData().session_token;
+      const sessionToken = UserService.getUserData().session_token;
       HttpService
         .deleteContact(sessionToken, contactId)
         .then(function () {
@@ -52,8 +51,7 @@
             vm.allContacts = ContactDataHandling.getContactData();
             $window.location.href = '#!/dashboard';
           });
-        })
-
+        });
     };
   }]);
 })();
