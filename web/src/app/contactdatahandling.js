@@ -16,18 +16,20 @@ konnektApp.factory('ContactDataHandling', ['HttpService', '$window', function (H
     return HttpService.getAllContacts(sessionToken)
     .then(function (successResponse) {
       if (successResponse.status === 200) {
-        contactData = Object.assign(contactData, successResponse.data.contacts);
+        // contactData = Object.assign(contactData, successResponse.data.contacts);
+        contactData = successResponse.data.contacts;
+        console.log('contact data: ', contactData);
       } else {
         console.log('contact data loading error');
       }
     });
   }
 
-  function editContactData(sessionToken, userData) {
-    return HttpService.editContact(sessionToken, userData)
+  function editContactData() {
+    return HttpService.editContact()
     .then(function (successResponse) {
       if (successResponse.status === 200) {
-        setContactData(sessionToken).then(function () {
+        setContactData().then(function () {
           $window.location.href = '#!/dashboard';
         });
       } else {
@@ -48,9 +50,15 @@ konnektApp.factory('ContactDataHandling', ['HttpService', '$window', function (H
     });
   }
 
+  // delete single contact data
+  function deleteContact(sessionToken, contactId) {
+    return HttpService.deleteContact(sessionToken, contactId);
+  }
+
   return {
     getContactData: getContactData,
     setContactData: setContactData,
-    editContactData: editContactData
+    editContactData: editContactData,
+    deleteContact: deleteContact,
   };
 }]);

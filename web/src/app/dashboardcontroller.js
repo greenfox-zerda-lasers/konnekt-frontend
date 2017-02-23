@@ -4,7 +4,7 @@
 
   const konnektApp = angular.module('konnektApp');
 
-  konnektApp.controller('dashboardController', ['UserService', 'ContactDataHandling', '$window', function (UserService, ContactDataHandling, $window) {
+  konnektApp.controller('dashboardController', ['UserService', 'ContactDataHandling', '$window', 'HttpService', function (UserService, ContactDataHandling, $window, HttpService) {
 
     let vm = this;
     vm.newContact = 'új kontakt';
@@ -15,10 +15,14 @@
       $window.location.href = '#!/login';
     };
 
-    // if user reload browser, needs update data from browser's local storage (inspirated by Tibi);
+    // if user reload browser, refresh contats data from browser's local storage;
     if (typeof UserService.getUserData().id === 'undefined') {
       if (UserService.getUserLocalStorage()) {
-        ContactDataHandling.setContactData();
+        let sessionToken = UserService.getUserData().session_token;
+        ContactDataHandling.setContactData(sessionToken)
+        .then(function () {
+          vm.allContacts = ContactDataHandling.getContactData();
+        });
       } else {
         UserService.logoutUser();
       }
@@ -27,5 +31,20 @@
     vm.loggedInUserId = UserService.getUserData().id;
     vm.allContacts = ContactDataHandling.getContactData();
 
+    // delete contacts
+    vm.deleteContact = function (contactId) {
+      console.log('deleted contact id: ', contactId);
+      let sessionToken = UserService.getUserData().session_token;
+      HttpService
+        .deleteContact(sessionToken, contactId)
+        .then(function () {
+          ContactDataHandling.setContactData(sessionToken)
+          .then(function () {
+            vm.allContacts = ContactDataHandling.getContactData();
+            $window.location.href = '#!/dashboard';
+          });
+        })
+
+    };
   }]);
 })();

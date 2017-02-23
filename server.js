@@ -65,6 +65,17 @@ app.put('/contacts/1', function (req, res) {
   }
 });
 
+app.put('/delete/', function (req, res) {
+  if (responseOk) {
+    console.log('deleted contact: ', req.params.id);
+    res.status(201).send('Successfull delete');
+  } else {
+    console.log(req.body);
+    // response = { errors: [{ name: 'Unknown user error', message: 'not user by this name' }] };
+    // res.status(401).send(JSON.stringify(response));
+  }
+});
+
 app.get('/contacts', function (req, res) {
   console.log('login on server');
   const contacts = {

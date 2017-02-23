@@ -19,7 +19,7 @@
         UserService.setUserData(newUserData);
         UserService.register();
       } else {
-        userData.errormessage = "Kérlek add meg a regisztrációs adataidat!";
+        userData.errormessage = 'Kérlek add meg a regisztrációs adataidat!';
 
       }
     };

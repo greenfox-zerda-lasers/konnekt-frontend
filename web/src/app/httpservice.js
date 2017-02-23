@@ -32,10 +32,15 @@ konnektApp.factory('HttpService', ['$http', function ($http) {
     return $http.put(`${appUrl}/contact/` + userData.user_id, JSON.stringify(userData), { headers: { 'session_token': sessionToken } });
   }
 
+  function deleteContact(sessionToken, id) {
+    return $http.delete(`${appUrl}/contact/${id}`, { headers: { 'session_token': sessionToken } });
+  }
+
   return {
     login: login,
     register: register,
     getAllContacts: getAllContacts,
-    editContact: editContact
+    editContact: editContact,
+    deleteContact: deleteContact,
   };
 }]);
