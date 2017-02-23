@@ -6,7 +6,7 @@
 
   <div class="body">
     <div class="buttons">
-      <div class="button icon-add"><p class="text">{{ dashboard.newContact }}</p></div>
+      <div class="button icon-add" ng-click="dashboard.openContact()"><p class="text">{{ dashboard.newContact }}</p></div>
       <div class="button icon-logout" ng-click="dashboard.logoutMember()"><p class="text">{{ dashboard.logoutUser }}</p></div>
     </div>
 
@@ -29,7 +29,7 @@
           <td class='row2'>{{ contact.description }}</td>
           <td class='row3'>{{ contact.user.email }}</td>
           <td class='row4'>
-            <div class="edit" ng-show="{{ contact.user.id }} === {{ dashboard.loggedInUserId }}"></div>
+            <div class="edit" ng-show="{{ contact.user.id }} === {{ dashboard.loggedInUserId }} " ng-click="dashboard.editContact(contact.id)"></div>
           </td>
           <td class='row5' ng-switch="{{ contact.user.id }} === {{ dashboard.loggedInUserId }}">
             <div class="delete" ng-switch-when="true" ng-click="dashboard.deleteContact(contact.id)"></div>

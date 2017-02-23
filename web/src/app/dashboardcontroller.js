@@ -30,6 +30,15 @@
 
     vm.loggedInUserId = UserService.getUserData().id;
     vm.allContacts = ContactDataHandling.getContactData();
+    console.log(ContactDataHandling.getContactData());
+
+    vm.editContact = function (contactId) {
+      $window.location.href = `#!/edit/${contactId}`;
+    };
+
+    vm.openContact = function () {
+      $window.location.href = '#!/create';
+    };
 
     // delete contacts
     vm.deleteContact = function (contactId) {

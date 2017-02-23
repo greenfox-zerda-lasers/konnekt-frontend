@@ -9,6 +9,7 @@
     $scope.header = 'regisztrálj.';
     $scope.welcome = 'üdv a Konnekt Kontaktkezelőben!';
     $scope.button = 'mehet';
+    $scope.errormessage = UserService.getUserData().errormessage;
 
     $scope.addNewMember = function () {
       if ($scope.newUser.password === $scope.newUser.passwordConfirmation) {
@@ -19,8 +20,7 @@
         UserService.setUserData(newUserData);
         UserService.register();
       } else {
-        userData.errormessage = 'Kérlek add meg a regisztrációs adataidat!';
-
+        $scope.errormessage = UserService.getUserData().errormessage;
       }
     };
   }]);

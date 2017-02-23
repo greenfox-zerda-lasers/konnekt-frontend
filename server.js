@@ -54,6 +54,14 @@ app.post('/login', function (req, res) {
   }
 });
 
+app.post('/contacts', function (req, res) {
+  if (responseOk) {
+    console.log(req.body)
+  } else {
+    console.log('error')
+  }
+});
+
 app.put('/contacts/1', function (req, res) {
   if (responseOk) {
     delete contacts.contacts[0];
