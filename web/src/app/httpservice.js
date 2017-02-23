@@ -5,10 +5,10 @@
 // *****************************************************************************
 //
 // for localhost testing
-const appUrl = 'http://localhost:3000';
+// const appUrl = 'http://localhost:3000';
 //
 // for raptors web
-// const appUrl = 'https://raptor-konnekt.herokuapp.com';
+const appUrl = 'https://raptor-konnekt.herokuapp.com';
 //
 // *****************************************************************************
 
@@ -24,7 +24,7 @@ konnektApp.factory('HttpService', ['$http', function ($http) {
     return $http.post(`${appUrl}/register`, JSON.stringify(userData));
   }
 
-  function create(sessionToken, contactData) {
+  function createContact(sessionToken, contactData) {
     return $http.post(`${appUrl}/contacts`, JSON.stringify(contactData));
   }
 
@@ -40,6 +40,7 @@ konnektApp.factory('HttpService', ['$http', function ($http) {
     login: login,
     register: register,
     getAllContacts: getAllContacts,
-    editContact: editContact
+    editContact: editContact,
+    createContact: createContact
   };
 }]);

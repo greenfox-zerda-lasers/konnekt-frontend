@@ -49,8 +49,8 @@ konnektApp.factory('ContactDataHandling', ['HttpService', '$window', function (H
   }
 
 
-  function createContactData(sessionToken, contactData) {
-    return HttpService.createContact(sessionToken, contactData)
+  function createContactData(sessionToken, userData) {
+    return HttpService.createContact(sessionToken, userData)
     .then(function (successResponse) {
       if (successResponse.status === 200) {
         setContactData(sessionToken).then(function () {
@@ -62,13 +62,9 @@ konnektApp.factory('ContactDataHandling', ['HttpService', '$window', function (H
     }, function (errorResponse) {
       if (errorResponse.status === 401) {
         console.log('ERROR: 401 status from server');
-        // UserService.logoutUser();
         $window.location.href = '#!/login';
-        // UserService.userData.errormessage = errorResponse.data.errors[0].name + ' : ' + errorResponse.data.errors[0].message;
-        // console.log(userData);
       } else {
         console.log('ERROR: no data from server');
-        // UserService.logoutUser();
         $window.location.href = '#!/login';
       }
     });
@@ -78,5 +74,6 @@ konnektApp.factory('ContactDataHandling', ['HttpService', '$window', function (H
     getContactData: getContactData,
     setContactData: setContactData,
     editContactData: editContactData
+    createContactData: createContactData
   };
 }]);
