@@ -52,7 +52,7 @@ konnektApp.factory('ContactDataHandling', ['HttpService', '$window', function (H
   function createContactData(sessionToken, contactData) {
     return HttpService.createContact(sessionToken, contactData)
     .then(function (successResponse) {
-      if (successResponse.status === 200) {
+      if (successResponse.status === 201) {
         setContactData(sessionToken).then(function () {
           $window.location.href = '#!/dashboard';
         });

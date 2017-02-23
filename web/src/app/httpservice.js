@@ -25,7 +25,7 @@ konnektApp.factory('HttpService', ['$http', function ($http) {
   }
 
   function createContact(sessionToken, contactData) {
-    return $http.post(`${appUrl}/contacts`, JSON.stringify(contactData));
+    return $http.post(`${appUrl}/contacts`, JSON.stringify(contactData), { headers: { 'session_token': sessionToken }});
   }
 
   function getAllContacts(sessionToken) {
