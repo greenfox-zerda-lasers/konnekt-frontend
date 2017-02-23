@@ -49,8 +49,8 @@ konnektApp.factory('ContactDataHandling', ['HttpService', '$window', function (H
   }
 
 
-  function createContactData(sessionToken, userData) {
-    return HttpService.createContact(sessionToken, userData)
+  function createContactData(sessionToken, contactData) {
+    return HttpService.createContact(sessionToken, contactData)
     .then(function (successResponse) {
       if (successResponse.status === 200) {
         setContactData(sessionToken).then(function () {
@@ -73,7 +73,7 @@ konnektApp.factory('ContactDataHandling', ['HttpService', '$window', function (H
   return {
     getContactData: getContactData,
     setContactData: setContactData,
-    editContactData: editContactData
+    editContactData: editContactData,
     createContactData: createContactData
   };
 }]);
