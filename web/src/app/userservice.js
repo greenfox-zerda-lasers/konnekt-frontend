@@ -51,7 +51,7 @@ konnektApp.factory('UserService', ['$window', 'HttpService', 'ContactDataHandlin
     // Check browser support
     if (window.localStorage.getItem('session_token')) {
       if ((window.localStorage.getItem('session_token')) !== 'undefined') {
-        let newUserData = {};
+        const newUserData = {};
         newUserData.session_token = $window.localStorage.getItem('session_token');
         newUserData.id = $window.localStorage.getItem('user_id');
         newUserData.email = $window.localStorage.getItem('username');
@@ -94,7 +94,6 @@ konnektApp.factory('UserService', ['$window', 'HttpService', 'ContactDataHandlin
           logoutUser();
           $window.location.href = '#!/login';
           userData.errormessage = errorResponse.data.errors[0].name + ' : ' + errorResponse.data.errors[0].message;
-          console.log(userData);
         } else {
           console.log('ERROR: no data from server');
           logoutUser();
@@ -105,36 +104,29 @@ konnektApp.factory('UserService', ['$window', 'HttpService', 'ContactDataHandlin
 
   // user registration
   function register() {
-    let data = { email: getUserData().email, password: getUserData().password, password_confirmation: getUserData().passwordConfirmation };
-    console.log('register data sent:');
-    console.log(data);
+    const data = {
+      email: getUserData().email,
+      password: getUserData().password,
+      password_confirmation: getUserData().passwordConfirmation,
+    };
     HttpService.register(data)
       .then(function (successResponse) {
         if (successResponse.status === 201) {
-          let newUserData = {};
+          const newUserData = {};
           newUserData.session_token = successResponse.headers().session_token;
           if (newUserData.session_token !== '') {
-            console.log('success registration response:');
-            console.log(successResponse);
-
             newUserData.id = successResponse.data.user_id;
             setUserData(newUserData);
             setUserLocalStorage();
-            console.log('user data login:');
-            console.log(newUserData);
             $window.location.href = '#!/dashboard';
           } else {
             console.log('ERROR: success response, but no session_token from server');
             logoutUser();
             $window.location.href = '#!/login';
           }
-        } else {
-          console.log(successResponse.status);
         }
       }, function (errorResponse) {
         if (errorResponse.status === 403) {
-          // beenged a dashboardra reg nélkül, nincs 403 hiba
-          // ha két jelszó nem egyezik hibaüzenet, foglalt névnél hibaüzenet, (hosszra ellenőrizni)
           console.log('registration error 403:', errorResponse);
           logoutUser();
           $window.location.href = '#!/register';

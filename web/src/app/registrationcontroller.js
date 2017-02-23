@@ -13,7 +13,7 @@
 
     $scope.addNewMember = function () {
       if ($scope.newUser.password === $scope.newUser.passwordConfirmation) {
-        let newUserData = {};
+        const newUserData = {};
         newUserData.email = $scope.newUser.email;
         newUserData.password = $scope.newUser.password;
         newUserData.passwordConfirmation = $scope.newUser.passwordConfirmation;

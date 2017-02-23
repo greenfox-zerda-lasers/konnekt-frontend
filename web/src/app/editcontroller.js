@@ -17,7 +17,7 @@
       var contactObject = ContactDataHandling.getContactData();
 
       for (let i = 0; i < Object.keys(contactObject).length; i++) {
-        if (contactObject[i].id == id) {
+        if (contactObject[i].id === id) {
           contactObjectEdit = contactObject[i];
         }
       }
@@ -27,7 +27,11 @@
     });
 
     $scope.editContact = function () {
-      let data = { user_id: UserService.getUserData().id, name: $scope.editName, description: $scope.editDescription };
+      const data = {
+        user_id: UserService.getUserData().id,
+        name: $scope.editName,
+        description: $scope.editDescription,
+      };
       ContactDataHandling.editContactData(id, UserService.getUserData().session_token, data);
     };
 
