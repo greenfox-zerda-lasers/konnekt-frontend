@@ -48,9 +48,32 @@ konnektApp.factory('ContactDataHandling', ['HttpService', '$window', function (H
     });
   }
 
+
+  function createContactData(sessionToken, contactData) {
+    return HttpService.createContact(sessionToken, contactData)
+    .then(function (successResponse) {
+      if (successResponse.status === 201) {
+        setContactData(sessionToken).then(function () {
+          $window.location.href = '#!/dashboard';
+        });
+      } else {
+        console.log('edit data error');
+      }
+    }, function (errorResponse) {
+      if (errorResponse.status === 401) {
+        console.log('ERROR: 401 status from server');
+        $window.location.href = '#!/login';
+      } else {
+        console.log('ERROR: no data from server');
+        $window.location.href = '#!/login';
+      }
+    });
+  }
+
   return {
     getContactData: getContactData,
     setContactData: setContactData,
-    editContactData: editContactData
+    editContactData: editContactData,
+    createContactData: createContactData
   };
 }]);

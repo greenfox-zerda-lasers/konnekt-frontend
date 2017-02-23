@@ -24,6 +24,10 @@ konnektApp.factory('HttpService', ['$http', function ($http) {
     return $http.post(`${appUrl}/register`, JSON.stringify(userData));
   }
 
+  function createContact(sessionToken, contactData) {
+    return $http.post(`${appUrl}/contacts`, JSON.stringify(contactData), { headers: { 'session_token': sessionToken }});
+  }
+
   function getAllContacts(sessionToken) {
     return $http.get(`${appUrl}/contacts`, { headers: { 'session_token': sessionToken } });
   }
@@ -36,6 +40,7 @@ konnektApp.factory('HttpService', ['$http', function ($http) {
     login: login,
     register: register,
     getAllContacts: getAllContacts,
-    editContact: editContact
+    editContact: editContact,
+    createContact: createContact
   };
 }]);

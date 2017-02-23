@@ -32,5 +32,9 @@
       $window.location.href = `#!/edit/${contactId}`;
     };
 
+    vm.openContact = function () {
+      $window.location.href = '#!/create';
+    };
+
   }]);
 })();
