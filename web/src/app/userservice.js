@@ -2,7 +2,7 @@
 
 const konnektApp = angular.module('konnektApp');
 
-konnektApp.factory('UserService', ['HttpService', '$window', 'ContactDataHandling', function (HttpService, $window, ContactDataHandling) {
+konnektApp.factory('UserService', ['$window', 'HttpService', 'ContactDataHandling', function ($window, HttpService, ContactDataHandling) {
 
   var userData = {};
 
@@ -24,14 +24,6 @@ konnektApp.factory('UserService', ['HttpService', '$window', 'ContactDataHandlin
     window.localStorage.removeItem('user_id');
     window.localStorage.removeItem('username');
     window.localStorage.removeItem('password');
-
-     // userData = {
-     // id: -1,
-     // token: '',
-     // email: '',
-     // password: '',
-     // passwordConfirmation: '',
-     // errormessage: false
   }
 
   // check if user logged in or not

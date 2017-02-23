@@ -16,7 +16,9 @@ konnektApp.factory('ContactDataHandling', ['HttpService', '$window', function (H
     return HttpService.getAllContacts(sessionToken)
     .then(function (successResponse) {
       if (successResponse.status === 200) {
-        contactData = Object.assign(contactData, successResponse.data.contacts);
+        // contactData = Object.assign(contactData, successResponse.data.contacts);
+        contactData = successResponse.data.contacts;
+        console.log('contact data: ', contactData);
       } else {
         console.log('contact data loading error');
       }
@@ -48,6 +50,10 @@ konnektApp.factory('ContactDataHandling', ['HttpService', '$window', function (H
     });
   }
 
+  // delete single contact data
+  function deleteContact(sessionToken, contactId) {
+    return HttpService.deleteContact(sessionToken, contactId);
+  }
 
   function createContactData(sessionToken, contactData) {
     return HttpService.createContact(sessionToken, contactData)
@@ -74,6 +80,7 @@ konnektApp.factory('ContactDataHandling', ['HttpService', '$window', function (H
     getContactData: getContactData,
     setContactData: setContactData,
     editContactData: editContactData,
-    createContactData: createContactData
+    deleteContact: deleteContact,
+    createContactData: createContactData,
   };
 }]);

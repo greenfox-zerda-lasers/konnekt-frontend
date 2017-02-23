@@ -27,7 +27,7 @@
         <tr ng-repeat="contact in dashboard.allContacts">
           <td class='row1'>{{ contact.name }}</td>
           <td class='row2'>{{ contact.description }}</td>
-          <td class='row3'>{{ contact.user.name }}</td>
+          <td class='row3'>{{ contact.user.email }}</td>
           <td class='row4'>
             <div class="edit" ng-show="{{ contact.user.id }} === {{ dashboard.loggedInUserId }} " ng-click="dashboard.editContact(contact.id)"></div>
           </td>
