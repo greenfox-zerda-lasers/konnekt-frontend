@@ -16,19 +16,7 @@ module.exports = function (config) {
     // list of files / patterns to load in the browser
     files: [
       'web/dist/bundle.js',
-      // 'node_modules/angular/angular.js',                            // angular
-      // 'node_modules/angular-route/angular-route.js',                // ng-route
-      'web/lib/angular-mocks.js',                // nm-mock
-      // 'web/src/app.js',
-      // 'web/src/app/contactdatahandling.js',
-      // 'web/src/app/createcontroller.js',
-      // 'web/src/app/dashboardcontroller.js',
-      // 'web/src/app/editcontroller.js',
-      // 'web/src/app/httpservice.js',
-      // 'web/src/app/logincontroller.js',
-      // 'web/src/app/registrationcontroller.js',
-      // 'web/src/app/router.js',
-      // 'web/src/app/userservice.js',
+      'node_modules/angular-mocks/angular-mocks.js',
       'tests/test.js',
     ],
 
