@@ -9,6 +9,11 @@ module.exports = {
     filename: 'bundle.js',
   },
 
+  preprocessors: {
+    'test/*.js': ['webpack'],
+    'src/app/*.js': ['webpack'],
+  },
+
   module: {
     loaders: [
       {
