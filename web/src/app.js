@@ -1,13 +1,14 @@
 'use strict';
 
-require('./css/main.scss');
-require('./css/_dashboard.scss');
-require('./css/_popup.scss');
-
 const angular = require('angular');
 const ngRoute = require('angular-route');
 
 const konnektApp = angular.module('konnektApp', ['ngRoute']);
+
+require('./css/main.scss');
+require('./css/_dashboard.scss');
+require('./css/_popup.scss');
+
 
 // APP CONFIG
 require('./app/router.js');
