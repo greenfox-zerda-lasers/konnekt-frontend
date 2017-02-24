@@ -28,8 +28,15 @@ describe('Dashboard controller', function () {
     });
   });
 
+  // testing ContactDataHandling 'getContactData' exists
+  describe('getContactData gives back empty object at start', function () {
+    it('should exist', function () {
+      expect(ContactDataHandling.getContactData()).toEqual({});
+    });
+  });
+
   // testing dashboardController 'newContact' exists
-  describe('allContacts exists', function () {
+  describe('newContacts exists', function () {
     it('should exist', function () {
       expect(dashboardController.newContact).toBeDefined();
     });
